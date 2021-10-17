@@ -1,0 +1,2 @@
+- :star: These are the programs I created for CSCI 241 - Intermediate Programming in C++ at NIU. Kurt McMahon was my professor
+- :star: All work is my own
