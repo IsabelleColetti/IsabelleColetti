@@ -1,0 +1,2 @@
+- :star: These are the programs I created for CSCI 330 - UNIX and Network Programming at NIU in Fall 2020. Jon Lehuta was my professor
+- :star: All work is my own
