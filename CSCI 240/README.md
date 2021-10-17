@@ -1,2 +1,2 @@
-- :star: These are the assignments I created for CSCI 240 - Computer Programming in C++ at NIU in Spring 2020
+- :star: These are the programs I created for CSCI 240 - Computer Programming in C++ at NIU in Spring 2020
 - :star: All work is my own
