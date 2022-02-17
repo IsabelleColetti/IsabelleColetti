@@ -1,0 +1,234 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+
+ 
+20.53.50 JOB01484 ---- MONDAY,    07 FEB 2022 ----
+20.53.50 JOB01484  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+20.53.50 JOB01484  ICH70001I KC03CC1  LAST ACCESS AT 20:53:02 ON MONDAY, FEBRUARY 7, 2022
+20.53.51 JOB01484  $HASP373 KC03CC1A STARTED - INIT 2    - CLASS A        - SYS 2964
+20.53.51 JOB01484  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+20.53.51 JOB01484  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+20.53.51 JOB01484  -JSTEP01              00     23      2       .00       .00     .0             4  BATCH        0     0     0     0
+20.53.51 JOB01484  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+20.53.51 JOB01484  $HASP395 KC03CC1A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  07 FEB 2022 JOB EXECUTION DATE
+
+
+          107 CARDS READ
+
+
+          186 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           18 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB01484
+       2 //JSTEP01  EXEC PGM=ASSIST                                                      
+       3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR                               
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN    DD *                                                                 
+       6 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03CC1  LAST ACCESS AT 20:53:02 ON MONDAY, FEBRUARY 7, 2022
+IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03CC1A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03CC1.KC03CC1A.JOB01484.D0000102.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB01484.D0000101.?         SYSIN         
+IEF373I STEP/JSTEP01 /START 2022038.2053
+IEF032I STEP/JSTEP01 /STOP  2022038.2053 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11256K
+        ATB- REAL:                  1056K  SLOTS:                     0K
+             VIRT- ALLOC:      13M SHRD:       0M
+IEF375I  JOB/KC03CC1A/START 2022038.2053
+IEF033I  JOB/KC03CC1A/STOP  2022038.2053 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 *****************************************************************                           
+                                      2 *  CSCI 360 -2           LAB EXERCISE 1            SPRING 2022  *                           
+                                      3 *                                                               *                           
+                                      4 * NAME: ISABELLE COLETTI                                        *                           
+                                      5 * DATE: 2/8/2022                                                *                           
+                                      6 *                                                               *                           
+                                      7 * This program consists of several coding exercises, including  *                           
+                                      8 * implementing equations with addition, subtraction, and        *                           
+                                      9 * multiplication, declaring storage, converting values to       *                           
+                                     10 * character format, printing output, and using arrays.          *                           
+                                     11 *                                                               *                           
+                                     12 * REGISTER USAGE:                                               *                           
+                                     13 * R2 - Used to hold constant integer values, results of         *                           
+                                     14 *      equations, and elements of arrays.                       *                           
+                                     15 * R3 - Used to hold constant integer values and elements of     *                           
+                                     16 *      arrays.                                                  *                           
+                                     17 * R4 - Used to hold constant integer values, results of         *                           
+                                     18 *      equations, and base address of SEQA array.               *                           
+                                     19 * R5 - Used to hold the base address of SEQB array and elements *                           
+                                     20 *      of arrays.                                               *                           
+                                     21 * R6 - Used to hold the base address of SEQB array.             *                           
+                                     22 *                                                               *                           
+                                     23 *****************************************************************                           
+                                     24 *                                                                                           
+                                     25 *| Code body goes here, beginning with CSECT + USING and         |                          
+                                     26 *| ending with return to caller (i.e., the BCR instruction)      |                          
+                                     27 *                                                                                           
+000000                               28 MAIN     CSECT                                                                              
+000000                               29          USING MAIN,15       ESTABLISH ADDRESSABILITY ON REG 15                             
+                                     30 * 1.                                                                                        
+000000 4120 0005            00005    31          LA    2,5           LOAD 5 INTO REG 2                                              
+000004 4130 000A            0000A    32          LA    3,10          LOAD 10 INTO REG 3                                             
+000008 4140 00C8            000C8    33          LA    4,200         LOAD 200 INTO REG 4                                            
+00000C 1B43                          34          SR    4,3           SUBTRACT 10 FROM 200                                           
+00000E 1A42                          35          AR    4,2           ADD 5 TO THE DIFFERENCE                                        
+000010 E160 0000 0000 00000          36          XDUMP ,             DUMP CONTENTS OF ALL 16 REGS                                   
+                                     37 * 2.                                                                                        
+000016 4120 000F            0000F    38          LA    2,15          LOAD 15 INTO REG 2                                             
+00001A 4130 0057            00057    39          LA    3,87          LOAD 87 INTO REG 3                                             
+00001E 1B23                          40          SR    2,3           SUBTRACT 87 FROM 15                                            
+000020 4130 0009            00009    41          LA    3,9           LOAD 9 INTO REG 3                                              
+000024 1A23                          42          AR    2,3           ADD 9 TO THE DIFFERENCE                                        
+000026 E160 0000 0000 00000          43          XDUMP ,             DUMP CONTENTS OF ALL 16 REGS                                   
+                                     44 * 3.                                                                                        
+00002C 5020 F0AC            000AC    45          ST    2,RESA        STORE THE CONTENTS OF REG 2 INTO RESA                          
+000030 E060 F0AC 0004 000AC          46          XDUMP RESA,4        DUMP THE FULLWORD OF STORAGE AT RESA                           
+                                     47 * 4.                                                                                        
+000036 4130 0004            00004    48          LA    3,4           LOAD 4 INTO REG 3                                              
+00003A 4140 0005            00005    49          LA    4,5           LOAD 5 INTO REG 4                                              
+00003E 1A44                          50          AR    4,4           ADD 5 TO 5                                                     
+000040 1A33                          51          AR    3,3           ADD 4 TO 4                                                     
+000042 4120 0004            00004    52          LA    2,4           LOAD 4 INTO REG 2                                              
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000046 1A32                          53          AR    3,2           ADD 4 TO 8                                                     
+000048 1A43                          54          AR    4,3           ADD 10 TO 12                                                   
+00004A 5040 F0B0            000B0    55          ST    4,RESB        STORE THE CONTENTS OF REG 4 INTO RESB                          
+00004E E060 F0B0 0004 000B0          56          XDUMP RESB,4        DUMP THE FULLWORD OF STORAGE AT RESB                           
+                                     57 * 5.                                                                                        
+000054 5820 F0AC            000AC    58          L     2,RESA        LOAD THE CONTENTS OF RESA INTO REG 2                           
+000058 5220 F0C6            000C6    59          XDECO 2,ORESA       CONVERT REG 2 TO CHAR, STORE IN ORESA                          
+00005C 5240 F0DB            000DB    60          XDECO 4,ORESB       CONVERT REG 4 TO CHAR, STORE IN ORESB                          
+000060 E020 F0C0 0085 000C0          61          XPRNT PRNTLINE,133  PRINT 133 BYTES STARTING AT PRNTLINE                           
+                                     62 * 6.                                                                                        
+000066 4150 F0A0            000A0    63          LA    5,SEQA        STORE BASE ADDRESS OF SEQA INTO REG 5                          
+00006A 5020 5000            00000    64          ST    2,0(,5)       STORE VALUE OF RESA INTO SEQA ARRAY                            
+00006E 5040 5004            00004    65          ST    4,4(,5)       STORE VALUE OF RESB INTO SEQA ARRAY                            
+000072 E060 F0A0 000C 000A0          66          XDUMP SEQA,12       DUMP SEQA STORAGE                                              
+                                     67 * 7.                                                                                        
+000078 4140 F0A0            000A0    68          LA    4,SEQA        STORE BASE ADDRESS OF SEQA INTO REG 4                          
+00007C 4160 F0B4            000B4    69          LA    6,SEQB        STORE BASE ADDRESS OF SEBQ INTO REG 6                          
+000080 5820 4000            00000    70          L     2,0(,4)       LOAD 1ST ELEMENT OF SEQA INTO REG 2                            
+000084 5020 6000            00000    71          ST    2,0(,6)       STORE REG 2'S CONTENTS IN 1ST ELEM SEQB                        
+000088 5830 4004            00004    72          L     3,4(,4)       LOAD 2ND ELEMENT OF SEQA INTO REG 3                            
+00008C 5030 6004            00004    73          ST    3,4(,6)       STORE REG 3'S CONTENTS IN 2ND ELEM SEQB                        
+000090 5850 4008            00008    74          L     5,8(,4)       LOAD 3RD ELEMENT OF SEQA INTO REG 5                            
+000094 5050 6008            00008    75          ST    5,8(,6)       STORE REG 5'S CONTENTS IN 3RD ELEM SEQB                        
+000098 E060 F0B4 000C 000B4          76          XDUMP SEQB,12       DUMP SEQB STORAGE                                              
+                                     77 *                                                                                           
+00009E 07FE                          78          BCR   B'1111',14    UNCONDITIONAL RETURN TO CALLER (OS)                            
+                                     79 *                                                                                           
+                                     80          LTORG               LITERAL ORGANIZATION                                           
+                                     81 *                                                                                           
+                                     82 *| Declared storage follows. Your declarations may go anywhere   |                          
+                                     83 *| you choose, except beteen the print line declarations.        |                          
+0000A0 FFFFFFFFFFFFFFFF              84 SEQA     DC    F'-1,-1,-1'                                                                  
+0000AC                               85 RESA     DS    F             DECLARE FULLWORD OF STORAGE                                    
+0000B0                               86 RESB     DS    F             DECLARE FULLWORD OF STORAGE                                    
+0000B4 FFFFFFFFFFFFFFFF              87 SEQB     DC    F'-1,-1,-1'   DECLARE 3 FULLWORDS OF SEQ STORAGE                             
+                                     88 *                                                                                           
+                                     89 * Print line begin ----------------------------------------------                           
+0000C0 F1                            90 PRNTLINE DC    C'1'           CARRIAGE CONTROL CHAR (NEW PAGE)                              
+0000C1 4040404040404040              91          DC    132C' '        WIPE PRINT LINE (SPACES)                                      
+0000C1                               92          ORG   PRNTLINE+1     GO BACK TO PRINTLN1 START LOC + 1                             
+0000C1 D9C5E2C17A                    93          DC    C'RESA:'                                                                     
+0000C6                               94 ORESA    DS    CL12           RESA OUTPUT FIELD                                             
+0000D2 40404040D9C5E2C2              95          DC    C'    RESB:'                                                                 
+0000DB                               96 ORESB    DS    CL12           RESB OUTPUT FIELD                                             
+000145                               97          ORG   PRNTLINE+133   JUMP PAST END OF PRINTLN1                                     
+                                     98 * Print line end ------------------------------------------------                           
+                                     99 *| End statement goes here                                       |                          
+                                    100          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:    4528 HIGH:     468 LEAVING:  488572 FREE BYTES. AVERAGE:       49 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   101000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+
+BEGIN XSNAP - CALL     1 AT E0000016 USER REGISTERS                                                                                 
+
+ REGS 0-7      F4F4F4F4    F4F4F4F4    00000005    0000000A    000000C3    F4F4F4F4    F4F4F4F4    F4F4F4F4                         
+
+ REGS 8-15     F4F4F4F4    F4F4F4F4    F4F4F4F4    F4F4F4F4    F4F4F4F4    00000148    FFFE7960    00000000                         
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     2 AT D000002C USER REGISTERS                                                                                 
+
+ REGS 0-7      F4F4F4F4    F4F4F4F4    FFFFFFC1    00000009    000000C3    F4F4F4F4    F4F4F4F4    F4F4F4F4                         
+ REGS 8-15     F4F4F4F4    F4F4F4F4    F4F4F4F4    F4F4F4F4    F4F4F4F4    00000148    FFFE7960    00000000                         
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     3 AT D0000036 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000AC TO 0000B0                                                         
+0000A0   FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFC1    F5F5F5F5 FFFFFFFF FFFFFFFF FFFFFFFF   *...............A5555............*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     4 AT E0000054 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000B0 TO 0000B4                                                         
+0000A0   FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFC1    00000016 FFFFFFFF FFFFFFFF FFFFFFFF   *...............A................*            
+
+                                                                                                                                    
+
+RESA:         -63    RESB:          22                                                                                              
+
+BEGIN XSNAP - CALL     5 AT E0000078 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000A0 TO 0000AC                                                         
+0000A0   FFFFFFC1 00000016 FFFFFFFF FFFFFFC1    00000016 FFFFFFFF FFFFFFFF FFFFFFFF   *...A...........A................*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     6 AT E000009E USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000B4 TO 0000C0                                                         
+0000A0   FFFFFFC1 00000016 FFFFFFFF FFFFFFC1    00000016 FFFFFFC1 00000016 FFFFFFFF   *...A...........A.......A........*            
+
+                                                                                                                                    
+
+*** EXECUTION TIME =    0.000 SECS.        41 INSTRUCTIONS EXECUTED -    41000 INSTRUCTIONS/SEC ***                                 
+
+*** FIRST CARD NOT READ: NO CARDS READ:FILE UNOPENED                                                                                
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
