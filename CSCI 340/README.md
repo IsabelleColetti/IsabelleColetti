@@ -1,2 +1,2 @@
-- :star: These are the programs I created for CSCI 340 -Data Structures and Algorithms at NIU in Fall 2021. John Winans was my professor
+- :star: These are the programs I created for CSCI 340 - Data Structures and Algorithms at NIU in Fall 2021. John Winans was my professor
 - :star: All work is my own
