@@ -1,1 +1,2 @@
-
+- :star: These are the programs I created for CSCI 466 - MSTR Databases at NIU in Spring 2022. Jon Lehuta was my professor
+- :star: All work is my own
