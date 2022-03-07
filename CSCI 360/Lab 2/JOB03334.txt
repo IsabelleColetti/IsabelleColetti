@@ -1,0 +1,247 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+
+ 
+16.13.15 JOB03334 ---- MONDAY,    21 FEB 2022 ----
+16.13.15 JOB03334  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+16.13.15 JOB03334  ICH70001I KC03CC1  LAST ACCESS AT 16:08:49 ON MONDAY, FEBRUARY 21, 2022
+16.13.15 JOB03334  $HASP373 KC03CC1A STARTED - INIT 1    - CLASS A        - SYS 2964
+16.13.15 JOB03334  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+16.13.15 JOB03334  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+16.13.15 JOB03334  -JSTEP01              00     27      3       .00       .00     .0             5  BATCH        0     0     0     0
+16.13.15 JOB03334  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+16.13.15 JOB03334  $HASP395 KC03CC1A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  21 FEB 2022 JOB EXECUTION DATE
+
+
+          135 CARDS READ
+
+
+          204 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           19 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB03334
+       2 //JSTEP01  EXEC PGM=ASSIST                                                      
+       3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR                               
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN    DD *                                                                 
+         //*                                                                             
+         //* IN-STREAM PROGRAM DATA                                                      
+       6 //FT05F001 DD *                                                                 
+       7 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03CC1  LAST ACCESS AT 16:08:49 ON MONDAY, FEBRUARY 21, 2022
+IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03CC1A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IEF237I JES2 ALLOCATED TO FT05F001
+IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03CC1.KC03CC1A.JOB03334.D0000103.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB03334.D0000101.?         SYSIN         
+IEF285I   KC03CC1.KC03CC1A.JOB03334.D0000102.?         SYSIN         
+IEF373I STEP/JSTEP01 /START 2022052.1613
+IEF032I STEP/JSTEP01 /STOP  2022052.1613 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11352K
+        ATB- REAL:                  1056K  SLOTS:                     0K
+             VIRT- ALLOC:      13M SHRD:       0M
+IEF375I  JOB/KC03CC1A/START 2022052.1613
+IEF033I  JOB/KC03CC1A/STOP  2022052.1613 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 *****************************************************************                           
+                                      2 *  CSCI 360 -2           LAB EXERCISE 2            SPRING 2022  *                           
+                                      3 *                                                               *                           
+                                      4 * NAME: ISABELLE COLETTI                                        *                           
+                                      5 * DATE: 2/21/2022                                               *                           
+                                      6 *                                                               *                           
+                                      7 * This program consists of several coding exercises. They       *                           
+                                      8 * include multiplication, division, looping, declaring print    *                           
+                                      9 * lines, using literals, and if-else logic.                     *                           
+                                     10 *                                                               *                           
+                                     11 * REGISTER USAGE:                                               *                           
+                                     12 * R2 - Used to hold constant integer values, results of         *                           
+                                     13 *      multiplication, division, and addition, and addresses of *                           
+                                     14 *      elements in ARR array.                                   *                           
+                                     15 * R3 - Used to hold constant integer values, results of         *                           
+                                     16 *      multiplication, division, and addition, and address of   *                           
+                                     17 *      the end of ARR array.                                    *                           
+                                     18 * R4 - Used to hold binary conversions of characters.           *                           
+                                     19 * R5 - Used to hold elements of ARR array.                      *                           
+                                     20 * R6 - Used to hold the addresses of elements in ARR array.     *                           
+                                     21 * R8 - Used to hold a constant integer value.                   *                           
+                                     22 *                                                               *                           
+                                     23 *****************************************************************                           
+                                     24 *                                                                                           
+000000                               25 MAIN     CSECT                                                                              
+000000                               26          USING MAIN,15        ESTABLISH ADDRESSABILITY ON REG 15                            
+                                     27 * 1.                                                                                        
+000000 4120 000A            0000A    28          LA    2,10           LOAD 10 INTO REG 2                                            
+000004 4130 0080            00080    29          LA    3,128          LOAD 128 INTO REG 3                                           
+000008 1C22                          30          MR    2,2            MULTIPLY 128 BY 10                                            
+00000A 5030 F0CC            000CC    31          ST    3,RES1         STORE PRODUCT IN RES1                                         
+00000E E060 F0CC 0004 000CC          32          XDUMP RES1,4         DUMP RESULT                                                   
+                                     33 * 2.                                                                                        
+000014 4130 012C            0012C    34          LA    3,300          LOAD 300 INTO REG 3                                           
+000018 5C20 F0C0            000C0    35          M     2,=F'-28'      MULTIPLY 300 BY -28                                           
+00001C 5030 F0D0            000D0    36          ST    3,RES2         STORE PRODUCT IN RES2                                         
+000020 E060 F0D0 0004 000D0          37          XDUMP RES2,4         DUMP RESULT                                                   
+                                     38 * 3.                                                                                        
+000026 4120 0000            00000    39          LA    2,0            LOAD 0 INTO REG 2                                             
+00002A 4130 00C8            000C8    40          LA    3,200          LOAD 200 INTO REG 3                                           
+00002E 4180 000F            0000F    41          LA    8,15           LOAD 15 INTO REG 8                                            
+000032 1D28                          42          DR    2,8            DIVIDE 200 BY 15                                              
+000034 5220 F282            00282    43          XDECO 2,OREMAIN      CONVERT TO CHAR, STORE IN OREMAIN                             
+000038 5230 F268            00268    44          XDECO 3,OQUOT        CONVERT TO CHAR, STORE IN OQUOT                               
+00003C E020 F256 0085 00256          45          XPRNT S3PRLINE,133   PRINT THE PRINTLINE                                           
+                                     46 * 4.                                                                                        
+000042 4110 F0F8            000F8    47          LA    1,BUFFER       LOAD BUFFER ADDRESS INTO REG 1                                
+000046 4120 F0D4            000D4    48          LA    2,ARR          LOAD BASE ADDRESS OF ARR INTO REG 2                           
+00004A 4130 F0F8            000F8    49          LA    3,ARR+36       LOAD END ADDRESS OF ARR INTO REG 3                            
+00004E E000 F0F8 0050 000F8          50          XREAD BUFFER,80      READ IN THE FIRST LINE OF INPUT                               
+                                     51 *                                                                                           
+000054 1923                          52 RDLOOP   CR    2,3            IF REG 2 = REG 3 (AT END OF ARR),                             
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000056 4780 F074            00074    53          BZ    DONE           BRANCH TO DONE                                                
+                                     54 *                                                                                           
+00005A 5340 1000            00000    55          XDECI 4,0(,1)        CONVERT TO BINARY, PUT IN REG 4                               
+00005E 5040 2000            00000    56          ST    4,0(,2)        STORE REG 4 CONTENTS INTO FIRST ELEM                          
+000062 4120 2004            00004    57          LA    2,4(,2)        INCREMENT TO NEXT ELEMENT ADDRESS                             
+000066 4110 F0F8            000F8    58          LA    1,BUFFER       LOAD BUFFER ADDRESS INTO REG 1                                
+00006A E000 F0F8 0050 000F8          59          XREAD BUFFER,80      READ IN THE NEXT LINE OF INPUT                                
+000070 47F0 F054            00054    60          B     RDLOOP                                                                       
+                                     61 *                                                                                           
+000074                               62 DONE     DS    0H                                                                           
+000074 E060 F0D4 0024 000D4          63          XDUMP ARR,36         DUMP THE ENTIRE ARR                                           
+                                     64 * 5.                                                                                        
+00007A 4120 0000            00000    65          LA    2,0            LOAD 0 INTO REG 2                                             
+00007E 4160 F0D4            000D4    66          LA    6,ARR          LOAD BASE ADDRESS OF ARR INTO REG 6                           
+000082                               67 ALOOP    DS    0H                                                                           
+000082 5850 6000            00000    68          L     5,0(,6)        LOAD FIRST ELEM OF ARR INTO REG 5                             
+000086 1A25                          69          AR    2,5            ADD FIRST ELEM TO REG 2, STORE IN REG 2                       
+000088 4160 6004            00004    70          LA    6,4(,6)        INCREMENT TO NEXT ELEM ADDRESS                                
+00008C 1963                          71          CR    6,3            IF REG 6 != REG 3 (NOT AT END OF ARR),                        
+00008E 4770 F082            00082    72          BNZ   ALOOP          CONTINUE LOOP                                                 
+000092 5020 F148            00148    73          ST    2,RES3         STORE SUM IN RES3                                             
+000096 E060 F148 0004 00148          74          XDUMP RES3,4         DUMP RESULT                                                   
+                                     75 * 6.                                                                                        
+00009C 5830 F148            00148    76          L     3,RES3         LOAD RESULT OF SUM INTO REG 3                                 
+0000A0 5C20 F0C4            000C4    77          M     2,=F'1'        ZERO OUT REG 2 AND 3                                          
+0000A4 5D20 F0C8            000C8    78          D     2,=F'2'        DIVIDE SUM BY 2                                               
+0000A8 1222                          79          LTR   2,2            IF REMAINDER IS 0,                                            
+0000AA 4780 F0B8            000B8    80          BZ    EVEN           BRANCH TO EVEN                                                
+0000AE E020 F1D1 0085 001D1          81          XPRNT PRLINE1,133    IF REMAINDER IS NOT 0, PRINT PRLINE1                          
+0000B4 47F0 F0BE            000BE    82          B     CONT           SKIP OVER EVEN                                                
+                                     83 *                                                                                           
+0000B8 E020 F14C 0085 0014C          84 EVEN     XPRNT PRLINE,133     PRINT PRLINE FOR EVEN                                         
+                                     85 *                                                                                           
+0000BE                               86 CONT     DS    0H                                                                           
+                                     87 *                                                                                           
+0000BE 07FE                          88          BR    14             UNCONDITIONAL RETURN TO CALLER (OS)                           
+                                     89 *                                                                                           
+                                     90          LTORG                LITERAL ORGANIZATION                                          
+0000C0 FFFFFFE4                      91                =F'-28'                                                                      
+0000C4 00000001                      92                =F'1'                                                                        
+0000C8 00000002                      93                =F'2'                                                                        
+                                     94 *                                                                                           
+0000CC                               95 RES1     DS    F              EMPTY FULLWORD FOR STEP 1                                     
+0000D0                               96 RES2     DS    F              EMPTY FULLWORD FOR STEP 2                                     
+0000D4                               97 ARR      DS    9F             9 EMPTY FULLWORDS FOR ARRAY                                   
+0000F8                               98 BUFFER   DS    CL80           INPUT BUFFER                                                  
+000148                               99 RES3     DS    F              EMPTY FULLWORD FOR STEP 5                                     
+                                    100 *                                                                                           
+                                    101 * STEP 6 OUTPUT BUFFER                                                                      
+00014C F0                           102 PRLINE   DC    C'0'           CARRIAGE CONTROL DOUBLE SPACING                               
+00014D E3888540818383A4             103          DC    C'The accumulated result is even!'                                           
+00016C 4040404040404040             104          DC    101C' '        FILL REMAINING BYTES WITH SPACES                              
+                                    105 *                                                                                           
+0001D1 F0                           106 PRLINE1  DC    C'0'           CARRIAGE CONTROL DOUBLE SPACING                               
+0001D2 E3888540818383A4             107          DC    C'The accumulated result is odd!'                                            
+0001F0 4040404040404040             108          DC    102C' '        FILL REMAINING BYTES WITH SPACES                              
+                                    109 *                                                                                           
+
+                                                                                                               PAGE    3            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                    110 * STEP 3 OUTPUT BUFFER                                                                      
+000256 F1                           111 S3PRLINE DC    C'1'           CARRIAGE CONTROL CHAR (NEW PAGE)                              
+000257 E2E3C5D740F34B40             112          DC    C'STEP 3. QUOTIENT:'                                                         
+000268                              113 OQUOT    DS    CL12           S3 QUOTIENT OUTPUT FIELD                                      
+000274 40404040D9C5D4C1             114          DC    C'    REMAINDER:'                                                            
+000282                              115 OREMAIN  DS    CL12           S3 REMAINDER OUTPUT FIELD                                     
+00028E 4040404040404040             116          DC    77C' '         FILL REMAINING BYTES WITH SPACES                              
+                                    117 *                                                                                           
+                                    118          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:    5220 HIGH:     680 LEAVING:  487668 FREE BYTES. AVERAGE:       49 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   119000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+
+BEGIN XSNAP - CALL     1 AT C0000014 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000CC TO 0000D0                                                         
+0000C0   FFFFFFE4 00000001 00000002 00000500    F5F5F5F5 F5F5F5F5 F5F5F5F5 F5F5F5F5   *...U............5555555555555555*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     2 AT C0000026 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000D0 TO 0000D4                                                         
+0000C0   FFFFFFE4 00000001 00000002 00000500    FFFFDF30 F5F5F5F5 F5F5F5F5 F5F5F5F5   *...U................555555555555*            
+
+                                                                                                                                    
+
+STEP 3. QUOTIENT:          13    REMAINDER:           5                                                                             
+
+BEGIN XSNAP - CALL     3 AT C000007A USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0000D4 TO 0000F8                                                         
+0000C0   FFFFFFE4 00000001 00000002 00000500    FFFFDF30 00000086 00000060 0000030E   *...U............................*            
+0000E0   FFFFFFDA 00000047 0000039A FFFFFEEB    FFFFFFB8 00000030 F4F84040 40404040   *........................48      *            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     4 AT C000009C USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000148 TO 00014C                                                         
+000140   40404040 40404040 00000682 F0E38885    40818383 A494A493 81A38584 409985A2   *        ....0T.. ........... ...*            
+
+                                                                                                                                    
+
+The accumulated result is even!                                                                                                     
+
+*** EXECUTION TIME =    0.000 SECS.       151 INSTRUCTIONS EXECUTED -   151000 INSTRUCTIONS/SEC ***                                 
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
