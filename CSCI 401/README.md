@@ -1,2 +1,2 @@
-- :star: These are the extra credit programs I created for CSCI 401 - Theory of Computation at NIU in Fall 2021. Nicholas Karonis was my instructor
+- :star: These are the extra credit programs I created for CSCI 401 - MSTR Theory of Computation at NIU in Fall 2021. Nicholas Karonis was my instructor
 - :star: All work is my own
