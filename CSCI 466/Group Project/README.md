@@ -7,3 +7,5 @@ Allows a customer to create an account for the store. Customers can view all pro
 Allows an employee to log into their account for the store. Employees can view inventory, view orders and order details, assign orders to themselves, add notes to orders, and ship orders.
 
 All source code is mine and my group's.
+
+Link to store (currently hosted on NIU servers): http://students.cs.niu.edu/~z1900409/csci466/Bobs-Pets-and-Supplies/
