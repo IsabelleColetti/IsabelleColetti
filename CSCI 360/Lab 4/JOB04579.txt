@@ -1,0 +1,483 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+
+ 
+23.57.20 JOB04579 ---- FRIDAY,    15 APR 2022 ----
+23.57.20 JOB04579  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+23.57.20 JOB04579  ICH70001I KC03CC1  LAST ACCESS AT 23:56:44 ON FRIDAY, APRIL 15, 2022
+23.57.20 JOB04579  $HASP373 KC03CC1A STARTED - INIT 1    - CLASS A        - SYS 2964
+23.57.20 JOB04579  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+23.57.20 JOB04579  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+23.57.20 JOB04579  -JSTEP01              00     32      3       .00       .00     .0             7  BATCH        0     0     0     0
+23.57.20 JOB04579  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+23.57.20 JOB04579  $HASP395 KC03CC1A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  15 APR 2022 JOB EXECUTION DATE
+
+
+          299 CARDS READ
+
+
+          415 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           37 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB04579
+       2 //JSTEP01  EXEC PGM=ASSIST                                                      
+       3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR                               
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN    DD *                                                                 
+         //*                                                                             
+         //* IN-STREAM PROGRAM DATA                                                      
+       6 //FT05F001 DD *                                                                 
+       7 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03CC1  LAST ACCESS AT 23:56:44 ON FRIDAY, APRIL 15, 2022
+IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03CC1A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IEF237I JES2 ALLOCATED TO FT05F001
+IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03CC1.KC03CC1A.JOB04579.D0000103.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB04579.D0000101.?         SYSIN         
+IEF285I   KC03CC1.KC03CC1A.JOB04579.D0000102.?         SYSIN         
+IEF373I STEP/JSTEP01 /START 2022105.2357
+IEF032I STEP/JSTEP01 /STOP  2022105.2357 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11372K
+        ATB- REAL:                  1056K  SLOTS:                     0K
+             VIRT- ALLOC:      13M SHRD:       0M
+IEF375I  JOB/KC03CC1A/START 2022105.2357
+IEF033I  JOB/KC03CC1A/STOP  2022105.2357 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 *****************************************************************                           
+                                      2 *  CSCI 360 -2           LAB EXERCISE 4            SPRING 2022  *                           
+                                      3 *                                                               *                           
+                                      4 * NAME: ISABELLE COLETTI                                        *                           
+                                      5 * DATE: 04/15/2022                                              *                           
+                                      6 *                                                               *                           
+                                      7 * This program consists of several coding exercises. They       *                           
+                                      8 * include reading in packed decimal input, adding packed        *                           
+                                      9 * decimals, multiplying packed decimals, dividing packed        *                           
+                                     10 * decimals, shifting decimal places, and printing packed        *                           
+                                     11 * decimals with and without prefixed characters.                *                           
+                                     12 *                                                               *                           
+                                     13 * REGISTER USAGE:                                               *                           
+                                     14 * R1 - Used to hold the address of the input buffer and the     *                           
+                                     15 *      address of the byte immediately left of the decimal      *                           
+                                     16 *      point while using EDMK.                                  *                           
+                                     17 * R2 - Used to hold the head addresses of the packed decimal    *                           
+                                     18 *      coefficient array and packed decimal table.              *                           
+                                     19 * R3 - Used to hold the value 4 for looping.                    *                           
+                                     20 * R4 - Used to hold the head address of the packed decimal      *                           
+                                     21 *      coefficient array.                                       *                           
+                                     22 *                                                               *                           
+                                     23 *****************************************************************                           
+                                     24 *                                                                                           
+000000                               25 MAIN     CSECT                                                                              
+000000                               26          USING MAIN,15             ESTABLISH ADDRESSABILITY REG 15                          
+                                     27 *                                                                                           
+                                     28 * EXERCISE 1                                                                                
+                                     29 *                                                                                           
+000000 4110 F2A2            002A2    30          LA    1,BUFFER            LOAD BUFFER ADDRESS INTO REG 1                           
+000004 E000 F2A2 0050 002A2          31          XREAD BUFFER,80           READ THE LINE OF INPUT                                   
+                                     32 *                                                                                           
+00000A F211 F2F2 F2A2 002F2 002A2    33          PACK  PMULT(2),BUFFER(2)  PACK NUM FROM BUFFER INTO PMULT                          
+000010 E060 F2A2 0050 002A2          34          XDUMP BUFFER,80           DUMP THE BUFFER                                          
+000016 E060 F2F2 0002 002F2          35          XDUMP PMULT,2             DUMP PMULT                                               
+                                     36 *                                                                                           
+                                     37 * EXERCISE 2                                                                                
+                                     38 *                                                                                           
+00001C E000 F2A2 0050 002A2          39          XREAD BUFFER,80               READ NEXT LINE OF INPUT                              
+                                     40 *                                                                                           
+000022 F212 F2F4 F2A2 002F4 002A2    41          PACK  P1EX2(2),BUFFER(3)      PACK FIRST NUM IN BUFFER                             
+000028 F212 F2F6 F2A6 002F6 002A6    42          PACK  P2EX2(2),BUFFER+4(3)    PACK SECOND NUM IN BUFFER                            
+00002E F211 F2F8 F2AA 002F8 002AA    43          PACK  P3EX2(2),BUFFER+8(2)    PACK THIRD NUM IN BUFFER                             
+000034 F211 F2FA F2AD 002FA 002AD    44          PACK  P4EX2(2),BUFFER+11(2)   PACK FOURTH NUM IN BUFFER                            
+                                     45 *                                                                                           
+00003A FA21 F2FC F2F4 002FC 002F4    46          AP    PSUMEX2(3),P1EX2(2)     ADD FIRST NUM TO TOTAL                               
+000040 FA21 F2FC F2F6 002FC 002F6    47          AP    PSUMEX2(3),P2EX2(2)     ADD SECOND NUM TO TOTAL                              
+000046 FA21 F2FC F2F8 002FC 002F8    48          AP    PSUMEX2(3),P3EX2(2)     ADD THIRD NUM TO TOTAL                               
+00004C FA21 F2FC F2FA 002FC 002FA    49          AP    PSUMEX2(3),P4EX2(2)     ADD FOURTH NUM TO TOTAL                              
+                                     50 *                                                                                           
+000052 E060 F2FC 0003 002FC          51          XDUMP PSUMEX2,3               DUMP THE TOTAL                                       
+                                     52 *                                                                                           
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                     53 * EXERCISE 3                                                                                
+                                     54 *                                                                                           
+000058 F842 F2FF F2FC 002FF 002FC    55          ZAP   PCALCTMP(5),PSUMEX2(3)  PREPARE PMULT FOR MULT                               
+00005E FC41 F2FF F2F2 002FF 002F2    56          MP    PCALCTMP(5),PMULT(2)    MULTIPLY PSUMEX2 BY PMULT                            
+                                     57 *                                                                                           
+                                     58 * EXERCISE 4                                                                                
+                                     59 *                                                                                           
+000064 F045 F2FF 003C 002FF 0003C    60          SRP   PCALCTMP(5),64-4,5      ROUND PRODUCT TO 1 DEC PLACE                         
+                                     61 *                                                                                           
+00006A E060 F2FF 0005 002FF          62          XDUMP PCALCTMP,5              DUMP ROUNDED PRODUCT                                 
+                                     63 *                                                                                           
+                                     64 * EXERCISE 5                                                                                
+                                     65 *                                                                                           
+000070 F864 F304 F2FF 00304 002FF    66          ZAP   PTEMP(7),PCALCTMP(5)    PREPARE PCACLTMP FOR DIVISION                        
+000076 F060 F304 0003 00304 00003    67          SRP   PTEMP(7),3,0            ADD 3 DECIMAL PLACES                                 
+00007C FD61 F304 F280 00304 00280    68          DP    PTEMP(7),=PL2'2.25'     DIVIDE BY 3.25                                       
+                                     69 *                                                                                           
+000082 E060 F304 0007 00304          70          XDUMP PTEMP,7                 DUMP THE QUOTIENT                                    
+                                     71 *                                                                                           
+                                     72 * EXERCISE 6                                                                                
+                                     73 *                                                                                           
+                                     74 * MOVE EDIT PATTERN INTO OUTPUT FIELD                                                       
+000088 D20C F30C F282 0030C 00282    75          MVC   OEX6(13),=X'40206B2020206B2021204B2020'                                      
+00008E DE0C F30C F304 0030C 00304    76          ED    OEX6(13),PTEMP          CONVERT TO EBCDIC                                    
+                                     77 *                                                                                           
+000094 E020 F30B 0085 0030B          78          XPRNT PRLINE1,133             PRINT THE OUTPUT FIELD                               
+                                     79 *                                                                                           
+                                     80 * EXERCISE 7                                                                                
+                                     81 *                                                                                           
+00009A 4110 F39A            0039A    82          LA    1,OEX7+9                STORE ADDRESS OF BYTE BEFORE                         
+                                     83 *                                      DECIMAL PLACE IN REGISTER 1                          
+                                     84 * MOVE EDIT PATTERN INTO OUTPUT FIELD                                                       
+00009E D20C F391 F282 00391 00282    85          MVC   OEX7(13),=X'40206B2020206B2021204B2020'                                      
+0000A4 DF0C F391 F304 00391 00304    86          EDMK  OEX7(13),PTEMP          CONVERT TO EBCDIC                                    
+0000AA 0610                          87          BCTR  1,0                     DECREMENT REG 1 BY 1                                 
+0000AC 925B 1000      00000          88          MVI   0(1),C'$'               PLACE DOLLAR SIGN IN FIELD                           
+                                     89 *                                                                                           
+0000B0 E020 F390 0085 00390          90          XPRNT PRLINE2,133             PRINT THE OUTPUT FIELD                               
+                                     91 *                                                                                           
+                                     92 * EXERCISE 8                                                                                
+                                     93 *                                                                                           
+0000B6 4110 F2A2            002A2    94          LA    1,BUFFER                LOAD BUFFER ADDRESS INTO REG 1                       
+0000BA 4120 F415            00415    95          LA    2,PCOEFFS               LOAD HEAD ADDR OF COEFFICIENT                        
+                                     96 *                                      ARRAY INTO REG 2                                     
+                                     97 *                                                                                           
+0000BE E000 F2A2 0050 002A2          98          XREAD BUFFER,80               READ IN LINE OF INPUT                                
+                                     99 *                                                                                           
+0000C4 F221 2000 F2A2 00000 002A2   100          PACK  0(3,2),BUFFER(2)        STORE FIRST NUM INTO FIRST                           
+                                    101 *                                      ELEMENT OF PCOEFFS                                   
+0000CA F223 2003 F2A5 00003 002A5   102          PACK  3(3,2),BUFFER+3(4)      STORE SECOND NUM INTO SECOND                         
+                                    103 *                                      ELEMENT OF PCOEFFS                                   
+0000D0 F222 2006 F2AA 00006 002AA   104          PACK  6(3,2),BUFFER+8(3)      STORE THIRD NUM INTO THIRD                           
+                                    105 *                                      ELEMENT OF PCOEFFS                                   
+0000D6 F221 2009 F2AE 00009 002AE   106          PACK  9(3,2),BUFFER+12(2)     STORE FOURTH NUM INTO FOURTH                         
+                                    107 *                                      ELEMENT OF PCOEFFS                                   
+0000DC F221 200C F2B1 0000C 002B1   108          PACK  12(3,2),BUFFER+15(2)    STORE FIFTH NUM INTO FIFTH                           
+                                    109 *                                      ELEMENT OF PCOEFFS                                   
+
+                                                                                                               PAGE    3            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+0000E2 F220 200F F2B4 0000F 002B4   110          PACK  15(3,2),BUFFER+18(1)    STORE SIXTH NUM INTO SIXTH                           
+                                    111 *                                      ELEMENT OF PCOEFFS                                   
+                                    112 *                                                                                           
+0000E8 4110 F2A2            002A2   113          LA    1,BUFFER                LOAD BUFFER ADDRESS INTO REG 1                       
+0000EC 4120 F427            00427   114          LA    2,PTABL1                LOAD HEAD ADDR OF PACKED                             
+                                    115 *                                      DECIMAL TABLE INTO REG 2                             
+                                    116 *                                                                                           
+0000F0 E000 F2A2 0050 002A2         117          XREAD BUFFER,80               READ IN LINE OF INPUT                                
+                                    118 *                                                                                           
+0000F6 4110 F2A2            002A2   119 RDLOOP   LA    1,BUFFER                LOAD BUFFER ADDRESS INTO REG 1                       
+0000FA 4770 F130            00130   120          BNZ   ENDREAD                 BRANCH TO ENDREAD AT EOF                             
+                                    121 *                                                                                           
+0000FE F220 2000 F2A2 00000 002A2   122          PACK  0(3,2),BUFFER(1)        STORE FIRST NUM INTO FIRST                           
+                                    123 *                                      ELEMENT OF ROW OF TABLE                              
+000104 F224 2003 F2A4 00003 002A4   124          PACK  3(3,2),BUFFER+2(5)      STORE SECOND NUM INTO SECOND                         
+                                    125 *                                      ELEMENT OF ROW OF TABLE                              
+00010A F222 2006 F2AA 00006 002AA   126          PACK  6(3,2),BUFFER+8(3)      STORE THIRD NUM INTO THIRD                           
+                                    127 *                                      ELEMENT OF ROW OF TABLE                              
+000110 F223 2009 F2AE 00009 002AE   128          PACK  9(3,2),BUFFER+12(4)     STORE FOURTH NUM INTO FOURTH                         
+                                    129 *                                      ELEMENT OF ROW OF TABLE                              
+000116 F222 200C F2B3 0000C 002B3   130          PACK  12(3,2),BUFFER+17(3)    STORE FIFTH NUM INTO FIFTH                           
+                                    131 *                                      ELEMENT OF ROW OF TABLE                              
+00011C F221 200F F2B7 0000F 002B7   132          PACK  15(3,2),BUFFER+21(2)    STORE SIXTH NUM INTO SIXTH                           
+                                    133 *                                      ELEMENT OF ROW OF TABLE                              
+                                    134 *                                                                                           
+000122 4120 2012            00012   135          LA    2,18(,2)                INCREMENT REG 2 FOR NEXT ROW                         
+000126 E000 F2A2 0050 002A2         136          XREAD BUFFER,80               READ NEXT LINE OF INPUT                              
+00012C 47F0 F0F6            000F6   137          B     RDLOOP                  CONTINUE LOOP                                        
+                                    138 *                                                                                           
+000130                              139 ENDREAD  DS    0H                                                                           
+                                    140 *                                                                                           
+000130 E060 F415 0012 00415         141          XDUMP PCOEFFS,18              DUMP THE COEFFICIENT ARRAY                           
+000136 E060 F427 0048 00427         142          XDUMP PTABL1,72               DUMP THE TABLE                                       
+                                    143 *                                                                                           
+                                    144 * EXERCISE 9                                                                                
+                                    145 *                                                                                           
+00013C 4120 F427            00427   146          LA    2,PTABL1            LOAD HEAD ADDR OF TABLE INTO REG 2                       
+000140 4130 0004            00004   147          LA    3,4                 LOAD 4 INTO REG 3                                        
+000144 4140 F415            00415   148          LA    4,PCOEFFS           LOAD HEAD ADDR OF ARRAY INTO REG 4                       
+                                    149 *                                                                                           
+000148                              150 ROWLP    DS    0H                                                                           
+                                    151 *                                                                                           
+000148 F852 F478 2000 00478 00000   152          ZAP   PTEMPEX9(6),0(3,2)      PREPARE FIRST ELEMENT OF ROW                         
+                                    153 *                                      OF TABLE FOR MULTIPLICATION                          
+00014E FC52 F478 4000 00478 00000   154          MP    PTEMPEX9(6),0(3,4)      MULT BY FIRST ELEM OF ARRAY                          
+000154 FA85 F46F F478 0046F 00478   155          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    156 *                                                                                           
+00015A F852 F478 2003 00478 00003   157          ZAP   PTEMPEX9(6),3(3,2)      PREPARE SECOND ELEMENT OF ROW                        
+                                    158 *                                      OF TABLE FOR MULTIPLICATION                          
+000160 FC52 F478 4003 00478 00003   159          MP    PTEMPEX9(6),3(3,4)      MULT BY SECOND ELEM OF ARRAY                         
+000166 FA85 F46F F478 0046F 00478   160          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    161 *                                                                                           
+00016C F852 F478 2006 00478 00006   162          ZAP   PTEMPEX9(6),6(3,2)      PREPARE THIRD ELEMENT OF ROW                         
+                                    163 *                                      OF TABLE FOR MULTIPLICATION                          
+000172 FC52 F478 4006 00478 00006   164          MP    PTEMPEX9(6),6(3,4)      MULT BY THIRD ELEM OF ARRAY                          
+000178 FA85 F46F F478 0046F 00478   165          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    166 *                                                                                           
+
+                                                                                                               PAGE    4            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+00017E F852 F478 2009 00478 00009   167          ZAP   PTEMPEX9(6),9(3,2)      PREPARE FOURTH ELEMENT OF ROW                        
+                                    168 *                                      OF TABLE FOR MULTIPLICATION                          
+000184 FC52 F478 4009 00478 00009   169          MP    PTEMPEX9(6),9(3,4)      MULT BY FOURTH ELEM OF ARRAY                         
+00018A FA85 F46F F478 0046F 00478   170          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    171 *                                                                                           
+000190 F852 F478 200C 00478 0000C   172          ZAP   PTEMPEX9(6),12(3,2)     PREPARE FIFTH ELEMENT OF ROW                         
+                                    173 *                                      OF TABLE FOR MULTIPLICATION                          
+000196 FC52 F478 400C 00478 0000C   174          MP    PTEMPEX9(6),12(3,4)     MULT BY FIFTH ELEM OF ARRAY                          
+00019C FA85 F46F F478 0046F 00478   175          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    176 *                                                                                           
+0001A2 F852 F478 200F 00478 0000F   177          ZAP   PTEMPEX9(6),15(3,2)     PREPARE SIXTH ELEMENT OF ROW                         
+                                    178 *                                      OF TABLE FOR MULTIPLICATION                          
+0001A8 FC52 F478 400F 00478 0000F   179          MP    PTEMPEX9(6),15(3,4)     MULT BY SIXTH ELEM OF ARRAY                          
+0001AE FA85 F46F F478 0046F 00478   180          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    181 *                                                                                           
+0001B4 F080 F46F 0003 0046F 00003   182          SRP   PSUMEX9(9),3,0          ADD 3 DECIMAL PLACES                                 
+0001BA FD82 F46F F28F 0046F 0028F   183          DP    PSUMEX9(9),=PL3'10.12'  DIVIDE BY 10.12                                      
+                                    184 *                                                                                           
+0001C0 E060 F46F 0009 0046F         185          XDUMP PSUMEX9,9               DUMP THE TOTAL                                       
+                                    186 *                                                                                           
+0001C6 F880 F46F F292 0046F 00292   187          ZAP   PSUMEX9(9),=PL1'0'      RESET TOTAL TO 0 FOR NEXT ROW                        
+0001CC 4120 2012            00012   188          LA    2,18(,2)                INCREMENT ADDRESS OF TABLE                           
+0001D0 4630 F148            00148   189          BCT   3,ROWLP                 BRANCH IF NOT DONE 4 TIMES                           
+                                    190 *                                                                                           
+0001D4 4120 F427            00427   191          LA    2,PTABL1            LOAD HEAD ADDR OF TABLE INTO REG 2                       
+0001D8 4130 0004            00004   192          LA    3,4                 LOAD 4 INTO REG 3                                        
+0001DC 4140 F415            00415   193          LA    4,PCOEFFS           LOAD HEAD ADDR OF ARRAY INTO REG 4                       
+                                    194 *                                                                                           
+0001E0                              195 ROWLP2   DS    0H                                                                           
+                                    196 *                                                                                           
+0001E0 F852 F478 2000 00478 00000   197          ZAP   PTEMPEX9(6),0(3,2)      PREPARE FIRST ELEMENT OF ROW                         
+                                    198 *                                      OF TABLE FOR MULTIPLICATION                          
+0001E6 FC52 F478 4000 00478 00000   199          MP    PTEMPEX9(6),0(3,4)      MULT BY FIRST ELEM OF ARRAY                          
+0001EC FA85 F46F F478 0046F 00478   200          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    201 *                                                                                           
+0001F2 F852 F478 2003 00478 00003   202          ZAP   PTEMPEX9(6),3(3,2)      PREPARE SECOND ELEMENT OF ROW                        
+                                    203 *                                      OF TABLE FOR MULTIPLICATION                          
+0001F8 FC52 F478 4003 00478 00003   204          MP    PTEMPEX9(6),3(3,4)      MULT BY SECOND ELEM OF ARRAY                         
+0001FE FA85 F46F F478 0046F 00478   205          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    206 *                                                                                           
+000204 F852 F478 2006 00478 00006   207          ZAP   PTEMPEX9(6),6(3,2)      PREPARE THIRD ELEMENT OF ROW                         
+                                    208 *                                      OF TABLE FOR MULTIPLICATION                          
+00020A FC52 F478 4006 00478 00006   209          MP    PTEMPEX9(6),6(3,4)      MULT BY THIRD ELEM OF ARRAY                          
+000210 FA85 F46F F478 0046F 00478   210          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    211 *                                                                                           
+000216 F852 F478 2009 00478 00009   212          ZAP   PTEMPEX9(6),9(3,2)      PREPARE FOURTH ELEMENT OF ROW                        
+                                    213 *                                      OF TABLE FOR MULTIPLICATION                          
+00021C FC52 F478 4009 00478 00009   214          MP    PTEMPEX9(6),9(3,4)      MULT BY FOURTH ELEM OF ARRAY                         
+000222 FA85 F46F F478 0046F 00478   215          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    216 *                                                                                           
+000228 F852 F478 200C 00478 0000C   217          ZAP   PTEMPEX9(6),12(3,2)     PREPARE FIFTH ELEMENT OF ROW                         
+                                    218 *                                      OF TABLE FOR MULTIPLICATION                          
+00022E FC52 F478 400C 00478 0000C   219          MP    PTEMPEX9(6),12(3,4)     MULT BY FIFTH ELEM OF ARRAY                          
+000234 FA85 F46F F478 0046F 00478   220          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    221 *                                                                                           
+00023A F852 F478 200F 00478 0000F   222          ZAP   PTEMPEX9(6),15(3,2)     PREPARE SIXTH ELEMENT OF ROW                         
+                                    223 *                                      OF TABLE FOR MULTIPLICATION                          
+
+                                                                                                               PAGE    5            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000240 FC52 F478 400F 00478 0000F   224          MP    PTEMPEX9(6),15(3,4)     MULT BY SIXTH ELEM OF ARRAY                          
+000246 FA85 F46F F478 0046F 00478   225          AP    PSUMEX9(9),PTEMPEX9(6)  ADD TO TOTAL                                         
+                                    226 *                                                                                           
+00024C F080 F46F 0003 0046F 00003   227          SRP   PSUMEX9(9),3,0          ADD 3 DECIMAL PLACES                                 
+000252 FD82 F46F F28F 0046F 0028F   228          DP    PSUMEX9(9),=PL3'10.12'  DIVIDE BY 10.12                                      
+                                    229 *                                                                                           
+                                    230 * MOVE EDIT PATTERN INTO OUTPUT FIELD                                                       
+000258 D20E F47F F293 0047F 00293   231          MVC   OEX10(15),=X'402020206B2020206B2021204B2020'                                 
+00025E DE0E F47F F46F 0047F 0046F   232          ED    OEX10(15),PSUMEX9       CONVERT TO EBCDIC                                    
+                                    233 *                                                                                           
+000264 E020 F47E 0085 0047E         234          XPRNT PRLINE3,133             PRINT THE OUTPUT FIELD                               
+                                    235 *                                                                                           
+00026A F880 F46F F292 0046F 00292   236          ZAP   PSUMEX9(9),=PL1'0'      RESET TOTAL TO 0 FOR NEXT ROW                        
+000270 4120 2012            00012   237          LA    2,18(,2)                INCREMENT ADDRESS OF TABLE                           
+000274 4630 F1E0            001E0   238          BCT   3,ROWLP2                BRANCH IF NOT DONE 4 TIMES                           
+                                    239 *                                                                                           
+                                    240 *                                                                                           
+000278 07FE                         241          BR    14                  RETURN TO CALLER (OS)                                    
+                                    242 *                                                                                           
+                                    243          LTORG                     LITERAL ORGANIZATION                                     
+000280 225C                         244                =PL2'2.25'                                                                   
+000282 40206B2020206B20             245                =X'40206B2020206B2021204B2020'                                               
+00028F 01012C                       246                =PL3'10.12'                                                                  
+000292 0C                           247                =PL1'0'                                                                      
+000293 402020206B202020             248                =X'402020206B2020206B2021204B2020'                                           
+                                    249 *                                                                                           
+0002A2                              250 BUFFER   DS    CL80                INPUT BUFFER                                             
+                                    251 * EXERCISE 1 STORAGE                                                                        
+0002F2 000C                         252 PMULT    DC    PL2'0'              2 BYTE PACKED DECIMAL                                    
+                                    253 * EXERCISE 2 STORAGE                                                                        
+0002F4 000C                         254 P1EX2    DC    PL2'0'              2 BYTE PACKED DECIMAL                                    
+0002F6 000C                         255 P2EX2    DC    PL2'0'              2 BYTE PACKED DECIMAL                                    
+0002F8 000C                         256 P3EX2    DC    PL2'0'              2 BYTE PACKED DECIMAL                                    
+0002FA 000C                         257 P4EX2    DC    PL2'0'              2 BYTE PACKED DECIMAL                                    
+0002FC 00000C                       258 PSUMEX2  DC    PL3'0'              3 BYTE PACKED DECIMAL                                    
+                                    259 * EXERCISE 3 STORAGE                                                                        
+0002FF 000000000C                   260 PCALCTMP DC    PL5'0'              5 BYTE PACKED DECIMAL                                    
+                                    261 * EXERCISE 5 STORAGE                                                                        
+000304 0000000000000C               262 PTEMP    DC    PL7'0'              7 BYTE PACKED DECIMAL                                    
+                                    263 * EXERCISE 6 STORAGE                                                                        
+00030B 40                           264 PRLINE1  DC    C' '                PRINT LINE, CC - SINGLE SPACE                            
+00030C                              265 OEX6     DS    CL13                OUTPUT FIELD - 11 CHARACTERS                             
+000319 4040404040404040             266          DC    119C' '             FILL WITH SPACES                                         
+                                    267 * EXERCISE 7 STORAGE                                                                        
+000390 40                           268 PRLINE2  DC    C' '                PRINT LINE, CC - SINGLE SPACE                            
+000391                              269 OEX7     DS    CL13                OUTPUT FIELD - 11 CHARACTERS                             
+00039E 4040404040404040             270          DC    119C' '             FILL WITH SPACES                                         
+                                    271 * EXERCISE 8 STORAGE                                                                        
+000415 00000C00000C0000             272 PCOEFFS  DC    6PL3'0'             6 3 BYTE PACKED DECIMALS (ARRAY)                         
+000427                              273 PTABL1   DS    24PL3'0'            24 3 BYTE PACKED DECIMALS (TABLE)                        
+                                    274 *                                                                                           
+                                    275 * EXERCISE 9 STORAGE                                                                        
+                                    276 *                                                                                           
+00046F 0000000000000000             277 PSUMEX9  DC    PL9'0'              9 BYTE PACKED DECIMAL                                    
+000478 00000000000C                 278 PTEMPEX9 DC    PL6'0'              6 BYTE PACKED DECIMAL                                    
+                                    279 *                                                                                           
+                                    280 * EXERCISE 10 STORAGE                                                                       
+
+                                                                                                               PAGE    6            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                    281 *                                                                                           
+00047E 40                           282 PRLINE3  DC    C' '                PRINT LINE, CC - SINGLE SPACE                            
+00047F                              283 OEX10    DS    CL15                OUTPUT FIELD - 15 CHARACTERS                             
+00048E 4040404040404040             284          DC    117C' '             FILL WITH SPACES                                         
+                                    285 *                                                                                           
+                                    286          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:   14688 HIGH:     964 LEAVING:  477916 FREE BYTES. AVERAGE:       54 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   287000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+
+BEGIN XSNAP - CALL     1 AT C0000016 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0002A2 TO 0002F2                                                         
+0002A0   2020F2F5 40404040 40404040 40404040    40404040 40404040 40404040 40404040   *..25                            *            
+0002C0   40404040 40404040 40404040 40404040    40404040 40404040 40404040 40404040   *                                *            
+0002E0   40404040 40404040 40404040 40404040    4040025F 000C000C 000C000C 00000C00   *                  ..............*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     2 AT C000001C USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0002F2 TO 0002F4                                                         
+0002E0   40404040 40404040 40404040 40404040    4040025F 000C000C 000C000C 00000C00   *                  ..............*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     3 AT E0000058 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0002FC TO 0002FF                                                         
+0002E0   40404040 40404040 40404040 40404040    4040025F 279F928F 027F046F 01280C00   *                  ..............*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     4 AT E0000070 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     0002FF TO 000304                                                         
+0002E0   40404040 40404040 40404040 40404040    4040025F 279F928F 027F046F 01280C00   *                  ..............*            
+000300   0000003C 00000000 00000C40 F5F5F5F5    F5F5F5F5 F5F5F5F5 F5404040 40404040   *........... 5555555555555       *            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     5 AT E0000088 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000304 TO 00030B                                                         
+000300   0000003C 00000001 3C075C40 F5F5F5F5    F5F5F5F5 F5F5F5F5 F5404040 40404040   *........... 5555555555555       *            
+
+                                                                                                                                    
+         0.13                                                                                                                       
+        $0.13                                                                                                                       
+
+BEGIN XSNAP - CALL     6 AT D0000136 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000415 TO 000427                                                         
+000400   40404040 40404040 40404040 40404040    40404040 4000019F 02778F00 191F0003   *                     ...........*            
+000420   8F00072F 00008F00 002F7270 7F00392F    01788F00 928F0002 7F00008F 26398F00   *................................*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     7 AT D000013C USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000427 TO 00046F                                                         
+000420   8F00072F 00008F00 002F7270 7F00392F    01788F00 928F0002 7F00008F 26398F00   *................................*            
+000440   293F0560 1F00965F 00018F00 000F1982    6F00501F 02985F00 601F0000 8F00009F   *................................*            
+000460   84516F00 871F0986 4F00168F 00050F00    00000000 0000000C 00000000 000C40F5   *.............................. 5*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     8 AT E00001C6 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     00046F TO 000478                                                         
+000460   84516F00 871F0986 4F00168F 00050F00    19979242 2C00936C 00000000 216C40F5   *.............................. 5*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     9 AT E00001C6 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     00046F TO 000478                                                         
+000460   84516F00 871F0986 4F00168F 00050F00    07279863 7C00356C 00000000 144C40F5   *.............................. 5*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL    10 AT E00001C6 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     00046F TO 000478                                                         
+000460   84516F00 871F0986 4F00168F 00050F00    05467300 8C00904C 00000000 064C40F5   *.............................. 5*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL    11 AT E00001C6 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     00046F TO 000478                                                         
+000460   84516F00 871F0986 4F00168F 00050F00    23254872 3C00324C 00000000 400C40F5   *............................ . 5*            
+
+                                                                                                                                    
+   1,997,924.22                                                                                                                     
+     727,986.37                                                                                                                     
+     546,730.08                                                                                                                     
+   2,325,487.23                                                                                                                     
+
+*** EXECUTION TIME =    0.000 SECS.       299 INSTRUCTIONS EXECUTED -   299000 INSTRUCTIONS/SEC ***                                 
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
