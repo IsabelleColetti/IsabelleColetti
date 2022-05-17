@@ -1,30 +1,9 @@
-# CSCI 466 Project
-by David Petrovski, Isabelle Coletti, Amanda Zedwick
+An online store created with HTML, PHP, and SQL.
 
-## Bobs Pets and Supplies
+# Customer-side
+Allows a customer to create an account for the store. Customers can view all products in stock along with a description, add products to their cart, purchase products in their cart, and view their order details and status.
 
-This is the repo for our project, and this README.md will be updated as we build the website.
+# Employee-side
+Allows an employee to log into their account for the store. Employees can view inventory, view orders and order details, assign orders to themselves, add notes to orders, and ship orders.
 
-### Instructions
-1. Clone this repo to your local machine, turing or hopper.
-2. Change the branch to your development branch.
-3. Put your login info in the `secrets.php` file and push it your branch of the repo.
-
-
-### To do list:
-1.  ~~Create ER diagram.~~
-2. ~~Write explanations for ER diagram.~~
-3. ~~Create Relational Schema.~~
-4. ~~Create database and sample data sql.~~
-5. ~~Create 'secrets.php' file~~
-6. ~~Create php file that connects to database~~
-7. ~~Create login screen and welcome screen for customers~~
-8. ~~Create button to go to employees screen for login~~
-9. ~~Create login screen for employee~~
-10. Create store page with products
-11. Create employee home page
-12. Create cart logo and show it in store page for user to be able to click on it
-13. Create cart page
-14. Enable user to add to cart
-15. Enable user to purchase products
-16. ...
+All source code is mine and my group's.
