@@ -1,0 +1,1513 @@
+1                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2
+0
+ 16.22.29 JOB08196 ---- FRIDAY,    06 MAY 2022 ----
+ 16.22.29 JOB08196  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+ 16.22.29 JOB08196  ICH70001I KC03CC1  LAST ACCESS AT 16:18:49 ON FRIDAY, MAY 6, 2022
+ 16.22.29 JOB08196  $HASP373 KC03CC1A STARTED - INIT 1    - CLASS A        - SYS 2964
+ 16.22.29 JOB08196  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+ 16.22.29 JOB08196  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+ 16.22.29 JOB08196  -JSTEP01              00     55      6       .00       .00     .0            13  BATCH        0     0     0     0
+ 16.22.29 JOB08196  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+ 16.22.29 JOB08196  $HASP395 KC03CC1A ENDED - RC=0000
+0------ JES2 JOB STATISTICS ------
+-  06 MAY 2022 JOB EXECUTION DATE
+-        1,384 CARDS READ
+-        1,517 SYSOUT PRINT RECORDS
+-            0 SYSOUT PUNCH RECORDS
+-          136 SYSOUT SPOOL KBYTES
+-         0.00 MINUTES EXECUTION TIME
+         1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB08196
+         2 //JSTEP01  EXEC PGM=ASSIST
+         3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR
+         4 //SYSPRINT DD SYSOUT=*
+         5 //SYSIN    DD *
+           //*
+         6 //FT05F001 DD DSN=KC02038.CSCI360.FA21DATA(PRJ2DATA),DISP=SHR
+           //*
+         7 //FT06F001 DD SYSOUT=*
+           //*
+         8 //SYSPRINT DD SYSOUT=*
+         9 //
+ ICH70001I KC03CC1  LAST ACCESS AT 16:18:49 ON FRIDAY, MAY 6, 2022
+ IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+          SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+ IEF236I ALLOC. FOR KC03CC1A JSTEP01
+ IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF237I JES2 ALLOCATED TO SYSIN
+ IGD103I SMS ALLOCATED TO DDNAME FT05F001
+ IEF237I JES2 ALLOCATED TO FT06F001
+ IEF237I JES2 ALLOCATED TO SYSPRINT
+ IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+ IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB
+ IEF285I   KC03CC1.KC03CC1A.JOB08196.D0000102.?         SYSOUT
+ IEF285I   KC03CC1.KC03CC1A.JOB08196.D0000101.?         SYSIN
+ IGD104I KC02038.CSCI360.FA21DATA                     RETAINED,  DDNAME=FT05F001
+ IEF285I   KC03CC1.KC03CC1A.JOB08196.D0000103.?         SYSOUT
+ IEF285I   KC03CC1.KC03CC1A.JOB08196.D0000104.?         SYSOUT
+ IEF373I STEP/JSTEP01 /START 2022126.1622
+ IEF032I STEP/JSTEP01 /STOP  2022126.1622
+         CPU:     0 HR  00 MIN  00.04 SEC    SRB:     0 HR  00 MIN  00.00 SEC
+         VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11312K
+         ATB- REAL:                  1056K  SLOTS:                     0K
+              VIRT- ALLOC:      13M SHRD:       0M
+ IEF375I  JOB/KC03CC1A/START 2022126.1622
+ IEF033I  JOB/KC03CC1A/STOP  2022126.1622
+         CPU:     0 HR  00 MIN  00.04 SEC    SRB:     0 HR  00 MIN  00.00 SEC
+1*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT
+0
+0                                                                                                               PAGE    1
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                       1 ******************************************************************
+                                       2 * CSCI 360-2              PROJECT 2                  SPRING 2022 *
+                                       3 *                                                                *
+                                       4 * NAME: ISABELLE COLETTI                                         *
+                                       5 *       DAVID PETROVSKI                                          *
+                                       6 *       JACOB EUL                                                *
+                                       7 * DATE: 05/08/2022                                               *
+                                       8 *                                                                *
+                                       9 * THIS PROGRAM READS IN TWO TABLES, ONE WHICH IS A MODEL         *
+                                      10 * COEFFICIENTS TABLE AND ONE THAT IS A HOUSING DATA TABLE. IT    *
+                                      11 * THEN GENERATES A SET OF PREDICTIONS USING THE HOUSING DATA     *
+                                      12 * WITH EACH MODE, AND THEN CALCULATES THE MEAN SQUARED ERROR     *
+                                      13 * (MSE) STATISTIC FOR EACH MODEL.                                *
+                                      14 *                                                                *
+                                      15 * RETURN CODES:                                                  *
+                                      16 *   0 - SUCCESSFUL PROGRAM EXIT                                  *
+                                      17 *                                                                *
+                                      18 * REGISTER USAGE:                                                *
+                                      19 *   1 - HOLDS ADDRESS OF THE PARAMETER LISTS FOR EACH SUBPROGRAM *
+                                      20 *       CALLED IN THE MAIN CSECT                                 *
+                                      21 *   2 - HOLDS PTR TO THE MODEL COEFFICIENTS TABLE ROWS AS THE    *
+                                      22 *       PROGRAM INCREMENTS THROUGH EACH OF THEM                  *
+                                      23 *   3 - HOLDS COUNTER VALUE FOR THE LOOP THAT GOES THROUGH EACH  *
+                                      24 *       ROW IN THE MODEL COEFFICIENTS TABLE                      *
+                                      25 *                                                                *
+                                      26 ******************************************************************
+                                      27 *
+                                      28 *=================================================================
+                                      29 * LABEL ADDRESSING
+ 000000                               30 $LBLS    DSECT
+ 000000                               31 $L1      DS    CL5                   LBLARR, 1ST COLUMN
+ 000005                               32 $L2      DS    CL2                   LBLARR, 2ND COLUMN
+ 000007                               33 $L3      DS    CL5                   LBLARR, 3RD COLUMN
+ 00000C                               34 $L4      DS    CL4                   LBLARR, 4TH COLUMN
+ 000010                               35 $L5      DS    CL3                   LBLARR, 5TH COLUMN
+ 000013                               36 $L6      DS    CL2                   LBLARR, 6TH COLUMN
+ 000015                               37 $L7      DS    CL3                   LBLARR, 7TH COLUMN
+ 000018                               38 $L8      DS    CL3                   LBLARR, 8TH COLUMN
+ 00001B                               39 $L9      DS    CL3                   LBLARR, 9TH COLUMN
+ 00001E                               40 $L10     DS    CL3                   LBLARR, 10TH COLUMN
+ 000021                               41 $L11     DS    CL7                   LBLARR, 11TH COLUMN
+ 000028                               42 $L12     DS    CL1                   LBLARR, 12TH COLUMN
+ 000029                               43 $L13     DS    CL5                   LBLARR, 13TH COLUMN
+                                      44 *
+                                      45 *=================================================================
+                                      46 *
+                                      47 *=================================================================
+                                      48 * MODEL COEFFICIENTS TABLE
+ 000000                               49 $MODLTBL DSECT
+ 000000                               50 $COEFFS  DS    13PL5                 MTABL, 13 COLS OF 5 BYTES
+ 000041                               51 $MSE     DS    PL6                   MTABL, MSE COLUMN
+                                      52 *=================================================================
+1                                                                                                               PAGE    2
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                      53 *
+                                      54 *=================================================================
+                                      55 * HOUSING DATA TABLE
+ 000000                               56 $HOUSTBL DSECT
+ 000000                               57 $DATA    DS    13PL5                 HTABL, 13 COLS OF 5 BYTES
+ 000041                               58 $Y       DS    PL5                   HTABL, Y COLUMN
+ 000046                               59 $YHAT    DS    PL5                   HTABL, YHAT COLUMN
+                                      60 *=================================================================
+                                      61 *
+ 000000                               62 MAIN     CSECT
+                                      63 * === Entry linkage ===
+                                      64 *      Back up caller's registers
+ 000000 90EC D00C            0000C    65          STM   14,12,12(13)   SAVE REGS IN CALLER'S SAVE AREA
+                                      66 *      Establish local addressability
+ 000004 18CF                          67          LR    12,15          COPY CSECT ADDRESS INTO R12
+ 000000                               68          USING MAIN,12        ESTABLISH R12 AS THE BASE REG
+                                      69 *      Store backwards and forwards pointers
+ 000006 41E0 C08C            0008C    70          LA    14,SAVEAREA    R14 POINTS TO THIS CSECT'S SAVE AREA
+ 00000A 50D0 E004            00004    71          ST    13,4(,14)      STORE ADDRESS OF CALLER'S SAVE AREA
+ 00000E 50E0 D008            00008    72          ST    14,8(,13)      STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                      73 *      Point R13 at local save area
+ 000012 18DE                          74          LR    13,14          POINT R13 AT THIS CSECT'S SAVE AREA
+                                      75 *
+                                      76 * === Read labels from input and store them ===
+ 000014 E000 C0D4 0050 000D4          77          XREAD BUFFER,80        READ ROW WITH ALL THE LABLES
+                                      78 *
+ 00001A 4110 C19C            0019C    79          LA    1,LPARMS         LOAD PARAMETER LIST
+ 00001E 58F0 C078            00078    80          L     15,=V(READLBLS)  LOAD EXTERNAL ADDRESS
+ 000022 05EF                          81          BALR  14,15            CALL READLBLS SUBPROGRAM
+                                      82 *
+                                      83 * === Read models coefficients and store them ===
+ 000024 4110 C30C            0030C    84          LA    1,MPARMS         LOAD PARAMETER LIST
+ 000028 58F0 C07C            0007C    85          L     15,=V(READMDLS)  LOAD EXTERNAL ADDRESS
+ 00002C 05EF                          86          BALR  14,15            CALL READMDLS SUBPROGRAM
+                                      87 *
+                                      88 * === Read house data and store them ===
+ 00002E 4110 CCC0            00CC0    89          LA    1,HPARMS         LOAD PARAMETER LIST
+ 000032 58F0 C080            00080    90          L     15,=V(READDATA)  LOAD EXTERNAL ADDRESS
+ 000036 05EF                          91          BALR  14,15            CALL READDATA SUBPROGRAM
+                                      92 *
+                                      93 * === Evaluate each model using housing data table ===
+ 000038 4130 0005            00005    94          LA    3,5              INIT COUNTER
+                                      95 *
+ 00003C 4120 C1A8            001A8    96          LA    2,MDLSROW1       LOAD FIRST MODELS TABLE ROW
+ 000040 5020 CCC8            00CC8    97          ST    2,CURMROW        SAVE ADDR OF CURRENT ROW FROM MODLTBL
+ 000044                               98 LOOP1    DS    0H               LOOP UNTIL END OF MODL TABL
+                                      99 *
+ 000044 4110 CCC8            00CC8   100          LA    1,EPARMS         LOAD PARAMETER LIST
+ 000048 58F0 C084            00084   101          L     15,=V(EVALMODL)  LOAD EXTERNAL ADDRESS
+ 00004C 05EF                         102          BALR  14,15            CALL EVALMODL SUBPROGRAM
+                                     103 *
+ 00004E 4120 2047            00047   104          LA    2,71(,2)         INCREMENT TO NEXT ROW
+ 000052 5020 CCC8            00CC8   105          ST    2,CURMROW        STORE IN CURMROW TO SEND AS PARAM
+ 000056 4630 C044            00044   106          BCT   3,LOOP1          DECREMENT COUNTER
+                                     107 *
+                                     108 * === Display labels and model coefficients table rows ===
+ 00005A 4110 CD5C            00D5C   109          LA    1,SPARMS         LOAD PARAMETER LIST
+1                                                                                                               PAGE    3
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 00005E 58F0 C088            00088   110          L     15,=V(SHWRESLT)  LOAD EXTERNAL ADDRESS
+ 000062 05EF                         111          BALR  14,15            CALL EVALMODL SUBPROGRAM
+                                     112 *
+                                     113 * === Exit linkage ===
+ 000064 1BFF                         114 PRGEXIT  SR    15,15            R15 = RETURN CODE OF 0
+ 000066 58D0 D004            00004   115          L     13,4(,13)        POINT R13 TO CALLER'S SAVE AREA
+ 00006A 58E0 D00C            0000C   116          L     14,12(,13)       RESTORE REGISTER 14
+ 00006E 980C D014            00014   117          LM    0,12,20(13)      RESTORE R0 THRU R12
+                                     118 *
+ 000072 07FE                         119          BR    14               RETURN TO CALLER
+                                     120 *
+                                     121          LTORG
+ 000078 00000D68                     122                =V(READLBLS)
+ 00007C 00000E08                     123                =V(READMDLS)
+ 000080 00000F70                     124                =V(READDATA)
+ 000084 00001268                     125                =V(EVALMODL)
+ 000088 00001698                     126                =V(SHWRESLT)
+                                     127 *
+ 00008C                              128 SAVEAREA DS    18F'-1'        PROGRAM'S SAVE AREA
+ 0000D4                              129 BUFFER   DS    CL80           READ BUFFER
+ 000124                              130 LBLARR   DS    13CL9 ' '      LABEL ARRAY
+                                     131 *
+                                     132 * PARM LIST FOR READLBLS
+ 00019C 000000D4                     133 LPARMS   DC    A(BUFFER)
+ 0001A0 00000124                     134          DC    A(BUFFER+80)
+ 0001A4 00000124                     135          DC    A(LBLARR)
+                                     136 *
+                                     137 * MODEL COEFFICIENTS TABLE
+ 0001A8                              138 BMTABL   DS    0H             HEAD OF MODEL COEFFICIENTS TABLE
+ 0001A8 000000000C000000             139 MDLSROW1 DC    13PL5'0'       FIRST ROW OF TABLE
+ 0001E9 00000000000C                 140 MSE1     DC    PL6'0'         MSE (IN FIRST ROW)
+ 0001EF 000000000C000000             141 MDLSROW2 DC    13PL5'0'       SECOND ROW OF TABLE
+ 000230 00000000000C                 142 MSE2     DC    PL6'0'         MSE (IN SECOND ROW)
+ 000236 000000000C000000             143 MDLSROW3 DC    13PL5'0'       THIRD ROW OF TABLE
+ 000277 00000000000C                 144 MSE3     DC    PL6'0'         MSE (IN THIRD ROW)
+ 00027D 000000000C000000             145 MDLSROW4 DC    13PL5'0'       FOURTH ROW OF TABLE
+ 0002BE 00000000000C                 146 MSE4     DC    PL6'0'         MSE (IN FOURTH ROW)
+ 0002C4 000000000C000000             147 MDLSROW5 DC    13PL5'0'       FIFTH ROW OF TABLE
+ 000305 00000000000C                 148 MSE5     DC    PL6'0'         MSE (IN FIFTH ROW)
+ 00030C                              149 EMTABL   DS    0H             END OF MODEL COEFFICIENTS TABLE
+                                     150 *
+                                     151 * PARM LIST FOR READMDLS
+ 00030C 000001A80000030C             152 MPARMS   DC    A(BMTABL,EMTABL)
+                                     153 *
+                                     154 * HOUSING DATA TABLE
+ 000314 000000000C000000             155 BHTABL   DC    495PL5'0'      HEAD OF HOUSE DATA TABLE
+ 000CC0                              156 EHTABL   DS    0H             END OF HOUSE DATA TABLE
+                                     157 *
+                                     158 * PARM LIST FOR READDATA
+ 000CC0 0000031400000CC0             159 HPARMS   DC    A(BHTABL,EHTABL)
+                                     160 *
+                                     161 * PARM LIST FOR EVALMODL
+ 000CC8                              162 EPARMS   DS    0F
+ 000CC8                              163 CURMROW  DS    F              ADDR OF CUR MODEL TABL ROW
+ 000CCC 0000031400000CBF             164          DC    A(BHTABL,EHTABL-1)
+                                     165 *
+ 000CD4 40                           166 PRNTLN   DC    C' '           CARRIAGE CONTROL - SINGLE SPACE
+1                                                                                                               PAGE    4
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 000CD5 4040404040404040             167 OUTBUF   DC    CL133' '
+                                     168 * PARM LIST FOR SHWRESLT
+ 000D5C                              169 SPARMS   DS    0F
+ 000D5C 00000123000001A8             170          DC    A(LBLARR-1,BMTABL,OUTBUF)
+                                     171 *
+                                     172 *
+                                     173 ******************************************************************
+                                     174 *                                                                *
+                                     175 * READ LABELS SUBPROGRAM                                         *
+                                     176 *                                                                *
+                                     177 * TAKES INPUT FROM INSTREAM DATA WHERE IT READS THE LABELS FOR   *
+                                     178 * THE MODEL COEFFICIENTS TABLE, WHICH WILL BE USED FOR OUTPUT.   *
+                                     179 *                                                                *
+                                     180 * RETURN CODES: NONE                                             *
+                                     181 *                                                                *
+                                     182 * REGISTER USAGE:                                                *
+                                     183 *   2 - (IN) PTR TO THE HEAD OF THE BUFFER (F)                   *
+                                     184 *   3 - (IN) PTR TO THE END OF THE BUFFER (F)                    *
+                                     185 *   4 - (IN) PTR TO THE LABEL ARRAY WHERE LABELS WILL BE         *
+                                     186 *       STORED (F)                                               *
+                                     187 *                                                                *
+                                     188 ******************************************************************
+ 000D68                              189 READLBLS CSECT
+                                     190 * === Entry linkage ===
+                                     191 *      Back up caller's register state
+ 000D68 90EC D00C            0000C   192          STM   14,12,12(13)   SAVE REGS IN CALLER'S SAVE AREA
+                                     193 *      Establish local addressability
+ 000D6C 18CF                         194          LR    12,15          COPY CSECT ADDRESS INTO R12
+ 000D68                              195          USING READLBLS,12    ESTABLISH R12 AS THE BASE REG
+                                     196 *      Store backwards, forwards pointers
+ 000D6E 41E0 C058            00DC0   197          LA    14,LBLSAVE     R14 POINTS TO THIS CSECT'S SAVE AREA
+ 000D72 50D0 E004            00004   198          ST    13,4(,14)      STORE ADDRESS OF CALLER'S SAVE AREA
+ 000D76 50E0 D008            00008   199          ST    14,8(,13)      STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     200 *      Point R13 at local save area
+ 000D7A 18DE                         201          LR    13,14          POINT R13 AT THIS CSECT'S SAVE AREA
+                                     202 *
+ 000D7C 9824 1000            00000   203          LM    2,4,0(1)       R2 -> BUFFER BEGIN ADDR
+                                     204 *                             R3 -> BUFFER END ADDR
+                                     205 *                             R4 -> LABEL ARRAY
+                                     206 *
+ 000D80 1923                         207 ICHCK    CR    2,3            CHECK IF AT END OF BUFFER
+ 000D82 4780 C044            00DAC   208          BE    END1           IF SO, BRANCH TO END
+ 000D86 9540 2000      00000         209          CLI   0(2),C' '      CHECK IF CURRENT INDEX IS A SPACE
+ 000D8A 4770 C02A            00D92   210          BNE   CHARF          IF NOT, IT'S A CHARACTER
+ 000D8E 47F0 C03C            00DA4   211          B     SPCF           OTHERWISE, IT'S A SPACE
+                                     212 *
+ 000D92                              213 CHARF    DS    0H             CURRENT INDEX IS A CHARACTER
+ 000D92 D200 4000 2000 00000 00000   214          MVC   0(1,4),0(2)    MOVE THE CHARACTER INTO THE LABEL ARRAY
+ 000D98 4120 2001            00001   215          LA    2,1(,2)        MOVE ONTO NEXT INDEX
+ 000D9C 4140 4001            00001   216          LA    4,1(,4)        INCREMENT LABEL ARRAY TO NEXT INDEX
+ 000DA0 47F0 C018            00D80   217          B     ICHCK          CHECK NEXT INDEX
+                                     218 *
+ 000DA4                              219 SPCF     DS    0H             CURRENT INDEX IS A SPACE
+ 000DA4 4120 2001            00001   220          LA    2,1(,2)        OTHERWISE, MOVE ONTO NEXT INDEX
+ 000DA8 47F0 C018            00D80   221          B     ICHCK          CHECK NEXT INDEX
+                                     222 *
+ 000DAC                              223 END1     DS    0H
+1                                                                                                               PAGE    5
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                     224 *
+                                     225 *
+                                     226 * === Exit linkage ===
+ 000DAC 58D0 D004            00004   227          L     13,4(,13)      POINT R13 TO CALLER'S SAVE AREA
+ 000DB0 58E0 D00C            0000C   228          L     14,12(,13)     RESTORE REGISTER 14
+ 000DB4 980C D014            00014   229          LM    0,12,20(13)    RESTORE R0 THRU R12
+                                     230 *
+ 000DB8 07FE                         231          BR    14             RETURN TO CALLER
+                                     232 *
+                                     233          LTORG
+                                     234 *
+ 000DC0                              235 LBLSAVE  DS    18F'-1'        PARSE SUBPROGRAM'S SAVE AREA
+                                     236 *
+                                     237 *
+                                     238 ******************************************************************
+                                     239 *                                                                *
+                                     240 * READ MODEL COEFFICIENTS TABLE SUBPROGRAM                       *
+                                     241 *                                                                *
+                                     242 * TAKES INPUT FROM INSTREAM DATA WHERE EACH ROW HAS 14, OF WHICH *
+                                     243 * 13 ARE COEFFICIENTS, WITH 5 IMPLIED DECIMAL PLACES. IN         *
+                                     244 * ADDITION EACH ROW IS READ USING TWO XREAD STATEMENTS. THE      *
+                                     245 * COEFFICIENTS ARE READ IN AND WITH USING THE DECIMAL PARSING    *
+                                     246 * SUBPROGRAM ARE CONVERTED TO PACKED DECIMALS WHICH ARE THEN     *
+                                     247 * STORED INTO THE TABLE. THERE IS ALSO ONE COLUMN LEFT EMPRTY    *
+                                     248 * FOR THE MSE VALUE OF EACH ROW.                                 *
+                                     249 *                                                                *
+                                     250 * RETURN CODES: NONE                                             *
+                                     251 *                                                                *
+                                     252 * REGISTER USAGE:                                                *
+                                     253 *   2 - (IN) PTR TO THE HEAD OF THE MODEL COEFFICIENTS TABLE (F) *
+                                     254 *   3 - (IN) PTR TO THE END OF THE MODEL COEFFICIENTS TABLE (F)  *
+                                     255 *   4 - HOLDS ADDRESSES FOR BUFFER AS WE MOVE THROUGH THE        *
+                                     256 *       COEFFICIENTS IN THE MODEL COEFFICIENTS TABLE             *
+                                     257 *                                                                *
+                                     258 ******************************************************************
+ 000E08                              259 READMDLS CSECT
+                                     260 * === Entry linkage ===
+                                     261 *      Back up caller's register state
+ 000E08 90EC D00C            0000C   262          STM   14,12,12(13)   SAVE REGS IN CALLER'S SAVE AREA
+                                     263 *      Establish local addressability
+ 000E0C 18CF                         264          LR    12,15          COPY CSECT ADDRESS INTO R12
+ 000E08                              265          USING READMDLS,12    ESTABLISH R12 AS THE BASE REG
+                                     266 *      Store backwards, forwards pointers
+ 000E0E 41E0 C0B0            00EB8   267          LA    14,MDLSAVE     R14 POINTS TO THIS CSECT'S SAVE AREA
+ 000E12 50D0 E004            00004   268          ST    13,4(,14)      STORE ADDRESS OF CALLER'S SAVE AREA
+ 000E16 50E0 D008            00008   269          ST    14,8(,13)      STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     270 *      Point R13 at local save area
+ 000E1A 18DE                         271          LR    13,14          POINT R13 AT THIS CSECT'S SAVE AREA
+                                     272 *
+ 000E1C 9823 1000            00000   273          LM    2,3,0(1)       R2 -> MDLTABL BEGIN ADDR
+                                     274 *                             R3 -> MDLTABL END ADDR
+                                     275 *
+ 000E20 E000 C0F8 0051 00F00         276          XREAD MDLSBUF,81         READ FIRST PART OF CUR ROW
+ 000E26 9240 C148      00F50         277          MVI   MDLSBUF+80,C' '    PUT A SPACE AT END OF BUF
+ 000E2A 4140 C148            00F50   278          LA    4,MDLSBUF+80       LOAD END ADDR OF BUFFER
+ 000E2E 5040 C158            00F60   279          ST    4,ENDBUF1          STORE THE END ADDR
+                                     280 *
+1                                                                                                               PAGE    6
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 000E32                              281 MLOOP1   DS    0H                 LOOP UNTIL * REACHED
+                                     282 *
+ 000E32 4140 C0F8            00F00   283          LA    4,MDLSBUF          LOAD THE BEGIN ADDR OF BUFFER
+ 000E36 5040 C154            00F5C   284          ST    4,CURVAL1          SAVE ADDR TO START WITH FIRST COL
+                                     285 *
+ 000E3A                              286 MLOOP2   DS    0H                 LOOP THROUGH FIRST PART OF ROW
+                                     287 *                                 CALLS PARSEDEC TO CONVERT VAL TO
+                                     288 *                                 PACKED DECIMAL
+ 000E3A 4110 C154            00F5C   289          LA    1,PPARMS1
+ 000E3E 58F0 C0A8            00EB0   290          L     15,=V(PARSEDEC)
+ 000E42 05EF                         291          BALR  14,15
+                                     292 *
+ 000E44 59F0 C0AC            00EB4   293          C     15,=F'1'           CHECKS IF IT FAILED TO PACK
+ 000E48 4780 C052            00E5A   294          BE    NEXTPT1            IF TRUE READ NEXT PART OF CUR ROW
+                                     295 *
+ 000E4C F847 2000 C148 00000 00F50   296          ZAP   0(5,2),TEMPVAL1(8) STORE CONVERTED PACKED TO MDLTABL
+ 000E52 4120 2005            00005   297          LA    2,5(,2)            INCREMENT TO NEXT COL IN HOUSE TABL
+ 000E56 47F0 C032            00E3A   298          B     MLOOP2
+                                     299 *
+ 000E5A E000 C0F8 0051 00F00         300 NEXTPT1  XREAD MDLSBUF,81         READ NEXT PART OF CUR ROW
+ 000E60 9240 C148      00F50         301          MVI   MDLSBUF+80,C' '    PUT A SPACE AT END OF BUFFER
+ 000E64 4140 C0F8            00F00   302          LA    4,MDLSBUF          LOAD BEGIN ADDR OF BUFFER
+ 000E68 5040 C154            00F5C   303          ST    4,CURVAL1          SAVE ADDR TO START WITH FIRST COL
+                                     304 *
+ 000E6C                              305 MLOOP3   DS    0H                 LOOPS THROUGH SECOND PART OF ROW
+                                     306 *                                 CALLS PARSEDEC TO CONVERT VAL TO
+                                     307 *                                 PACKED DECIMAL
+ 000E6C 4110 C154            00F5C   308          LA    1,PPARMS1
+ 000E70 58F0 C0A8            00EB0   309          L     15,=V(PARSEDEC)
+ 000E74 05EF                         310          BALR  14,15
+                                     311 *
+ 000E76 59F0 C0AC            00EB4   312          C     15,=F'1'           CHECKS IF IT FAILED TO PACK
+ 000E7A 4780 C084            00E8C   313          BE    NEXTREC1           IF TRUE READ NEXT ROW
+                                     314 *
+ 000E7E F847 2000 C148 00000 00F50   315          ZAP   0(5,2),TEMPVAL1(8) STORE CONVERTED PACKED TO MDLTABL
+ 000E84 4120 2005            00005   316          LA    2,5(,2)            INCREMENT TO NEXT COL IN HOUSE TABL
+ 000E88 47F0 C064            00E6C   317          B     MLOOP3
+                                     318 *
+ 000E8C 4120 2006            00006   319 NEXTREC1 LA    2,6(,2)            LEAVE LAST COL EMPTY
+ 000E90 E000 C0F8 0051 00F00         320          XREAD MDLSBUF,81         READ NEXT ROW OF DATA
+ 000E96 9240 C148      00F50         321          MVI   MDLSBUF+80,C' '    PUT A SPACE AT THE END OF BUFFER
+ 000E9A 955C C0F8      00F00         322          CLI   MDLSBUF,C'*'       CHECK IF * WAS FOUND
+ 000E9E 4770 C02A            00E32   323          BNE   MLOOP1             IF NOT LOOP AGAIN, OTHERWISE CONT
+                                     324 *
+ 000EA2                              325 END2     DS    0H
+                                     326 *
+                                     327 *
+                                     328 * === Exit linkage ===
+ 000EA2 58D0 D004            00004   329          L     13,4(,13)      POINT R13 TO CALLER'S SAVE AREA
+ 000EA6 58E0 D00C            0000C   330          L     14,12(,13)     RESTORE REGISTER 14
+ 000EAA 980C D014            00014   331          LM    0,12,20(13)    RESTORE R0 THRU R12
+                                     332 *
+ 000EAE 07FE                         333          BR    14             RETURN TO CALLER
+                                     334 *
+                                     335          LTORG
+ 000EB0 000010E0                     336                =V(PARSEDEC)
+ 000EB4 00000001                     337                =F'1'
+1                                                                                                               PAGE    7
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                     338 *
+ 000EB8                              339 MDLSAVE  DS    18F'-1'        PARSE SUBPROGRAM'S SAVE AREA
+ 000F00                              340 MDLSBUF  DS    CL80           BUFFER FOR MODELS TABLE
+ 000F50 000000000000000C             341 TEMPVAL1 DC    PL8'0'         TEMP STORAGE FOR PARSED DECIMAL
+ 000F58                              342 IMPLIED1 DS    F              IMPLIED DECIMALS FOR PARSEDEC
+                                     343 *
+                                     344 * PARM LIST FOR PARSEDEC
+ 000F5C                              345 PPARMS1  DS    0H
+ 000F5C                              346 CURVAL1  DS    F               HOLD PTR TO CUR VAL TO BE PACKED
+ 000F60                              347 ENDBUF1  DS    F               HOLD PTR TO END OF BUFFER
+ 000F64 00000F5000000F5C             348          DC    A(TEMPVAL1,CURVAL1,IMPLIED1)
+                                     349 *
+                                     350 *
+                                     351 ******************************************************************
+                                     352 *                                                                *
+                                     353 * READ HOUSING DATA TABLE SUBPROGRAM                             *
+                                     354 *                                                                *
+                                     355 * TAKES INPUT FROM INSTREAM DATA WHERE EACH ROW HAS 14 COLUMNS,  *
+                                     356 * OF WHICH 13 ARE HOUSING DATAS, WITH 4 IMPLIED DECIMAL PLACES.  *
+                                     357 * COLUMN 14 IS THE EXPECTED Y AND THE LAST COLUMN IS YHAT WHICH  *
+                                     358 * IS LEFT BLANK AND CALCULATED LATER ON. IN ADDITION EACH ROW IS *
+                                     359 * READ USING TWO XREAD STATEMENTS. THE HOUSING DATA VALUES ARE   *
+                                     360 * READ IN AND WITH USING THE DECIMAL PARSING SUBPROGRAM ARE      *
+                                     361 * CONVERTED TO PACKED DECIMALS WHICH ARE THEN STORED INTO THE    *
+                                     362 * TABLE.                                                         *
+                                     363 *                                                                *
+                                     364 * RETURN CODES: NONE                                             *
+                                     365 *                                                                *
+                                     366 * REGISTER USAGE:                                                *
+                                     367 *   2 - (IN) PTR TO THE HEAD OF THE HOUSING DATA TABLE (F)       *
+                                     368 *   3 - (IN) PTR TO THE END OF THE HOUSING DATA TABLE (F)        *
+                                     369 *   4 - HOLDS ADDRESSES FOR THE BUFFER TO GO THROUGH EACH COLUMN *
+                                     370 *       OF THE HOUSING DATA TABLE AND STORE THE VALUES           *
+                                     371 *                                                                *
+                                     372 ******************************************************************
+ 000F70                              373 READDATA CSECT
+                                     374 * === Entry linkage ===
+                                     375 *      Back up caller's register state
+ 000F70 90EC D00C            0000C   376          STM   14,12,12(13)    SAVE REGS IN CALLER'S SAVE AREA
+                                     377 *      Establish local addressability
+ 000F74 18CF                         378          LR    12,15           COPY CSECT ADDRESS INTO R12
+ 000F70                              379          USING READDATA,12     ESTABLISH R12 AS THE BASE REG
+                                     380 *      Store backwards, forwards pointers
+ 000F76 41E0 C0B0            01020   381          LA    14,HOUSAVE      R14 POINTS TO THIS CSECT'S SAVE AREA
+ 000F7A 50D0 E004            00004   382          ST    13,4(,14)       STORE ADDRESS OF CALLER'S SAVE AREA
+ 000F7E 50E0 D008            00008   383          ST    14,8(,13)       STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     384 *      Point R13 at local save area
+ 000F82 18DE                         385          LR    13,14           POINT R13 AT THIS CSECT'S SAVE AREA
+                                     386 *
+ 000F84 9823 1000            00000   387          LM    2,3,0(1)        R2 -> HOUSE DATA TABLE BEGIN ADDR
+                                     388 *                              R3 -> HOUSE DATA TABLE END ADDR
+                                     389 *
+ 000F88 E000 C0F8 0051 01068         390          XREAD HOUSBUF,81         READ FIRST PART OF CUR ROW
+ 000F8E 9240 C148      010B8         391          MVI   HOUSBUF+80,C' '    PUT A SPACE AT END OF BUF
+ 000F92 4140 C148            010B8   392          LA    4,HOUSBUF+80       LOAD END ADDR OF BUFFER
+ 000F96 5040 C15C            010CC   393          ST    4,ENDBUF2          STORE THE END ADDR
+                                     394 *
+1                                                                                                               PAGE    8
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 000F9A 4770 C09A            0100A   395 DLOOP1   BNE   END3               LOOP UNTIL EOF REACHED
+                                     396 *
+ 000F9E 4140 C0F8            01068   397          LA    4,HOUSBUF          LOAD THE BEGIN ADDR OF BUFFER
+ 000FA2 5040 C158            010C8   398          ST    4,CURVAL2          SAVE ADDR TO START WITH FIRST COL
+                                     399 *
+ 000FA6                              400 DLOOP2   DS    0H                 LOOP THROUGH FIRST PART OF ROW
+                                     401 *                                 CALLS PARSEDEC TO CONVERT VAL TO
+                                     402 *                                 PACKED DECIMAL
+ 000FA6 4110 C158            010C8   403          LA    1,PPARMS2
+ 000FAA 58F0 C0A8            01018   404          L     15,=V(PARSEDEC)
+ 000FAE 05EF                         405          BALR  14,15
+                                     406 *
+ 000FB0 59F0 C0AC            0101C   407          C     15,=F'1'           CHECKS IF IT FAILED TO PACK
+ 000FB4 4780 C056            00FC6   408          BE    NEXTPT2            IF TRUE READ NEXT PART OF CUR ROW
+                                     409 *
+ 000FB8 F847 2000 C149 00000 010B9   410          ZAP   0(5,2),TEMPVAL2(8) STORE CONVERTED PACKED TO MDLTABL
+ 000FBE 4120 2005            00005   411          LA    2,5(,2)            INCREMENT TO NEXT COL IN HOUSE TABL
+ 000FC2 47F0 C036            00FA6   412          B     DLOOP2
+                                     413 *
+ 000FC6 E000 C0F8 0051 01068         414 NEXTPT2  XREAD HOUSBUF,81         READ NEXT PART OF CUR ROW
+ 000FCC 9240 C148      010B8         415          MVI   HOUSBUF+80,C' '    PUT A SPACE AT END OF BUFFER
+ 000FD0 4140 C0F8            01068   416          LA    4,HOUSBUF          LOAD BEGIN ADDR OF BUFFER
+ 000FD4 5040 C158            010C8   417          ST    4,CURVAL2          SAVE ADDR TO START WITH FIRST COL
+                                     418 *
+ 000FD8                              419 DLOOP3   DS    0H                 LOOPS THROUGH SECOND PART OF ROW
+                                     420 *                                 CALLS PARSEDEC TO CONVERT VAL TO
+                                     421 *                                 PACKED DECIMAL
+ 000FD8 4110 C158            010C8   422          LA    1,PPARMS2
+ 000FDC 58F0 C0A8            01018   423          L     15,=V(PARSEDEC)
+ 000FE0 05EF                         424          BALR  14,15
+                                     425 *
+ 000FE2 59F0 C0AC            0101C   426          C     15,=F'1'           CHECKS IF IT FAILED TO PACK
+ 000FE6 4780 C088            00FF8   427          BE    NEXTREC2           IF TRUE READ NEXT ROW
+                                     428 *
+ 000FEA F847 2000 C149 00000 010B9   429          ZAP   0(5,2),TEMPVAL2(8) STORE CONVERTED PACKED TO MDLTABL
+ 000FF0 4120 2005            00005   430          LA    2,5(,2)            INCREMENT TO NEXT COL IN HOUSE TABL
+ 000FF4 47F0 C068            00FD8   431          B     DLOOP3
+                                     432 *
+ 000FF8 4120 2005            00005   433 NEXTREC2 LA    2,5(,2)            LEAVE LAST COL EMPTY
+ 000FFC E000 C0F8 0051 01068         434          XREAD HOUSBUF,81         READ NEXT ROW OF DATA
+ 001002 9240 C148      010B8         435          MVI   HOUSBUF+80,C' '    PUT A SPACE AT THE END OF BUFFER
+ 001006 47F0 C02A            00F9A   436          B     DLOOP1
+                                     437 *
+                                     438 *
+ 00100A                              439 END3     DS    0H
+                                     440 *
+                                     441 *
+                                     442 * === Exit linkage ===
+ 00100A 58D0 D004            00004   443          L     13,4(,13)       POINT R13 TO CALLER'S SAVE AREA
+ 00100E 58E0 D00C            0000C   444          L     14,12(,13)      RESTORE REGISTER 14
+ 001012 980C D014            00014   445          LM    0,12,20(13)     RESTORE R0 THRU R12
+                                     446 *
+ 001016 07FE                         447          BR    14              RETURN TO CALLER
+                                     448 *
+                                     449          LTORG
+ 001018 000010E0                     450                =V(PARSEDEC)
+ 00101C 00000001                     451                =F'1'
+1                                                                                                               PAGE    9
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                     452 *
+ 001020                              453 HOUSAVE  DS    18F'-1'         PARSE SUBPROGRAM'S SAVE AREA
+ 001068                              454 HOUSBUF  DS    CL81            BUFFER FOR MODELS TABLE
+ 0010B9 000000000000000C             455 TEMPVAL2 DC    PL8'0'          TEMP STORAGE FOR PARSED DECIMAL
+ 0010C4                              456 IMPLIED2 DS    F               IMPLIED DECIMALS FOR PARSEDEC
+                                     457 *
+                                     458 * PARM LIST FOR PARSEDEC
+ 0010C8                              459 PPARMS2  DS    0H
+ 0010C8                              460 CURVAL2  DS    F               HOLD PTR TO CUR VAL TO BE PACKED
+ 0010CC                              461 ENDBUF2  DS    F               HOLD PTR TO END OF BUFFER
+ 0010D0 000010B9000010C8             462          DC    A(TEMPVAL2,CURVAL2,IMPLIED2)
+                                     463 *
+                                     464 *
+                                     465 ******************************************************************
+                                     466 *                                                                *
+                                     467 * DECIMAL PARSING SUBPROGRAM                                     *
+                                     468 *                                                                *
+                                     469 * TAKES AN EBCDIC REPRESENTATION OF A DECIMAL VALUE AND CONVERTS *
+                                     470 * IT TO A PACKED DECIMAL REPRESENTATION. THE PROVIDED START AND  *
+                                     471 * TRAILING ADDRESSES DETERMINE THE REGION OF STORAGE THAT WILL   *
+                                     472 * BE SCANNED, WITH THE TRAILING ADDRESS 1 POS PAST THE END. SETS *
+                                     473 * THE SIGN DIGIT OF THE RESULTING PACKED DECIMAL IF A PRECEDING  *
+                                     474 * SIGN CHARACTER ACCOMPANIES THE NUMERIC CHARACTERS. IF NO SIGN  *
+                                     475 * CHARACTER IS FOUND ASSUMES A POSITIVE QUANTITY. COUNTS AND     *
+                                     476 * RETURNS THE NUMBER OF IMPLIED DECIMAL PLACES, WHICH WILL BE    *
+                                     477 * BE NON-ZERO IF A DECIMAL CHARACTER IS FOUND.                   *
+                                     478 *                                                                *
+                                     479 * RETURN CODES:                                                  *
+                                     480 *   0 - PARSE WAS SUCCESSFUL                                     *
+                                     481 *   1 - PARSE WAS UNSUCCESSFUL                                   *
+                                     482 *                                                                *
+                                     483 *   NOTE: IF PARSE WAS UNSUCCESSFUL THEN RETURN FIELD WILL NOT   *
+                                     484 *         CONTAIN A VALID PACKED DECIMAL, BUT WILL CONTAIN PREV  *
+                                     485 *         DATA WITH THE LAST BYTE OVERWRITTEN WITH X'00'         *
+                                     486 *         (GUARANTEEING IT WILL NOT CONTAIN A VALID PACKED DEC)  *
+                                     487 *                                                                *
+                                     488 * PARSING WILL FAIL IN THE FOLLOWING CASES:                      *
+                                     489 *   1.) THE SUBPROGRAM ATTEMPTED TO PARSE AN INVALID CHARACTER   *
+                                     490 *       (I.E., NOT C'+', C'-', C'.' OR NUMERIC CHAR)             *
+                                     491 *   2.) NO NUMERIC CHARACTERS WERE FOUND                         *
+                                     492 *   3.) NO TRAILING SPACE CHARACTER WAS FOUND                    *
+                                     493 *   4.) THE NUMBER BEING PARSED CONTAINED MORE THAN 15 DIGITS    *
+                                     494 *                                                                *
+                                     495 * TODO: IMPLEMENT PARSE END CONSTRAINTS (STOP AT BUFFER END,     *
+                                     496 *       > 15 SOURCE DIGITS)                                      *
+                                     497 *                                                                *
+                                     498 * REGISTER USAGE:                                                *
+                                     499 *   2 - (IN) PTR TO BUFFERING LOC BEGIN ADDR (F)                 *
+                                     500 *   3 - (IN) PTR TO BUFFERING LOC TRAILING ADDR (F)              *
+                                     501 *   4 - (OUT) PTR TO PACKED DECIMAL'S RECEIVING FIELD (PL8)      *
+                                     502 *   5 - (OUT) ADDRESS OF FIRST TRAILING SPACE IN BUFFER (F)      *
+                                     503 *   6 - (OUT) IMPLIED DECIMALS (F)                               *
+                                     504 *   7 - BUFFER READ PTR                                          *
+                                     505 *   8 - COPY FIELD WRITE PTR                                     *
+                                     506 *   9 - COUNTER, IMPLIED DECIMAL PLACES                          *
+                                     507 *                                                                *
+                                     508 ******************************************************************
+1                                                                                                               PAGE   10
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0010E0                              509 PARSEDEC CSECT
+                                     510 * ==== Entry linkage ===========
+                                     511 *      Back up caller's register state
+ 0010E0 90EC D00C            0000C   512          STM   14,12,12(13)   SAVE REGS IN CALLER'S SAVE AREA
+                                     513 *      Establish local addressability
+ 0010E4 18CF                         514          LR    12,15          COPY CSECT ADDRESS INTO R12
+ 0010E0                              515          USING PARSEDEC,12    ESTABLISH R12 AS THE BASE REG
+                                     516 *      Store backwards, forwards pointers
+ 0010E6 41E0 C12C            0120C   517          LA    14,PARSSAVE    R14 POINTS TO THIS CSECT'S SAVE AREA
+ 0010EA 50D0 E004            00004   518          ST    13,4(,14)      STORE ADDRESS OF CALLER'S SAVE AREA
+ 0010EE 50E0 D008            00008   519          ST    14,8(,13)      STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     520 *      Preemptively point r13 at local save area
+ 0010F2 18DE                         521          LR    13,14          POINT R13 AT THIS CSECT'S SAVE AREA
+                                     522 *
+ 0010F4 9826 1000            00000   523          LM    2,6,0(1)       R2 -> PARSE START ADDR
+                                     524 *                             R3 -> PARSE END ADDR
+                                     525 *                             R4 -> PACKED RETURN FIELD
+                                     526 *                             R5 -> ADDR IN BUFFER, TRAILING SPACE
+                                     527 *                             R6 -> IMPLIED DECIMAL PLACES
+                                     528 *
+                                     529 * (RE)INITIALIZE STATE VARS
+ 0010F8 9200 4007      00007         530          MVI   7(4),X'00'     SET LAST BYTE TO ERROR CODE
+ 0010FC 9200 C174      01254         531          MVI   SCODE,X'00'    (RE)SET DEFAULT SIGN CODE
+ 001100 9200 C175      01255         532          MVI   DECFLAG,X'00'  (RE)SET DECIMAL FLAG
+ 001104 1872                         533          LR    7,2            SET SCAN HEAD TO BUFFER START
+ 001106 4190 0000            00000   534          LA    9,0            RESET DECIMAL PLACE COUNTER
+                                     535 *
+                                     536 * FAST-FORWARD PAST LEADING SPACES
+ 00110A 9540 7000      00000         537 FFLOOP   CLI   0(7),C' '      TEST FOR LEADING SPACE
+ 00110E 4770 C03E            0111E   538          BNE   TESTNEG        NON-SPACE CHAR FOUND, BEGIN PARSE
+ 001112 4120 2001            00001   539          LA    2,1(,2)        MOVE START ADDR FORWARD 1 POS
+ 001116 4170 7001            00001   540          LA    7,1(,7)        MOVE READ HEAD FORWARD 1 POS
+ 00111A 47F0 C02A            0110A   541          B     FFLOOP         TEST NEXT POS
+                                     542 *
+                                     543 ** TEST FOR LEADING +/-
+                                     544 *
+                                     545 * TEST IF FIRST CHAR IS '-'
+ 00111E 9560 7000      00000         546 TESTNEG  CLI   0(7),C'-'      TEST FOR NEGATIVE SIGN
+ 001122 4770 C052            01132   547          BNE   TESTPOS        NO NEGATIVE SIGN, TEST FOR +
+ 001126 92FF C174      01254         548          MVI   SCODE,X'FF'    SET SIGN CODE BYTE TO -1
+ 00112A 4120 7001            00001   549          LA    2,1(,7)        MOVE BUFFER START PAST SIGN
+ 00112E 47F0 C0BA            0119A   550          B     UPDTSCHD       GO TO NEXT CHAR
+                                     551 *
+                                     552 * TEST IF FIRST CHAR IS '+'
+ 001132 954E 7000      00000         553 TESTPOS  CLI   0(7),C'+'      TEST FOR POSITIVE SIGN
+ 001136 4770 C062            01142   554          BNE   SCANLOOP       NO POSITIVE SIGN, START SCANNING
+ 00113A 4120 7001            00001   555          LA    2,1(,7)        MOVE BUFFER START PAST SIGN
+ 00113E 4780 C0BA            0119A   556          BE    UPDTSCHD       POS SIGN FOUND, GO TO NEXT CHAR
+                                     557 *
+                                     558 ** SCAN FROM LEFT TO RIGHT FOR FIRST TRAILING SPACE **
+                                     559 *
+                                     560 * TEST AND HANDLE SPACE FOUND CASE
+ 001142 9540 7000      00000         561 SCANLOOP CLI   0(7),C' '      TEST FOR SPACE CHAR
+ 001146 4770 C078            01158   562          BNE   TSTDEC         NOT A SPACE, TEST FOR DECIMAL CHAR
+ 00114A 1972                         563          CR    7,2            TEST OFFSET INTO BUFFER
+ 00114C 4770 C0CE            011AE   564          BNE   COPYPREP       FOUND TRAIL SPC, BEGIN NEXT STEPS
+ 001150 41F0 0001            00001   565          LA    15,1           OTHERWISE SET R15 = 1 (PARSE ERROR)
+1                                                                                                               PAGE   11
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 001154 47F0 C116            011F6   566          B     PARSEXIT       EXIT IMMEDIATELY
+                                     567 *
+                                     568 * TEST FOR DECIMAL CHARACTER
+ 001158 954B 7000      00000         569 TSTDEC   CLI   0(7),C'.'      TEST FOR DECIMAL CHAR
+ 00115C 4770 C09A            0117A   570          BNE   TSTCXLOW       NOT FOUND, TEST FOR NON-NUMERIC
+ 001160 9501 C175      01255         571          CLI   DECFLAG,X'01'  TEST IF FLAG ALREADY SET
+ 001164 4770 C090            01170   572          BNE   SETDFLAG       IF NOT THEN SET FLAG BYTE
+ 001168 41F0 0001            00001   573          LA    15,1           OTHERWISE SET R15 = 1 (PARSE ERROR)
+ 00116C 47F0 C116            011F6   574          B     PARSEXIT       EXIT IMMEDIATELY
+ 001170 9201 C175      01255         575 SETDFLAG MVI   DECFLAG,X'01'  SET DECIMAL FLAG TO 1 (TRUE)
+ 001174 0690                         576          BCTR  9,0            SET COUNT TO -1 (IGNORES DEC CHAR)
+ 001176 47F0 C0BA            0119A   577          B     UPDTSCHD       UPDATE AND CONTINUE
+                                     578 *
+                                     579 * TEST FOR NON-NUMERIC CHARACTERS
+ 00117A 95F0 7000      00000         580 TSTCXLOW CLI   0(7),X'F0'     TEST IF < X'F0' (CHAR 0)
+ 00117E 47B0 C0AA            0118A   581          BNL   TSTCXHI        IF NOT LOW THEN TEST IF HIGH
+ 001182 41F0 0001            00001   582          LA    15,1           R15 = 1 (PARSE ERROR)
+ 001186 47F0 C116            011F6   583          B     PARSEXIT       OTHERWISE DO NOTHING AND EXIT
+ 00118A 95F9 7000      00000         584 TSTCXHI  CLI   0(7),X'F9'     TEST IF > X'F9' (CHAR 9)
+ 00118E 47D0 C0BA            0119A   585          BNH   UPDTSCHD       IF NOT HIGH THEN UPDATE AND CONTINUE
+ 001192 41F0 0001            00001   586          LA    15,1           OTHERWISE R15 = 1 (PARSE ERROR)
+ 001196 47F0 C116            011F6   587          B     PARSEXIT       DO NOTHING AND EXIT
+                                     588 *
+                                     589 * UPDATE AND CONTINUE
+ 00119A 4170 7001            00001   590 UPDTSCHD LA    7,1(,7)        INCREMENT READ PTR
+ 00119E 9501 C175      01255         591          CLI   DECFLAG,X'01'  TEST IF DECIMAL FLAG IS SET
+ 0011A2 4770 C062            01142   592          BNE   SCANLOOP       IF NOT THEN TEST NEXT CHAR
+ 0011A6 4190 9001            00001   593          LA    9,1(,9)        INCREMENT IMPLIED DEC COUNTER
+ 0011AA 47F0 C062            01142   594          B     SCANLOOP       TEST NEXT CHAR
+                                     595 *
+                                     596 * PREPARE FOR COPY INTO TEMP FIELD
+ 0011AE 5070 5000            00000   597 COPYPREP ST    7,0(,5)         WRITE OUT TRAILING SPACE ADDR
+ 0011B2 92F0 C176      01256         598          MVI   ZNTEMP,X'F0'    RESET COPY FIELD TO 0
+ 0011B6 D20D C177 C176 01257 01256   599          MVC   ZNTEMP+1(14),ZNTEMP
+ 0011BC 4180 C184            01264   600          LA    8,ZNTEMP+14     GET ADDR OF LAST CHAR IN COPY FIELD
+ 0011C0 0670                         601          BCTR  7,0             MOVE READ PTR BACK TO LAST DIGIT
+                                     602 *
+                                     603 * COPY EBCDIC CODES RIGHT TO LEFT INTO CONVERSION FIELD
+ 0011C2 954B 7000      00000         604 COPYLOOP CLI   0(7),C'.'      TEST IF DECIMAL CHARACTER
+ 0011C6 4780 C0F2            011D2   605          BE    UPDTNCPY       SKIP THIS POS IF SO (NO COPY)
+ 0011CA D200 8000 7000 00000 00000   606          MVC   0(1,8),0(7)    COPY EBCDIC CODE
+ 0011D0 0680                         607 UPDTCPY  BCTR  8,0            DECREMENT COPY HEAD
+ 0011D2 0670                         608 UPDTNCPY BCTR  7,0            DECREMENT SCAN HEAD
+ 0011D4 1972                         609          CR    7,2            TEST IF BACK AT FIRST DIGIT
+ 0011D6 47B0 C0E2            011C2   610          BNL   COPYLOOP       IF NOT THEN CONTINUE
+                                     611 *
+                                     612 * SET RESULTS IN RECEIVER FIELDS
+ 0011DA 5090 6000            00000   613          ST    9,0(,6)            WRITE BACK # IMPLIED DECIMALS
+ 0011DE F27E 4000 C176 00000 01256   614          PACK  0(8,4),ZNTEMP(15)  WRITE BACK PACKED DECIMAL
+ 0011E4 95FF C174      01254         615          CLI   SCODE,X'FF'        SET SIGN DIGIT IF NEGATIVE
+ 0011E8 4770 C112            011F2   616          BNE   SETRCODE
+ 0011EC FC70 4000 C128 00000 01208   617          MP    0(8,4),=PL1'-1'
+                                     618 *
+                                     619 * ==== Exit linkage ============
+ 0011F2 41F0 0000            00000   620 SETRCODE LA    15,0           R15 = RETURN CODE OF 0
+ 0011F6 58D0 D004            00004   621 PARSEXIT L     13,4(,13)      POINT R13 TO CALLER'S SAVE AREA
+ 0011FA 58E0 D00C            0000C   622          L     14,12(,13)     RESTORE REGISTER 14
+1                                                                                                               PAGE   12
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0011FE 980C D014            00014   623          LM    0,12,20(13)    RESTORE R0 THRU R12
+ 001202 07FE                         624          BR    14             RETURN TO CALLER
+                                     625 *
+                                     626          LTORG
+ 001208 1D                           627                =PL1'-1'
+                                     628 *
+ 00120C                              629 PARSSAVE DS    18F'-1'        PARSE SUBPROGRAM'S SAVE AREA
+                                     630 *
+ 001254 00                           631 SCODE    DC    X'00'          SIGN CODE BYTE, DEFAULT 0 (POSITIVE)
+ 001255 00                           632 DECFLAG  DC    X'00'          DECIMAL FOUND FLAG, DEFAULT 0 (FALSE)
+ 001256                              633 ZNTEMP   DS    CL15           CONVERSION COPY FIELD
+                                     634 *
+                                     635 *
+                                     636 ******************************************************************
+                                     637 *                                                                *
+                                     638 * EVALUATE MODEL SUBPROGRAM                                      *
+                                     639 *                                                                *
+                                     640 * FIRST IT ITERATES THROUGH EACH ROW OF THE HOUSING DATA TABLE   *
+                                     641 * AND IT CALCULATES THE YHAT OF EACH ROW OF THE HOUSING DATA     *
+                                     642 * TABLE CORRESPONDING TO THE CURRENT ROW OF THE MODEL            *
+                                     643 * COEFFICIENTS TABLE THAT WAS SENT AS A PARAMETER USING THE      *
+                                     644 * CALCULATE YHAT SUBPROGRAM. THEN IT USES THE CALCUALTE MSE      *
+                                     645 * SUBPROGRAM TO CALCULATE THE MSE OF THE CURRENT ROW OF THE      *
+                                     646 * THE MODEL COEFFICIENTS TABLE AND IT SAVES ALL THESE VALUES IN  *
+                                     647 * THEIR COLUMNS IN BOTH TABLES.                                  *
+                                     648 *                                                                *
+                                     649 * RETURN CODES: NONE                                             *
+                                     650 *                                                                *
+                                     651 * REGISTER USAGE:                                                *
+                                     652 *   2 - (IN) PTR TO THE HEAD OF THE CURRENT ROW IN THE MODEL     *
+                                     653 *       COEFFICIENTS TABLE (F)                                   *
+                                     654 *   3 - (IN) PTR TO THE HEAD OF THE HOUSING DATA TABLE (F)       *
+                                     655 *   4 - (IN) PTR TO THE END OF THE HOUSING DATA TABLE (F)        *
+                                     656 *   5 - HOLDS THE NUMBER OF ROWS IN THE HOUSING DATA TABLE       *
+                                     657 *                                                                *
+                                     658 ******************************************************************
+ 001268                              659 EVALMODL CSECT
+                                     660 * === Entry linkage ===
+                                     661 *      Back up caller's register state
+ 001268 90EC D00C            0000C   662          STM   14,12,12(13)    SAVE REGS IN CALLER'S SAVE AREA
+                                     663 *      Establish local addressability
+ 00126C 18CF                         664          LR    12,15           COPY CSECT ADDRESS INTO R12
+ 001268                              665          USING EVALMODL,12     ESTABLISH R12 AS THE BASE REG
+                                     666 *      Store backwards, forwards pointers
+ 00126E 41E0 C078            012E0   667          LA    14,EVALSAVE      R14 POINTS TO THIS CSECT'S SAVE AREA
+ 001272 50D0 E004            00004   668          ST    13,4(,14)       STORE ADDRESS OF CALLER'S SAVE AREA
+ 001276 50E0 D008            00008   669          ST    14,8(,13)       STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     670 *      Point R13 at local save area
+ 00127A 18DE                         671          LR    13,14           POINT R13 AT THIS CSECT'S SAVE AREA
+                                     672 *
+ 00127C 9824 1000            00000   673          LM    2,4,0(1)        R2 -> CURRENT ROW OF MODELS TABLE
+                                     674 *                              R3 -> BEGIN ADDR OF HOUSE DATA TABLE
+                                     675 *                              R4 -> END ADDR OF HOUSE DATA TABLE
+                                     676 *
+ 001280 5020 C0C0            01328   677          ST    2,CURMROW2      STORE ADDR OF CUR ROW FROM MODELS TABL
+ 001284 5020 C0D0            01338   678          ST    2,CURMROW3      STORE ADDR OF CUR ROW FROM MODELS TABL
+                                     679 *
+1                                                                                                               PAGE   13
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 001288 5030 C0C8            01330   680          ST    3,INITADDR      STORE ADDR OF HEAD FOR HOUSE DATA TABL
+ 00128C 5030 C0C4            0132C   681          ST    3,CURHROW       STORE ADDR OF FIRST ROW FROM HOUSE TABL
+                                     682 *
+ 001290 5850 C0CC            01334   683          L     5,HNUMROWS      LOAD COUNTER FOR NUMBER OF ROWS IN HTABL
+                                     684 *
+ 001294                              685 ELOOP1   DS    0H              LOOP THROUGH EACH ROW IN HOUSE DATA TBL
+                                     686 *
+ 001294 4150 5001            00001   687          LA    5,1(,5)         INCREMENT NUM OF ROWS READ FROM HDATA
+                                     688 *                              CALLS CALCYHAT TO CALCULATE YHAT AND
+                                     689 *                              STORES IT IN THE CORRECT COL IN HTABL
+ 001298 4110 C0C0            01328   690          LA    1,CYHPARMS
+ 00129C 58F0 C070            012D8   691          L     15,=V(CALCYHAT)
+ 0012A0 05EF                         692          BALR  14,15
+                                     693 *
+ 0012A2 4130 304B            0004B   694          LA    3,75(,3)        INCREMENT HOUSE DATA ROW PTR TO NXT ROW
+ 0012A6 5030 C0C4            0132C   695          ST    3,CURHROW       STORE ADDR OF NEXT ROW FROM HOUSE TABL
+ 0012AA 1934                         696          CR    3,4             CHECK IF END OF HOUSE DATA TABL REACHED
+ 0012AC 4780 C04C            012B4   697          BE    END4            IF TRUE, FINISH LOOP
+ 0012B0 47F0 C02C            01294   698          B     ELOOP1          OTHERWISE CONT TO CALC NEXT Y HAT
+                                     699 *
+ 0012B4                              700 END4     DS    0H
+ 0012B4 5050 C0CC            01334   701          ST    5,HNUMROWS      STORE THE NUM OF ROWS READ FROM HDATA
+                                     702 *
+                                     703 *                              CALCULATE MSE FOR CURRENT MODEL TBL ROW
+ 0012B8 4110 C0C8            01330   704          LA    1,MSEPARMS
+ 0012BC 58F0 C074            012DC   705          L     15,=V(CALCMSE)
+ 0012C0 05EF                         706          BALR  14,15
+ 0012C2 4150 0000            00000   707          LA    5,0             RESET ROW COUNTER TO 0
+ 0012C6 5050 C0CC            01334   708          ST    5,HNUMROWS      STORE RESET VALUE
+                                     709 *
+                                     710 *
+                                     711 * === Exit linkage ===
+ 0012CA 58D0 D004            00004   712          L     13,4(,13)       POINT R13 TO CALLER'S SAVE AREA
+ 0012CE 58E0 D00C            0000C   713          L     14,12(,13)      RESTORE REGISTER 14
+ 0012D2 980C D014            00014   714          LM    0,12,20(13)     RESTORE R0 THRU R12
+                                     715 *
+ 0012D6 07FE                         716          BR    14              RETURN TO CALLER
+                                     717 *
+                                     718          LTORG
+ 0012D8 00001340                     719                =V(CALCYHAT)
+ 0012DC 000015A0                     720                =V(CALCMSE)
+                                     721 *
+ 0012E0                              722 EVALSAVE DS    18F'-1'         PARSE SUBPROGRAM'S SAVE AREA
+                                     723 *
+                                     724 * PARM LIST FOR CALCYHAT
+ 001328                              725 CYHPARMS DS    0H
+ 001328                              726 CURMROW2 DS    F
+ 00132C                              727 CURHROW  DS    F
+                                     728 *
+                                     729 * PARM LIST FOR CALCMSE
+ 001330                              730 MSEPARMS DS    0F
+ 001330                              731 INITADDR DS    F               HEAD ADDR OF HOUSE DATA TABLE
+ 001334 00000000                     732 HNUMROWS DC    F'0'            NUMBER OF ROWS IN HOUSE DATA TABLE
+ 001338                              733 CURMROW3 DS    F
+                                     734 *
+                                     735 *
+                                     736 ******************************************************************
+1                                                                                                               PAGE   14
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                     737 *                                                                *
+                                     738 * CALCULATE YHAT SUBPROGRAM                                      *
+                                     739 *                                                                *
+                                     740 * ITERATES THROUGH THE EACH COLUMN IN THE CURRENT ROW OF THE     *
+                                     741 * MODEL COEFFICIENTS TABLE AND MULTIPLIES THE COLUMN TO THE      *
+                                     742 * CORRESPONDING COLUMN IN THE HOUSING DATA TABLE. SUMS UP THE    *
+                                     743 * RESULTS AND SAVES THEM IN THE YHAT COLUMN IN THE HOUSING DATA  *
+                                     744 * TABLE FOR THE CURRENT ROW OF THE HOUSING DATA TABLE SENT AS A  *
+                                     745 * PARAMETER                                                      *
+                                     746 *                                                                *
+                                     747 * RETURN CODES: NONE                                             *
+                                     748 *                                                                *
+                                     749 * REGISTER USAGE:                                                *
+                                     750 *   2 - (IN) PTR TO THE HEAD OF THE CURRENT ROW IN THE MODEL     *
+                                     751 *       COEFFICIENTS TABLE (F)                                   *
+                                     752 *   3 - (IN) PTR TO THE HEAD OF THE HOUSING DATA TABLE (F)       *
+                                     753 *                                                                *
+                                     754 ******************************************************************
+ 001340                              755 CALCYHAT CSECT
+                                     756 * === Entry linkage ===
+                                     757 *      Back up caller's register state
+ 001340 90EC D00C            0000C   758          STM   14,12,12(13)    SAVE REGS IN CALLER'S SAVE AREA
+                                     759 *      Establish local addressability
+ 001344 18CF                         760          LR    12,15           COPY CSECT ADDRESS INTO R12
+ 001340                              761          USING CALCYHAT,12     ESTABLISH R12 AS THE BASE REG
+                                     762 *      Store backwards, forwards pointers
+ 001346 41E0 C204            01544   763          LA    14,YHATSAVE     R14 POINTS TO THIS CSECT'S SAVE AREA
+ 00134A 50D0 E004            00004   764          ST    13,4(,14)       STORE ADDRESS OF CALLER'S SAVE AREA
+ 00134E 50E0 D008            00008   765          ST    14,8(,13)       STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     766 *      Point R13 at local save area
+ 001352 18DE                         767          LR    13,14           POINT R13 AT THIS CSECT'S SAVE AREA
+                                     768 *
+ 001354 9823 1000            00000   769          LM    2,3,0(1)        R2 -> CURR ROW ADDR OF MODELS TABLE
+                                     770 *                              R3 -> CURR ROW ADDR OF HOUSE DATA TABLE
+                                     771 *
+ 000000                              772          USING $MODLTBL,2      BASE REG FOR MODEL TABL DSECT
+ 000000                              773          USING $HOUSTBL,3      BASE REG FOR HOUSE DATA TABL DSECT
+                                     774 *
+ 001358 F840 3046 C200 00046 01540   775          ZAP   $YHAT(5),=PL1'0' RESET FIRST ROWS YHAT COL TO 0
+                                     776 *
+                                     777 *                                      COL1 CALCULATION
+ 00135E F8A4 C24C 2000 0158C 00000   778          ZAP   PTEMP2(11),$COEFFS(5)   ADD COEFFS COL TO TEMP FIELD
+ 001364 F854 C257 3000 01597 00000   779          ZAP   PTEMP3(6),$DATA(5)      PUT HDATA COL INTO TEMP FIELD
+ 00136A F050 C257 0001 01597 00001   780          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001370 FCA5 C24C C257 0158C 01597   781          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001376 F0A5 C24C 003A 0158C 0003A   782          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 00137C FA4A 3046 C24C 00046 0158C   783          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     784 *
+                                     785 *                                      COL2 CALCULATION
+ 001382 F8A4 C24C 2005 0158C 00005   786          ZAP   PTEMP2(11),$COEFFS+5(5) ADD COEFFS COL TO TEMP FIELD
+ 001388 F854 C257 3005 01597 00005   787          ZAP   PTEMP3(6),$DATA+5(5)    PUT HDATA COL INTO TEMP FIELD
+ 00138E F050 C257 0001 01597 00001   788          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001394 FCA5 C24C C257 0158C 01597   789          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 00139A F0A5 C24C 003A 0158C 0003A   790          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 0013A0 FA4A 3046 C24C 00046 0158C   791          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     792 *
+                                     793 *                                      COL3 CALCULATION
+1                                                                                                               PAGE   15
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0013A6 F8A4 C24C 200A 0158C 0000A   794          ZAP   PTEMP2(11),$COEFFS+10(5) ADD COEFFS COL TO TEMP FIELD
+ 0013AC F854 C257 300A 01597 0000A   795          ZAP   PTEMP3(6),$DATA+10(5)    PUT HDATA COL INTO TEMP FIELD
+ 0013B2 F050 C257 0001 01597 00001   796          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 0013B8 FCA5 C24C C257 0158C 01597   797          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 0013BE F0A5 C24C 003A 0158C 0003A   798          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 0013C4 FA4A 3046 C24C 00046 0158C   799          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     800 *
+                                     801 *                                      COL4 CALCULATION
+ 0013CA F8A4 C24C 200F 0158C 0000F   802          ZAP   PTEMP2(11),$COEFFS+15(5) ADD COEFFS COL TO TEMP FIELD
+ 0013D0 F854 C257 300F 01597 0000F   803          ZAP   PTEMP3(6),$DATA+15(5)    PUT HDATA COL INTO TEMP FIELD
+ 0013D6 F050 C257 0001 01597 00001   804          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 0013DC FCA5 C24C C257 0158C 01597   805          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 0013E2 F0A5 C24C 003A 0158C 0003A   806          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 0013E8 FA4A 3046 C24C 00046 0158C   807          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     808 *
+                                     809 *                                      COL5 CALCULATION
+ 0013EE F8A4 C24C 2014 0158C 00014   810          ZAP   PTEMP2(11),$COEFFS+20(5) ADD COEFFS COL TO TEMP FIELD
+ 0013F4 F854 C257 3014 01597 00014   811          ZAP   PTEMP3(6),$DATA+20(5)    PUT HDATA COL INTO TEMP FIELD
+ 0013FA F050 C257 0001 01597 00001   812          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001400 FCA5 C24C C257 0158C 01597   813          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001406 F0A5 C24C 003A 0158C 0003A   814          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 00140C FA4A 3046 C24C 00046 0158C   815          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     816 *
+                                     817 *                                      COL6 CALCULATION
+ 001412 F8A4 C24C 2019 0158C 00019   818          ZAP   PTEMP2(11),$COEFFS+25(5) ADD COEFFS COL TO TEMP FIELD
+ 001418 F854 C257 3019 01597 00019   819          ZAP   PTEMP3(6),$DATA+25(5)    PUT HDATA COL INTO TEMP FIELD
+ 00141E F050 C257 0001 01597 00001   820          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001424 FCA5 C24C C257 0158C 01597   821          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 00142A F0A5 C24C 003A 0158C 0003A   822          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 001430 FA4A 3046 C24C 00046 0158C   823          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     824 *
+                                     825 *                                      COL7 CALCULATION
+ 001436 F8A4 C24C 201E 0158C 0001E   826          ZAP   PTEMP2(11),$COEFFS+30(5) ADD COEFFS COL TO TEMP FIELD
+ 00143C F854 C257 301E 01597 0001E   827          ZAP   PTEMP3(6),$DATA+30(5)    PUT HDATA COL INTO TEMP FIELD
+ 001442 F050 C257 0001 01597 00001   828          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001448 FCA5 C24C C257 0158C 01597   829          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 00144E F0A5 C24C 003A 0158C 0003A   830          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 001454 FA4A 3046 C24C 00046 0158C   831          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     832 *
+                                     833 *                                      COL8 CALCULATION
+ 00145A F8A4 C24C 2023 0158C 00023   834          ZAP   PTEMP2(11),$COEFFS+35(5) ADD COEFFS COL TO TEMP FIELD
+ 001460 F854 C257 3023 01597 00023   835          ZAP   PTEMP3(6),$DATA+35(5)    PUT HDATA COL INTO TEMP FIELD
+ 001466 F050 C257 0001 01597 00001   836          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 00146C FCA5 C24C C257 0158C 01597   837          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001472 F0A5 C24C 003A 0158C 0003A   838          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 001478 FA4A 3046 C24C 00046 0158C   839          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     840 *
+                                     841 *                                      COL9 CALCULATION
+ 00147E F8A4 C24C 2028 0158C 00028   842          ZAP   PTEMP2(11),$COEFFS+40(5) ADD COEFFS COL TO TEMP FIELD
+ 001484 F854 C257 3028 01597 00028   843          ZAP   PTEMP3(6),$DATA+40(5)    PUT HDATA COL INTO TEMP FIELD
+ 00148A F050 C257 0001 01597 00001   844          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001490 FCA5 C24C C257 0158C 01597   845          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001496 F0A5 C24C 003A 0158C 0003A   846          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 00149C FA4A 3046 C24C 00046 0158C   847          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     848 *
+                                     849 *                                      COL10 CALCULATION
+ 0014A2 F8A4 C24C 202D 0158C 0002D   850          ZAP   PTEMP2(11),$COEFFS+45(5) ADD COEFFS COL TO TEMP FIELD
+1                                                                                                               PAGE   16
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0014A8 F854 C257 302D 01597 0002D   851          ZAP   PTEMP3(6),$DATA+45(5)    PUT HDATA COL INTO TEMP FIELD
+ 0014AE F050 C257 0001 01597 00001   852          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 0014B4 FCA5 C24C C257 0158C 01597   853          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 0014BA F0A5 C24C 003A 0158C 0003A   854          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 0014C0 FA4A 3046 C24C 00046 0158C   855          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     856 *
+                                     857 *                                      COL11 CALCULATION
+ 0014C6 F8A4 C24C 2032 0158C 00032   858          ZAP   PTEMP2(11),$COEFFS+50(5) ADD COEFFS COL TO TEMP FIELD
+ 0014CC F854 C257 3032 01597 00032   859          ZAP   PTEMP3(6),$DATA+50(5)    PUT HDATA COL INTO TEMP FIELD
+ 0014D2 F050 C257 0001 01597 00001   860          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 0014D8 FCA5 C24C C257 0158C 01597   861          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 0014DE F0A5 C24C 003A 0158C 0003A   862          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 0014E4 FA4A 3046 C24C 00046 0158C   863          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     864 *
+                                     865 *                                      COL12 CALCULATION
+ 0014EA F8A4 C24C 2037 0158C 00037   866          ZAP   PTEMP2(11),$COEFFS+55(5) ADD COEFFS COL TO TEMP FIELD
+ 0014F0 F854 C257 3037 01597 00037   867          ZAP   PTEMP3(6),$DATA+55(5)    PUT HDATA COL INTO TEMP FIELD
+ 0014F6 F050 C257 0001 01597 00001   868          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 0014FC FCA5 C24C C257 0158C 01597   869          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001502 F0A5 C24C 003A 0158C 0003A   870          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 001508 FA4A 3046 C24C 00046 0158C   871          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     872 *
+                                     873 *                                      COL13 CALCULATION
+ 00150E F8A4 C24C 203C 0158C 0003C   874          ZAP   PTEMP2(11),$COEFFS+60(5) ADD COEFFS COL TO TEMP FIELD
+ 001514 F854 C257 303C 01597 0003C   875          ZAP   PTEMP3(6),$DATA+60(5)    PUT HDATA COL INTO TEMP FIELD
+ 00151A F050 C257 0001 01597 00001   876          SRP   PTEMP3(6),1,0           SHIFT LEFT 1 TO ALIGN DECIMALS
+ 001520 FCA5 C24C C257 0158C 01597   877          MP    PTEMP2(11),PTEMP3(6)    MULTIPLY CORRESPONDING COLS
+ 001526 F0A5 C24C 003A 0158C 0003A   878          SRP   PTEMP2(11),64-6,5       SHIFT BY 6 FOR 4 DECIMAL PLACES
+ 00152C FA4A 3046 C24C 00046 0158C   879          AP    $YHAT(5),PTEMP2(11)     ADD ABOVE PRODUCT TO YHAT FIELD
+                                     880 *
+ 001532                              881          DROP  2,3
+ 001532                              882 END5     DS    0H
+                                     883 *
+                                     884 *
+                                     885 * === Exit linkage ===
+ 001532 58D0 D004            00004   886          L     13,4(,13)       POINT R13 TO CALLER'S SAVE AREA
+ 001536 58E0 D00C            0000C   887          L     14,12(,13)      RESTORE REGISTER 14
+ 00153A 980C D014            00014   888          LM    0,12,20(13)     RESTORE R0 THRU R12
+                                     889 *
+ 00153E 07FE                         890          BR    14              RETURN TO CALLER
+                                     891 *
+                                     892          LTORG
+ 001540 0C                           893                =PL1'0'
+                                     894 *
+ 001544                              895 YHATSAVE DS    18F'-1'         PARSE SUBPROGRAM'S SAVE AREA
+ 00158C 0000000000000000             896 PTEMP2   DC    PL11'0'         HOLDS PRODUCT BEFORE ADDING TO YHAT
+ 001597 00000000000C                 897 PTEMP3   DC    PL6'0'          HOLDS SHIFTED DATA FROM HOUSE TABL
+                                     898 *
+                                     899 *
+                                     900 ******************************************************************
+                                     901 *                                                                *
+                                     902 * CALCULATE MSE SUBPROGRAM                                       *
+                                     903 *                                                                *
+                                     904 * ITERATES THROUGH THE EACH Y AND YHAT COLUMN IN THE HOUSING     *
+                                     905 * DATA TABLE AND CALCULATING THE YHAT TO THE CURRENT MODEL       *
+                                     906 * COEFFICIENTS TABLE ROW, IT SUBTRACTS Y WITH YHAT, SQUARES IT   *
+                                     907 * SUMS UP THE ABOVE RESULT FOR EACH ROW IN THE HOUSING DATA      *
+1                                                                                                               PAGE   17
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                     908 * TABLE AND DIVIDES IT BY THE NUMBER OF ROWS IN THE HOUSING DATA *
+                                     909 * TABLE, WHICH GIVES THE MSE FOR THE CURRENT MODEL COEFFICIENTS  *
+                                     910 * TABLE ROW. IT THEN STORES THE MSE IN ITS CORRECT COLUMN AND    *
+                                     911 * ROW IN THE MODEL COEFFICIENTS TABLE.                           *
+                                     912 *                                                                *
+                                     913 * RETURN CODES: NONE                                             *
+                                     914 *                                                                *
+                                     915 * REGISTER USAGE:                                                *
+                                     916 *   2 - (IN) PTR TO THE HEAD OF THE HOUSING DATA TABLE (F)       *
+                                     917 *   3 - (IN) NUMBER OF ROWS IN THE HOUSING DATA TABLE (F)        *
+                                     918 *   4 - (IN) PTR TO THE HEAD OF THE CURRENT ROW OF THE MODEL     *
+                                     919 *       COEFFICIENTS TABLE                                       *
+                                     920 *   5 - HOLDS COPY OF THE NUMBER OF ROWS IN THE HOUSING DATA     *
+                                     921 *       TABLE TO USE AS A COUNTER IN A LOOP                      *
+                                     922 *                                                                *
+                                     923 ******************************************************************
+ 0015A0                              924 CALCMSE CSECT
+                                     925 * === Entry linkage ===
+                                     926 *      Back up caller's register state
+ 0015A0 90EC D00C            0000C   927          STM   14,12,12(13)    SAVE REGS IN CALLER'S SAVE AREA
+                                     928 *      Establish local addressability
+ 0015A4 18CF                         929          LR    12,15           COPY CSECT ADDRESS INTO R12
+ 0015A0                              930          USING CALCMSE,12      ESTABLISH R12 AS THE BASE REG
+                                     931 *      Store backwards, forwards pointers
+ 0015A6 41E0 C074            01614   932          LA    14,MSESAVE      R14 POINTS TO THIS CSECT'S SAVE AREA
+ 0015AA 50D0 E004            00004   933          ST    13,4(,14)       STORE ADDRESS OF CALLER'S SAVE AREA
+ 0015AE 50E0 D008            00008   934          ST    14,8(,13)       STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                     935 *      Point R13 at local save area
+ 0015B2 18DE                         936          LR    13,14           POINT R13 AT THIS CSECT'S SAVE AREA
+                                     937 *
+ 0015B4 9824 1000            00000   938          LM    2,4,0(1)        R2 -> BEGIN ADDR OF HOUSE DATA TABLE
+                                     939 *                              R3 -> NUMBER OF ROWS IN HOUSE DATA TABLE
+                                     940 *                              R4 -> ADDR OF CURRENT MSE COLUMN
+                                     941 *
+ 000000                              942          USING $HOUSTBL,2      BASE REG FOR HOUSE DATA TABL DSECT
+ 0015B8 4E30 C0E0            01680   943          CVD   3,PNUMROWS      CONVERT BINARY TO PACKED
+ 0015BC 1853                         944          LR    5,3             COPY NUM ROWS INTO NEW REGISTER FOR LOOP
+                                     945 *
+ 0015BE F890 C0CB C070 0166B 01610   946          ZAP   PTEMP6(10),=PL1'0'   RESET TEMP FIELD
+                                     947 *
+ 0015C4                              948 MSELOOP1 DS    0H                   LOOP THROUGH ALL ROWS IN HOUSE TABL
+                                     949 *
+ 0015C4 F844 C0BC 2041 0165C 00041   950          ZAP   PTEMP4(5),$Y(5)      STORE Y INTO TEMP FIELD TO PREPARE
+ 0015CA FB44 C0BC 2046 0165C 00046   951          SP    PTEMP4(5),$YHAT(5)   SUBTRACT Y WITH Y HAT
+ 0015D0 F894 C0C1 C0BC 01661 0165C   952          ZAP   PTEMP5(10),PTEMP4(5) STORE DIFFERENCE IN TEMP FIELD
+ 0015D6 FC94 C0C1 C0BC 01661 0165C   953          MP    PTEMP5(10),PTEMP4(5) SQUARE THE DIFFERENCE
+ 0015DC F095 C0C1 003C 01661 0003C   954          SRP   PTEMP5(10),64-4,5    SHIFT BY 4 FOR 4 DECIMAL PLACES
+ 0015E2 FA99 C0CB C0C1 0166B 01661   955          AP    PTEMP6(10),PTEMP5(10) ADD THE SQUARED DIFFERENCES
+ 0015E8 4120 204B            0004B   956          LA    2,75(,2)             INCREMENT TO NEXT ROW
+ 0015EC 4650 C024            015C4   957          BCT   5,MSELOOP1           DECREMENT ROW COUNTER
+                                     958 *
+ 0015F0                              959          DROP  2
+                                     960 *
+                                     961 *
+ 000000                              962          USING $MODLTBL,4
+ 0015F0 F8F9 C0E8 C0CB 01688 0166B   963          ZAP   PMSE(16),PTEMP6(10)  PREPARE FOR DIVISION
+ 0015F6 FDF7 C0E8 C0E0 01688 01680   964          DP    PMSE(16),PNUMROWS(8) DIVIDE SUM(Y-YHAT) W HTABL # ROWS
+1                                                                                                               PAGE   18
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0015FC F857 4041 C0E8 00041 01688   965          ZAP   $MSE(6),PMSE(8)      STORE THE MSE VALUE INTO ITS COL
+ 001602                              966          DROP  4
+ 001602                              967 END6     DS    0H
+                                     968 *
+                                     969 *
+                                     970 * === Exit linkage ===
+ 001602 58D0 D004            00004   971          L     13,4(,13)       POINT R13 TO CALLER'S SAVE AREA
+ 001606 58E0 D00C            0000C   972          L     14,12(,13)      RESTORE REGISTER 14
+ 00160A 980C D014            00014   973          LM    0,12,20(13)     RESTORE R0 THRU R12
+                                     974 *
+ 00160E 07FE                         975          BR    14              RETURN TO CALLER
+                                     976 *
+                                     977          LTORG
+ 001610 0C                           978                =PL1'0'
+                                     979 *
+ 001614                              980 MSESAVE  DS    18F'-1'         PARSE SUBPROGRAM'S SAVE AREA
+ 00165C 000000000C                   981 PTEMP4   DC    PL5'0'          TEMP STORAGE FOR Y - YHAT
+ 001661 0000000000000000             982 PTEMP5   DC    PL10'0'         TEMP STORAGE FOR (Y - YHAT)^2
+ 00166B 0000000000000000             983 PTEMP6   DC    PL10'0'         TEMP STORAGE FOR SUM OF ALL (Y - YHAT)^2
+ 001678                              984          DS    2F
+ 001680 000000000000000C             985 PNUMROWS DC    PL8'0'          NUM OF ROWS IN HOUSE TABL
+ 001688 0000000000000000             986 PMSE     DC    PL16'0'         MSE FOR CURRENT MODELS TABLE ROW
+                                     987 *
+                                     988 *
+                                     989 ******************************************************************
+                                     990 *                                                                *
+                                     991 * SHOW RESULTS SUBPROGRAM                                        *
+                                     992 *                                                                *
+                                     993 * PRINTS THE COLUMN LABELS WITH CORRECT SPACING IN BETWEEN.      *
+                                     994 * ITERATES THROUGH THE MODEL COEFFICIENTS TABLE AND PRINTS EACH  *
+                                     995 * COLUMN UNDER THE CORRECT LABEL IN TABULAR FORMAT.              *
+                                     996 *                                                                *
+                                     997 * RETURN CODES: NONE                                             *
+                                     998 *                                                                *
+                                     999 * REGISTER USAGE:                                                *
+                                    1000 *   2 - (IN) PTR TO THE HEAD OF THE LABEL ARRAY (F)              *
+                                    1001 *   3 - (IN) PTR TO THE HEAD OF THE MODEL COEFFICIENTS TABLE (F) *
+                                    1002 *   4 - (IN) PTR TO THE HEAD OF THE PRINT LINE IN STROAGE (F)    *
+                                    1003 *   7 - COUNTER FOR THE LOOP THAT ITERATES THROUGH THE ROWS OF   *
+                                    1004 *       THE MODEL COEFFICIENTS TABLE                             *
+                                    1005 *   9 - HOLDS COPY OF THE PTR TO THE HEAD OF THE MODEL           *
+                                    1006 *       COEFFICIENTS TABLE IN ORDER TO USE DSECT FOR THE TABLE   *
+                                    1007 *       AND ACCESS EACH COLUMN OF THE ROWS                       *
+                                    1008 *                                                                *
+                                    1009 ******************************************************************
+ 001698                             1010 SHWRESLT CSECT
+                                    1011 * === Entry linkage ===
+                                    1012 *      Back up caller's register state
+ 001698 90EC D00C            0000C  1013          STM   14,12,12(13)   SAVE REGS IN CALLER'S SAVE AREA
+                                    1014 *      Establish local addressability
+ 00169C 18CF                        1015          LR    12,15          COPY CSECT ADDRESS INTO R12
+ 001698                             1016          USING SHWRESLT,12    ESTABLISH R12 AS THE BASE REG
+                                    1017 *      Store backwards, forwards pointers
+ 00169E 41E0 C3F8            01A90  1018          LA    14,SHWSAVE     R14 POINTS TO THIS CSECT'S SAVE AREA
+ 0016A2 50D0 E004            00004  1019          ST    13,4(,14)      STORE ADDRESS OF CALLER'S SAVE AREA
+ 0016A6 50E0 D008            00008  1020          ST    14,8(,13)      STORE ADDRESS OF THIS CSECT'S SAVE AREA
+                                    1021 *      Point R13 at local save area
+1                                                                                                               PAGE   19
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0016AA 18DE                        1022          LR    13,14          POINT R13 AT THIS CSECT'S SAVE AREA
+                                    1023 *
+ 0016AC 9824 1000            00000  1024          LM    2,4,0(1)       R2 -> LBLARR BEGIN ADDRESS
+                                    1025 *                             R3 -> MODEL TABLE BEGIN ADDRESS
+                                    1026 *                             R4 -> PRINT LINE ADDR
+                                    1027 *
+ 0016B0 E020 C6A7 0079 01D3F        1028          XPRNT NEWLINE,121
+                                    1029 *
+ 0016B6 1893                        1030          LR    9,3            COPY REG 3 INTO REG 9
+                                    1031 *
+ 000000                             1032          USING $LBLS,2        USE LABELS DSECT
+                                    1033 *
+ 0016B8 D204 4002 2000 00002 00000  1034          MVC   2(5,4),$L1     MOVE ALL LABELS WITH SPACES IN BETWEEN
+ 0016BE D201 400C 2005 0000C 00005  1035          MVC   12(2,4),$L2
+ 0016C4 D204 4013 2007 00013 00007  1036          MVC   19(5,4),$L3
+ 0016CA D203 401B 200C 0001B 0000C  1037          MVC   27(4,4),$L4
+ 0016D0 D202 4025 2010 00025 00010  1038          MVC   37(3,4),$L5
+ 0016D6 D201 402E 2013 0002E 00013  1039          MVC   46(2,4),$L6
+ 0016DC D202 4036 2015 00036 00015  1040          MVC   54(3,4),$L7
+ 0016E2 D202 403E 2018 0003E 00018  1041          MVC   62(3,4),$L8
+ 0016E8 D202 4047 201B 00047 0001B  1042          MVC   71(3,4),$L9
+ 0016EE D202 404F 201E 0004F 0001E  1043          MVC   79(3,4),$L10
+ 0016F4 D206 4057 2021 00057 00021  1044          MVC   87(7,4),$L11
+ 0016FA D200 4062 2028 00062 00028  1045          MVC   98(1,4),$L12
+ 001700 D204 4069 2029 00069 00029  1046          MVC   105(5,4),$L13
+ 001706 D202 4073 C440 00073 01AD8  1047          MVC   115(3,4),MSELBL   MOVE MSE LABEL
+                                    1048 *
+ 00170C E020 4000 0085 00000        1049          XPRNT 0(,4),133      PRINT ALL THE LABELS
+                                    1050 *
+ 001712                             1051          DROP  2
+                                    1052 *
+ 001712 E020 C62C 0079 01CC4        1053          XPRNT PRLINE2,121    PRINT THE LINE OF LABELS
+                                    1054 *
+ 001718 4170 0005            00005  1055          LA    7,5            LOAD 5 INTO COUNTER REGISTER
+                                    1056 *
+                                    1057 * DISPLAYING COLUMN 1
+                                    1058 *
+ 00171C                             1059 RESLOOP  DS    0H             LOOP TO PRINT ALL 5 MODELS
+ 00171C 4110 C449            01AE1  1060          LA    1,OBUFFR1+5    LOAD ADDRESS FOR EDMK
+ 001720 F944 3000 C3CA 00000 01A62  1061          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 001726 4740 C0A2            0173A  1062          BL    NEG2            IF SO, BRANCH TO NEGATIVE AREA
+ 00172A D20B C444 C3B0 01ADC 01A48  1063          MVC   OBUFFR1(12),=X'40202021204B202020202020' MOVE ED MASK
+ 001730 DE0A C444 3000 01ADC 00000  1064          ED    OBUFFR1(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001736 47F0 C0B4            0174C  1065          B     RESLTCO1           BRANCH OVER NEGATIVE AREA
+                                    1066 *
+ 00173A                             1067 NEG2     DS    0H
+ 00173A D20B C444 C3CF 01ADC 01A67  1068          MVC   OBUFFR1(12),=X'4020202120204B202020202020' EDMK MASK
+ 001740 0610                        1069          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 001742 9260 1000      00000        1070          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 001746 DF0B C444 3000 01ADC 00000  1071          EDMK  OBUFFR1(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1072 *
+ 00174C                             1073 RESLTCO1 DS    0H
+ 00174C D207 C54E C448 01BE6 01AE0  1074          MVC   PBUF1(8),OBUFFR1+4    CROP SPACES FROM FRONT OF NUM
+                                    1075 *
+ 001752 4130 3005            00005  1076          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1077 *
+                                    1078 * DISPLAYING COLUMN 2
+1                                                                                                               PAGE   20
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+                                    1079 *
+ 001756 4110 C455            01AED  1080          LA    1,OBUFFR2+5     LOAD ADDRESS FOR EDMK
+ 00175A F944 3000 C3CA 00000 01A62  1081          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 001760 4740 C0DC            01774  1082          BL    NEG3            IF SO, BRANCH TO NEGATIVE AREA
+ 001764 D20B C450 C3B0 01AE8 01A48  1083          MVC   OBUFFR2(12),=X'40202021204B202020202020' MOVE ED MASK
+ 00176A DE0A C450 3000 01AE8 00000  1084          ED    OBUFFR2(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001770 47F0 C0EE            01786  1085          B     RESLTCO2           BRANCH OVER NEGATIVE AREA
+                                    1086 *
+ 001774                             1087 NEG3     DS    0H
+ 001774 D20B C450 C3CF 01AE8 01A67  1088          MVC   OBUFFR2(12),=X'4020202120204B202020202020' EDMK MASK
+ 00177A 0610                        1089          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 00177C 9260 1000      00000        1090          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 001780 DF0B C450 3000 01AE8 00000  1091          EDMK  OBUFFR2(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1092 *
+ 001786                             1093 RESLTCO2 DS    0H
+ 001786 D207 C556 C453 01BEE 01AEB  1094          MVC   PBUF2(8),OBUFFR2+3    CROP SPACES FROM FRONT OF NUM
+                                    1095 *
+ 00178C 4130 3005            00005  1096          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1097 *
+                                    1098 * DISPLAYING COLUMN 3
+                                    1099 *
+ 001790 4110 C460            01AF8  1100          LA    1,OBUFFR3+5     LOAD ADDRESS FOR EDMK
+ 001794 F944 3000 C3CA 00000 01A62  1101          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 00179A 4740 C116            017AE  1102          BL    NEG4            IF SO, BRANCH TO NEGATIVE AREA
+ 00179E D20B C45B C3B0 01AF3 01A48  1103          MVC   OBUFFR3(12),=X'40202021204B202020202020'
+ 0017A4 DE0A C45B 3000 01AF3 00000  1104          ED    OBUFFR3(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 0017AA 47F0 C128            017C0  1105          B     RESLTCO3           BRANCH OVER NEGATIVE AREA
+                                    1106 *
+ 0017AE                             1107 NEG4     DS    0H
+ 0017AE D20B C45B C3CF 01AF3 01A67  1108          MVC   OBUFFR3(12),=X'4020202120204B202020202020'
+ 0017B4 0610                        1109          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 0017B6 9260 1000      00000        1110          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0017BA DF0B C45B 3000 01AF3 00000  1111          EDMK  OBUFFR3(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1112 *
+ 0017C0                             1113 RESLTCO3 DS    0H
+ 0017C0 D207 C55E C45E 01BF6 01AF6  1114          MVC   PBUF3(8),OBUFFR3+3    CROP SPACES FROM FRONT OF NUM
+                                    1115 *
+ 0017C6 4130 3005            00005  1116          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1117 *
+                                    1118 * DISPLAYING COLUMN 4
+                                    1119 *
+ 0017CA 4110 C46B            01B03  1120          LA    1,OBUFFR4+5     LOAD ADDRESS FOR EDMK
+ 0017CE F944 3000 C3CA 00000 01A62  1121          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 0017D4 4740 C150            017E8  1122          BL    NEG5            IF SO, BRANCH TO NEGATIVE AREA
+ 0017D8 D20B C466 C3B0 01AFE 01A48  1123          MVC   OBUFFR4(12),=X'40202021204B202020202020'
+ 0017DE DE0A C466 3000 01AFE 00000  1124          ED    OBUFFR4(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 0017E4 47F0 C162            017FA  1125          B     RESLTCO4           BRANCH OVER NEGATIVE AREA
+                                    1126 *
+ 0017E8                             1127 NEG5     DS    0H
+ 0017E8 D20B C466 C3CF 01AFE 01A67  1128          MVC   OBUFFR4(12),=X'4020202120204B202020202020'
+ 0017EE 0610                        1129          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 0017F0 9260 1000      00000        1130          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0017F4 DF0B C466 3000 01AFE 00000  1131          EDMK  OBUFFR4(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1132 *
+ 0017FA                             1133 RESLTCO4 DS    0H
+ 0017FA D208 C566 C469 01BFE 01B01  1134          MVC   PBUF4(9),OBUFFR4+3    CROP SPACES FROM FRONT OF NUM
+                                    1135 *
+1                                                                                                               PAGE   21
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 001800 4130 3005            00005  1136          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1137 *
+                                    1138 * DISPLAYING COLUMN 5
+                                    1139 *
+ 001804 4110 C476            01B0E  1140          LA    1,OBUFFR5+4     LOAD ADDRESS FOR EDMK
+ 001808 F944 3000 C3CA 00000 01A62  1141          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 00180E 4740 C18A            01822  1142          BL    NEG6            IF SO, BRANCH TO NEGATIVE AREA
+ 001812 D20B C472 C3B0 01B0A 01A48  1143          MVC   OBUFFR5(12),=X'40202021204B202020202020'
+ 001818 DE0A C472 3000 01B0A 00000  1144          ED    OBUFFR5(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 00181E 47F0 C19C            01834  1145          B     RESLTCO5           BRANCH OVER NEGATIVE AREA
+                                    1146 *
+ 001822                             1147 NEG6     DS    0H
+ 001822 D20B C472 C3DC 01B0A 01A74  1148          MVC   OBUFFR5(12),=X'4020212020204B202020202020'
+ 001828 0610                        1149          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 00182A 9260 1000      00000        1150          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 00182E DF0B C472 3000 01B0A 00000  1151          EDMK  OBUFFR5(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1152 *
+ 001834                             1153 RESLTCO5 DS    0H
+ 001834 D209 C56F C474 01C07 01B0C  1154          MVC   PBUF5(10),OBUFFR5+2    CROP SPACES FROM FRONT OF NUM
+                                    1155 *
+ 00183A 4130 3005            00005  1156          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1157 *
+                                    1158 * DISPLAYING COLUMN 6
+                                    1159 *
+ 00183E 4110 C483            01B1B  1160          LA    1,OBUFFR6+5     LOAD ADDRESS FOR EDMK
+ 001842 F944 3000 C3CA 00000 01A62  1161          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 001848 4740 C1C4            0185C  1162          BL    NEG7            IF SO, BRANCH TO NEGATIVE AREA
+ 00184C D20B C47E C3B0 01B16 01A48  1163          MVC   OBUFFR6(12),=X'40202021204B202020202020'
+ 001852 DE0A C47E 3000 01B16 00000  1164          ED    OBUFFR6(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001858 47F0 C1D6            0186E  1165          B     RESLTCO6           BRANCH OVER NEGATIVE AREA
+                                    1166 *
+ 00185C                             1167 NEG7     DS    0H
+ 00185C D20B C47E C3CF 01B16 01A67  1168          MVC   OBUFFR6(12),=X'4020202120204B202020202020'
+ 001862 0610                        1169          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 001864 9260 1000      00000        1170          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 001868 DF0B C47E 3000 01B16 00000  1171          EDMK  OBUFFR6(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1172 *
+ 00186E                             1173 RESLTCO6 DS    0H
+ 00186E D208 C579 C481 01C11 01B19  1174          MVC   PBUF6(9),OBUFFR6+3    CROP SPACES FROM FRONT OF NUM
+                                    1175 *
+ 001874 4130 3005            00005  1176          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1177 *
+                                    1178 * DISPLAYING COLUMN 7
+                                    1179 *
+ 001878 4110 C48E            01B26  1180          LA    1,OBUFFR7+5     LOAD ADDRESS FOR EDMK
+ 00187C F944 3000 C3CA 00000 01A62  1181          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 001882 4740 C1FE            01896  1182          BL    NEG8            IF SO, BRANCH TO NEGATIVE AREA
+ 001886 D20B C489 C3B0 01B21 01A48  1183          MVC   OBUFFR7(12),=X'40202021204B202020202020'
+ 00188C DE0A C489 3000 01B21 00000  1184          ED    OBUFFR7(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001892 47F0 C210            018A8  1185          B     RESLTCO7           BRANCH OVER NEGATIVE AREA
+                                    1186 *
+ 001896                             1187 NEG8     DS    0H
+ 001896 D20B C489 C3CF 01B21 01A67  1188          MVC   OBUFFR7(12),=X'4020202120204B202020202020'
+ 00189C 0610                        1189          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 00189E 9260 1000      00000        1190          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0018A2 DF0B C489 3000 01B21 00000  1191          EDMK  OBUFFR7(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1192 *
+1                                                                                                               PAGE   22
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0018A8                             1193 RESLTCO7 DS    0H
+ 0018A8 D207 C582 C48C 01C1A 01B24  1194          MVC   PBUF7(8),OBUFFR7+3    CROP SPACES FROM FRONT OF NUM
+                                    1195 *
+ 0018AE 4130 3005            00005  1196          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1197 *
+                                    1198 * DISPLAYING COLUMN 8
+                                    1199 *
+ 0018B2 4110 C499            01B31  1200          LA    1,OBUFFR8+5     LOAD ADDRESS FOR EDMK
+ 0018B6 F944 3000 C3CA 00000 01A62  1201          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 0018BC 4740 C238            018D0  1202          BL    NEG9            IF SO, BRANCH TO NEGATIVE AREA
+ 0018C0 D20B C494 C3B0 01B2C 01A48  1203          MVC   OBUFFR8(12),=X'40202021204B202020202020'
+ 0018C6 DE0A C494 3000 01B2C 00000  1204          ED    OBUFFR8(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 0018CC 47F0 C24A            018E2  1205          B     RESLTCO8           BRANCH OVER NEGATIVE AREA
+                                    1206 *
+ 0018D0                             1207 NEG9     DS    0H
+ 0018D0 D20C C494 C3CF 01B2C 01A67  1208          MVC   OBUFFR8(13),=X'4020202120204B202020202020'
+ 0018D6 0610                        1209          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 0018D8 9260 1000      00000        1210          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0018DC DF0B C494 3000 01B2C 00000  1211          EDMK  OBUFFR8(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1212 *
+ 0018E2                             1213 RESLTCO8 DS    0H
+ 0018E2 D208 C58A C497 01C22 01B2F  1214          MVC   PBUF8(9),OBUFFR8+3    CROP SPACES FROM FRONT OF NUM
+                                    1215 *
+ 0018E8 4130 3005            00005  1216          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1217 *
+                                    1218 * DISPLAYING COLUMN 9
+                                    1219 *
+ 0018EC 4110 C4A5            01B3D  1220          LA    1,OBUFFR9+5     LOAD ADDRESS FOR EDMK
+ 0018F0 F944 3000 C3CA 00000 01A62  1221          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 0018F6 4740 C272            0190A  1222          BL    NEG10           IF SO, BRANCH TO NEGATIVE AREA
+ 0018FA D20B C4A0 C3B0 01B38 01A48  1223          MVC   OBUFFR9(12),=X'40202021204B202020202020'
+ 001900 DE0A C4A0 3000 01B38 00000  1224          ED    OBUFFR9(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001906 47F0 C284            0191C  1225          B     RESLTCO9           BRANCH OVER NEGATIVE AREA
+                                    1226 *
+ 00190A                             1227 NEG10    DS    0H
+ 00190A D20C C4A0 C3CF 01B38 01A67  1228          MVC   OBUFFR9(13),=X'4020202120204B202020202020'
+ 001910 0610                        1229          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 001912 9260 1000      00000        1230          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 001916 DF0B C4A0 3000 01B38 00000  1231          EDMK  OBUFFR9(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1232 *
+ 00191C                             1233 RESLTCO9 DS    0H
+ 00191C D207 C593 C4A3 01C2B 01B3B  1234          MVC   PBUF9(8),OBUFFR9+3    CROP SPACES FROM FRONT OF NUM
+                                    1235 *
+ 001922 4130 3005            00005  1236          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1237 *
+                                    1238 * DISPLAYING COLUMN 10
+                                    1239 *
+ 001926 4110 C4B0            01B48  1240          LA    1,OBUFFR10+5    LOAD ADDRESS FOR EDMK
+ 00192A F944 3000 C3CA 00000 01A62  1241          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 001930 4740 C2AC            01944  1242          BL    NEG11           IF SO, BRANCH TO NEGATIVE AREA
+ 001934 D20B C4AB C3B0 01B43 01A48  1243          MVC   OBUFFR10(12),=X'40202021204B202020202020'
+ 00193A DE0A C4AB 3000 01B43 00000  1244          ED    OBUFFR10(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 001940 47F0 C2BE            01956  1245          B     RESLTC10            BRANCH OVER NEGATIVE AREA
+                                    1246 *
+ 001944                             1247 NEG11    DS    0H
+ 001944 D20C C4AB C3CF 01B43 01A67  1248          MVC   OBUFFR10(13),=X'4020202120204B202020202020'
+ 00194A 0610                        1249          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+1                                                                                                               PAGE   23
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 00194C 9260 1000      00000        1250          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 001950 DF0B C4AB 3000 01B43 00000  1251          EDMK  OBUFFR10(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1252 *
+ 001956                             1253 RESLTC10 DS    0H
+ 001956 D208 C59B C4AE 01C33 01B46  1254          MVC   PBUF10(9),OBUFFR10+3   CROP SPACES FROM FRONT OF NUM
+                                    1255 *
+ 00195C 4130 3005            00005  1256          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1257 *
+                                    1258 * DISPLAYING COLUMN 11
+                                    1259 *
+ 001960 4110 C4BB            01B53  1260          LA    1,OBUFFR11+4    LOAD ADDRESS FOR EDMK
+ 001964 F944 3000 C3CA 00000 01A62  1261          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 00196A 4740 C2E6            0197E  1262          BL    NEG12           IF SO, BRANCH TO NEGATIVE AREA
+ 00196E D20B C4B7 C3B0 01B4F 01A48  1263          MVC   OBUFFR11(12),=X'40202021204B202020202020'
+ 001974 DE0A C4B7 3000 01B4F 00000  1264          ED    OBUFFR11(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 00197A 47F0 C2F8            01990  1265          B     RESLTC11            BRANCH OVER NEGATIVE AREA
+                                    1266 *
+ 00197E                             1267 NEG12    DS    0H
+ 00197E D20C C4B7 C3E9 01B4F 01A81  1268          MVC   OBUFFR11(13),=X'40202120204B20202020202020'
+ 001984 0610                        1269          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 001986 9260 1000      00000        1270          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 00198A DF0B C4B7 3000 01B4F 00000  1271          EDMK  OBUFFR11(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1272 *
+ 001990                             1273 RESLTC11 DS    0H
+ 001990 D208 C5A4 C4B9 01C3C 01B51  1274          MVC   PBUF11(9),OBUFFR11+2   CROP SPACES FROM FRONT OF NUM
+                                    1275 *
+ 001996 4130 3005            00005  1276          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1277 *
+                                    1278 * DISPLAYING COLUMN 12
+                                    1279 *
+ 00199A 4110 C4C8            01B60  1280          LA    1,OBUFFR12+5    LOAD ADDRESS FOR EDMK
+ 00199E F944 3000 C3CA 00000 01A62  1281          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 0019A4 4740 C320            019B8  1282          BL    NEG13           IF SO, BRANCH TO NEGATIVE AREA
+ 0019A8 D20B C4C3 C3B0 01B5B 01A48  1283          MVC   OBUFFR12(12),=X'40202021204B202020202020'
+ 0019AE DE0A C4C3 3000 01B5B 00000  1284          ED    OBUFFR12(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 0019B4 47F0 C332            019CA  1285          B     RESLTC12            BRANCH OVER NEGATIVE AREA
+                                    1286 *
+ 0019B8                             1287 NEG13    DS    0H
+ 0019B8 D20C C4C3 C3CF 01B5B 01A67  1288          MVC   OBUFFR12(13),=X'4020202120204B202020202020'
+ 0019BE 0610                        1289          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 0019C0 9260 1000      00000        1290          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0019C4 DF0B C4C3 3000 01B5B 00000  1291          EDMK  OBUFFR12(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1292 *
+ 0019CA                             1293 RESLTC12 DS    0H
+ 0019CA D207 C5AD C4C6 01C45 01B5E  1294          MVC   PBUF12(8),OBUFFR12+3   CROP SPACES FROM FRONT OF NUM
+                                    1295 *
+ 0019D0 4130 3005            00005  1296          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1297 *
+                                    1298 * DISPLAYING COLUMN 13
+                                    1299 *
+ 0019D4 4110 C4D3            01B6B  1300          LA    1,OBUFFR13+4    LOAD ADDRESS FOR EDMK
+ 0019D8 F944 3000 C3CA 00000 01A62  1301          CP    0(5,3),=PL5'0'  CHECK IF NUMBER IS NEGATIVE
+ 0019DE 4740 C35A            019F2  1302          BL    NEG14           IF SO, BRANCH TO NEGATIVE AREA
+ 0019E2 D20B C4CF C3B0 01B67 01A48  1303          MVC   OBUFFR13(12),=X'40202021204B202020202020'
+ 0019E8 DE0A C4CF 3000 01B67 00000  1304          ED    OBUFFR13(11),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+ 0019EE 47F0 C36C            01A04  1305          B     RESLTC13            BRANCH OVER NEGATIVE AREA
+                                    1306 *
+1                                                                                                               PAGE   24
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 0019F2                             1307 NEG14    DS    0H
+ 0019F2 D20C C4CF C3E9 01B67 01A81  1308          MVC   OBUFFR13(13),=X'40202120204B20202020202020'
+ 0019F8 0610                        1309          BCTR  1,0                DECREMENT REGISTER 1 BY 1
+ 0019FA 9260 1000      00000        1310          MVI   0(1),C'-'          MOVE A - SIGN BEFORE THE NUMBER
+ 0019FE DF0B C4CF 3000 01B67 00000  1311          EDMK  OBUFFR13(12),0(3)   CONVERT PACKED NUMBER TO EBCDIC
+                                    1312 *
+ 001A04                             1313 RESLTC13 DS    0H
+ 001A04 D208 C5B5 C4D1 01C4D 01B69  1314          MVC   PBUF13(9),OBUFFR13+2   CROP SPACES FROM FRONT OF NUM
+                                    1315 *
+ 001A0A 4130 3005            00005  1316          LA    3,5(,3)              INCREMENT MODEL TABLE ADDR
+                                    1317 *
+                                    1318 * DISPLAYING COLUMN 14 (MSE)
+                                    1319 *
+ 000000                             1320          USING $MODLTBL,9           USE MODEL TABLE DSECT
+ 001A0E D20D C4DB C3BC 01B73 01A54  1321          MVC   OBUFFR14(14),=X'40202020202021204B2020202020' ED MASK
+ 001A14 DE0C C4DB 9041 01B73 00041  1322          ED    OBUFFR14(13),$MSE    CONVERT PACKED NUMBER TO EBCDIC
+ 001A1A D209 C5BE C4DE 01C56 01B76  1323          MVC   PBUF14(10),OBUFFR14+3  CROP SPACES FROM FRONT OF NUM
+                                    1324 *
+ 001A20                             1325          DROP  9
+                                    1326 *
+ 001A20 E020 C54D 0085 01BE5        1327          XPRNT PRLINE,133     PRINT ALL 14 COLUMNS
+                                    1328 *
+ 001A26 4130 3006            00006  1329          LA    3,6(,3)        SKIP OVER MSE NUMBER IN MODEL TABLE ADDR
+ 001A2A 4190 9047            00047  1330          LA    9,71(,9)       INCREMENT TO NEXT ROW IN MODEL TABLE FOR
+                                    1331 *                             MODEL TABLE DSECT TO GET CORRECT MSE
+ 001A2E 4670 C084            0171C  1332          BCT   7,RESLOOP      BRANCH TO MODEL LOOP
+                                    1333 *
+ 001A32 E020 C6A7 0079 01D3F        1334          XPRNT NEWLINE,121
+                                    1335 * === Exit linkage ===
+ 001A38 58D0 D004            00004  1336          L     13,4(,13)      POINT R13 TO CALLER'S SAVE AREA
+ 001A3C 58E0 D00C            0000C  1337          L     14,12(,13)     RESTORE REGISTER 14
+ 001A40 980C D014            00014  1338          LM    0,12,20(13)    RESTORE R0 THRU R12
+                                    1339 *
+ 001A44 07FE                        1340          BR    14             RETURN TO CALLER
+                                    1341 *
+                                    1342          LTORG
+ 001A48 40202021204B2020            1343                =X'40202021204B202020202020'
+ 001A54 4020202020202120            1344                =X'40202020202021204B2020202020'
+ 001A62 000000000C                  1345                =PL5'0'
+ 001A67 4020202120204B20            1346                =X'4020202120204B202020202020'
+ 001A74 4020212020204B20            1347                =X'4020212020204B202020202020'
+ 001A81 40202120204B2020            1348                =X'40202120204B20202020202020'
+                                    1349 *
+ 001A90                             1350 SHWSAVE  DS    18F'-1'        SHWRESLT SUBPROGRAM'S SAVE AREA
+ 001AD8 D4E2C5                      1351 MSELBL   DC    C'MSE'         LABEL FOR MSE
+ 001ADB 40                          1352 TEMPPRL  DC    C' '           TEMPORARY PRINT LINE FOR ED USE
+ 001ADC                             1353 OBUFFR1  DS    CL12
+ 001AE8                             1354 OBUFFR2  DS    CL11
+ 001AF3                             1355 OBUFFR3  DS    CL11
+ 001AFE                             1356 OBUFFR4  DS    CL12
+ 001B0A                             1357 OBUFFR5  DS    CL12
+ 001B16                             1358 OBUFFR6  DS    CL11
+ 001B21                             1359 OBUFFR7  DS    CL11
+ 001B2C                             1360 OBUFFR8  DS    CL12
+ 001B38                             1361 OBUFFR9  DS    CL11
+ 001B43                             1362 OBUFFR10 DS    CL12
+ 001B4F                             1363 OBUFFR11 DS    CL12
+1                                                                                                               PAGE   25
+0  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT
+ 001B5B                             1364 OBUFFR12 DS    CL12
+ 001B67                             1365 OBUFFR13 DS    CL12
+ 001B73                             1366 OBUFFR14 DS    CL14
+ 001B81 4040404040404040            1367          DC    100C' '
+ 001BE5 40                          1368 PRLINE   DC    C' '           PRINT LINE FOR CONVERTED EBCDIC NUMS
+ 001BE6                             1369 PBUF1    DS    CL8
+ 001BEE                             1370 PBUF2    DS    CL8
+ 001BF6                             1371 PBUF3    DS    CL8
+ 001BFE                             1372 PBUF4    DS    CL9
+ 001C07                             1373 PBUF5    DS    CL10
+ 001C11                             1374 PBUF6    DS    CL9
+ 001C1A                             1375 PBUF7    DS    CL8
+ 001C22                             1376 PBUF8    DS    CL9
+ 001C2B                             1377 PBUF9    DS    CL8
+ 001C33                             1378 PBUF10   DS    CL9
+ 001C3C                             1379 PBUF11   DS    CL9
+ 001C45                             1380 PBUF12   DS    CL8
+ 001C4D                             1381 PBUF13   DS    CL9
+ 001C56                             1382 PBUF14   DS    CL10
+ 001C60 4040404040404040            1383          DC    100C' '
+ 001CC4                             1384 PRLINE2  DS    C' '           CARRIAGE CONTROL - SINGLE SPACE
+ 001CC5 7E7E7E7E7E7E7E7E            1385          DC    121C'='        LINE OF ALL ='S
+ 001D3E                             1386 PRLINE3  DS    C' '           CARRIAGE CONTROL - SINGLE SPACE
+ 001D3F 4040404040404040            1387 NEWLINE  DC    121C' '        NEW LINE OF ALL SPACES
+                                    1388 *
+                                    1389 *
+                                    1390          END MAIN
+0***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS
+0*** DYNAMIC CORE AREA USED:  LOW:   77612 HIGH:    4804 LEAVING:  411152 FREE BYTES. AVERAGE:       59 BYTES/STMT ***
+0*** ASSEMBLY TIME =    0.002 SECS,   695500 STATEMENTS/SEC ***
+0*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***
+
+   CRIM     ZN     INDUS   CHAS      NOX      RM      AGE     DIS      RAD     TAX     PTRATIO    B      LSTAT     MSE
+ ========================================================================================================================
+ -0.09079 0.04551 0.02075 3.11634 -17.28798 3.26584 0.00061 -1.22755 0.34228 -0.01479 -0.09804 0.01018 -0.04290 1509.5950
+ -0.11273 0.03774 0.02315 3.05692 -16.01289 3.84519 0.00056 -1.46269 0.32639 -0.01000 -0.09667 0.00838 -0.05104 1296.2706
+ -0.09876 0.04996 0.02390 3.04187 -16.00139 3.18722 0.00083 -1.59613 0.35126 -0.01216 -0.09194 0.01028 -0.05414 1594.5508
+ -0.11011 0.05548 0.01690 2.22337 -16.41104 3.57423 0.00068 -1.55147 0.34173 -0.01292 -0.10677 0.00920 -0.05059 1651.2027
+ -0.12942 0.04633 0.01802 3.16652 -15.16825 3.52984 0.00069 -1.63726 0.27756 -0.01251 -0.08509 0.00885 -0.06225 1476.9717
+
+0*** EXECUTION TIME =    0.037 SECS.    126510 INSTRUCTIONS EXECUTED -  3419189 INSTRUCTIONS/SEC ***
+0*** AM004 - NORMAL USER TERMINATION BY RETURN ***
