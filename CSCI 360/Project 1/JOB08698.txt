@@ -1,0 +1,722 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+
+ 
+17.21.35 JOB08698 ---- MONDAY,    28 MAR 2022 ----
+17.21.35 JOB08698  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+17.21.35 JOB08698  ICH70001I KC03CC1  LAST ACCESS AT 17:21:17 ON MONDAY, MARCH 28, 2022
+17.21.35 JOB08698  $HASP373 KC03CC1A STARTED - INIT 1    - CLASS A        - SYS 2964
+17.21.35 JOB08698  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+17.21.35 JOB08698  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+17.21.35 JOB08698  -JSTEP01              00     44      5       .00       .00     .0             8  BATCH        0     0     0     0
+17.21.35 JOB08698  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+17.21.35 JOB08698  $HASP395 KC03CC1A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  28 MAR 2022 JOB EXECUTION DATE
+
+
+          449 CARDS READ
+
+
+          682 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           56 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB08698
+       2 //JSTEP01  EXEC PGM=ASSIST                                                      
+       3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR                               
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN    DD *                                                                 
+         //*                                                                             
+       6 //FT05F001 DD DSN=KC02038.CSCI360.FA21DATA(PRJ1DATA),DISP=SHR                   
+         //*                                                                             
+       7 //FT06F001 DD SYSOUT=*                                                          
+         //*                                                                             
+       8 //SYSPRINT DD SYSOUT=*                                                          
+       9 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03CC1  LAST ACCESS AT 17:21:17 ON MONDAY, MARCH 28, 2022
+IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03CC1A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IGD103I SMS ALLOCATED TO DDNAME FT05F001
+IEF237I JES2 ALLOCATED TO FT06F001
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03CC1.KC03CC1A.JOB08698.D0000102.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB08698.D0000101.?         SYSIN         
+IGD104I KC02038.CSCI360.FA21DATA                     RETAINED,  DDNAME=FT05F001
+IEF285I   KC03CC1.KC03CC1A.JOB08698.D0000103.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB08698.D0000104.?         SYSOUT        
+IEF373I STEP/JSTEP01 /START 2022087.1721
+IEF032I STEP/JSTEP01 /STOP  2022087.1721 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11288K
+        ATB- REAL:                  1056K  SLOTS:                     0K
+             VIRT- ALLOC:      13M SHRD:       0M
+IEF375I  JOB/KC03CC1A/START 2022087.1721
+IEF033I  JOB/KC03CC1A/STOP  2022087.1721 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 ******************************************************************                          
+                                      2 * CSCI 360-2              PROJECT 1                  SPRING 2022 *                          
+                                      3 *                                                                *                          
+                                      4 * NAME: ISABELLE COLETTI                                         *                          
+                                      5 *       DAVID PETROVSKI                                          *                          
+                                      6 *       JACOB EUL                                                *                          
+                                      7 * DATE: 04/01/2022                                               *                          
+                                      8 *                                                                *                          
+                                      9 * THIS PROGRAM IS REPORT GENERATION TOOL. IT ALLOWS THE          *                          
+                                     10 * EMPLOYEER TO VIEW CUSTOMER ORDER SUMMARY INFROMATION, BY       *                          
+                                     11 * PULLING ORDER DATA FROM A GIVEN DATABASE.                      *                          
+                                     12 *                                                                *                          
+                                     13 * REGISTER USAGE:                                                *                          
+                                     14 *  R2  - HOLDS ADDR OF CURRENT ROW IN TABL1 AND TABL2            *                          
+                                     15 *  R3  - HOLDS ADDR OF INPUT BUFFER AND ADDR OF THE ENDS OF      *                          
+                                     16 *        TABLE1 AND TABLE2                                       *                          
+                                     17 *  R4  - HOLDS FULLWORD VALUES OF TABLE DATA THAT THEN GET USED  *                          
+                                     18 *        LATER IN AN XDECI OR XDECO                              *                          
+                                     19 *  R5  - HOLDS ADDR OF CURRENT ROW IN TABLE2 FOR THE ORDERS      *                          
+                                     20 *        REPORT                                                  *                          
+                                     21 *  R6  - HOLDS ADDR OF THE END OF TABLE2                         *                          
+                                     22 *  R7  - HOLDS ADDR OF THE OUTPUT BUFFER FOR THE REPORTS         *                          
+                                     23 *  R8  - HOLDS FULLWORD VALUES OF THE ORDER TABLE DATA THAT      *                          
+                                     24 *        LATER IS USED IN AN XDECO, ALSO USED IN DIVISON AS EVEN *                          
+                                     25 *        REG IN EVEN-ODD PAIR                                    *                          
+                                     26 *  R9  - HOLDS SUMMARY STATISTIC VALUES TO BE USED IN ARITHMETIC *                          
+                                     27 *        OPERATIONS, USED AS ODD REG IS EVEN-ODD PAIR, AND USED  *                          
+                                     28 *        TO RESET SUMMARY STATISTIC STORAGE                      *                          
+                                     29 *  R10 - HOLDS TOTAL ORDER COUNT                                 *                          
+                                     30 *  R11 - HOLDS OVERALL TOTAL COUNT                               *                          
+                                     31 ******************************************************************                          
+                                     32 *        COL. 10                                                                            
+                                     33 *        |     COL. 16                                                                      
+                                     34 *        |     |                                                                            
+                                     35 *        v     v                                                                            
+                                     36 *=================================================================                          
+                                     37 * CUSTOMER FIELD ADDRESSING (INPUT)                                                         
+000000                               38 $IBUFF   DSECT                                                                              
+000000                               39 $IID     DS    F                   INPUT, CUSTOMER ID                                       
+000004                               40          DS    CL5                                                                          
+000009                               41 $INAME   DS    CL20                INPUT, CUSTOMER NAME                                     
+00001D                               42 $IADDR   DS    CL30                INPUT, SHIPPING ADDRESS                                  
+00003B                               43 $ISTAT   DS    CL6                 INPUT, MEMBER STATUS                                     
+                                     44 *                                                                                           
+                                     45 *=================================================================                          
+                                     46 *                                                                                           
+                                     47 *=================================================================                          
+                                     48 * CUSTOMER TABLE COLUMN ADDRESSING                                                          
+000000                               49 $CUSTROW DSECT                                                                              
+000000                               50 $CID     DS    F                   TABLE1, CUSTOMER ID                                      
+000004                               51 $CNAME   DS    CL20                TABLE1, CUSTOMER NAME                                    
+000018                               52 $CADDR   DS    CL30                TABLE1, SHIPPING ADDRESS                                 
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000036                               53 $CSTAT   DS    CL6                 TABLE1, MEMBER STATUS                                    
+                                     54 *                                                                                           
+                                     55 *=================================================================                          
+                                     56 *                                                                                           
+                                     57 *=================================================================                          
+                                     58 * ORDER FIELD ADDRESSING (INPUT)                                                            
+000000                               59 $IBUFF2  DSECT                                                                              
+000000                               60 $ICID    DS    CL8                 INPUT, CUSTOMER ID                                       
+000008                               61          DS    C                                                                            
+000009                               62 $IORID   DS    CL8                 INPUT, ORDER ID                                          
+000011                               63          DS    C                                                                            
+000012                               64 $ISUB    DS    CL6                 INPUT, ORDER SUBTOTAL                                    
+000018                               65          DS    C                                                                            
+000019                               66 $ISHIP   DS    CL4                 INPUT, SHIPPING CHARGE                                   
+00001D                               67          DS    C                                                                            
+00001E                               68 $IORMET  DS    CL10                INPUT, PAYMENT METHOD                                    
+000028                               69          DS    C                                                                            
+000029                               70 $IORSTAT DS    CL6                 INPUT, ORDER STATUS                                      
+                                     71 *                                                                                           
+                                     72 *=================================================================                          
+                                     73 *                                                                                           
+                                     74 *=================================================================                          
+                                     75 * ORDER TABLE COLUMN ADDRESSING                                                             
+000000                               76 $ORDROW  DSECT                                                                              
+000000                               77 $ORCID   DS    F                   TABLE2, CUSTOMER ID                                      
+000004                               78 $ORID    DS    F                   TABLE2, ORDER ID                                         
+000008                               79 $ORSUB   DS    F                   TABLE2, ORDER SUBTOTAL                                   
+00000C                               80 $ORSHIP  DS    F                   TABLE2, SHIPPING CHARGE                                  
+000010                               81 $ORMET   DS    CL10                TABLE2, PAYMENT METHOD                                   
+00001A                               82 $ORSTAT  DS    CL6                 TABLE2, ORDER STATUS                                     
+                                     83 *                                                                                           
+                                     84 *=================================================================                          
+                                     85 *                                                                                           
+                                     86 *=================================================================                          
+                                     87 * OUTPUT BUFFER FIELD ADDRESSING FOR ORDERS                                                 
+000000                               88 $REPBUFF DSECT                                                                              
+000000                               89 $OORID   DS    CL12                OUTPUT, ORDER ID                                         
+00000C                               90          DS    CL4                                                                          
+000010                               91 $OORSTAT DS    CL6                 OUTPUT, ORDER STATUS                                     
+000016                               92          DS    CL4                                                                          
+00001A                               93 $OORMET  DS    CL10                OUTPUT, PAYMENT METHOD                                   
+000024                               94          DS    CL2                                                                          
+000026                               95 $OORSUB  DS    CL12                OUTPUT, SUBTOTAL                                         
+000032                               96 $OORDISC DS    CL12                OUTPUT, DISCOUNT                                         
+00003E                               97          DS    CL3                                                                          
+000041                               98 $OORSHIP DS    CL12                OUTPUT, SHIPPING                                         
+00004D                               99          DS    CL2                                                                          
+00004F                              100 $OORDTOT DS    CL12                OUTPUT, ORDER TOTAL                                      
+                                    101 *                                                                                           
+                                    102 *=================================================================                          
+                                    103 *                                                                                           
+                                    104 ******************************************************************                          
+000000                              105 MAIN     CSECT                                                                              
+000000                              106          USING MAIN,15             ESTABLISH ADDRESSABILITY ON R15                          
+                                    107 *=================================================================                          
+                                    108 * READ/STORE CUSTOMER TABLE                                                                 
+                                    109 *                                                                                           
+
+                                                                                                               PAGE    3            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000000 4120 F2C8            002C8   110          LA    2,TABLE1            LOAD HEAD OF CUSTOMER TABLE                              
+000004 E000 F278 0050 00278         111          XREAD BUFFER,80           READ IN FIRST LINE OF INPUT                              
+                                    112 *                                                                                           
+000000                              113          USING $IBUFF,3            USE REG 3 AS BASE FOR $IBUFF                             
+000000                              114          USING $CUSTROW,2          USE REG 2 AS BASE FOR $CUSTROW                           
+                                    115 *                                                                                           
+00000A 4130 F278            00278   116 RDLOOP1  LA    3,BUFFER            LOAD ADDRESS OF INPUT BUFFER                             
+                                    117 *                                                                                           
+00000E 955C F278      00278         118          CLI   BUFFER,C'*'         CHECK TO SEE IF * FOUND                                  
+000012 4780 F03E            0003E   119          BZ    END1                IF SO, BRANCH TO END OF LOOP                             
+                                    120 *                                                                                           
+000016 5340 3000            00000   121          XDECI 4,$IID              GET CUSTOMER ID FROM BUFFER                              
+00001A 5040 2000            00000   122          ST    4,$CID              STORE IN TABLE                                           
+                                    123 *                                                                                           
+00001E D213 2004 3009 00004 00009   124          MVC   $CNAME(20),$INAME   MOVE CUSTOMER NAME TO TABLE                              
+                                    125 *                                                                                           
+000024 D21D 2018 301D 00018 0001D   126          MVC   $CADDR(30),$IADDR   MOVE SHIPPING ADDRESS TO TABLE                           
+                                    127 *                                                                                           
+00002A D205 2036 303B 00036 0003B   128          MVC   $CSTAT(6),$ISTAT    MOVE MEMBER STATUS TO TABLE                              
+                                    129 *                                                                                           
+000030 4120 203C            0003C   130          LA    2,60(,2)            INCREMENT TABLE ADDRESS BY ROW                           
+000034 E000 F278 0050 00278         131          XREAD BUFFER,80           READ IN NEXT LINE OF INPUT                               
+                                    132 *                                                                                           
+00003A 47F0 F00A            0000A   133          B     RDLOOP1             CONTINUE                                                 
+                                    134 *                                                                                           
+00003E                              135 END1     DS    0H                                                                           
+00003E                              136          DROP  2,3                 DROP DSECT                                               
+                                    137 *                                                                                           
+                                    138 *=================================================================                          
+                                    139 * READ/STORE ORDER TABLE                                                                    
+                                    140 *                                                                                           
+00003E 4120 F520            00520   141          LA    2,TABLE2            LOAD HEAD OF ORDER TABLE                                 
+000042 4130 F278            00278   142          LA    3,BUFFER            LOAD ADDRESS OF INPUT BUFFER                             
+000046 E000 F278 0050 00278         143          XREAD BUFFER,80           READ IN FIRST LINE OF INPUT                              
+                                    144 *                                                                                           
+000000                              145          USING $IBUFF2,3           USE REG 3 AS BASE FOR $IBUFF2                            
+000000                              146          USING $ORDROW,2           USE REG 2 AS BASE FOR $ORDROW                            
+                                    147 *                                                                                           
+00004C 4770 F08A            0008A   148 RDLOOP2  BNZ   END2                IF AT EOF, BRANCH TO END OF LOOP                         
+                                    149 *                                                                                           
+000050 5340 3000            00000   150          XDECI 4,$ICID             GET CUSTOMER ID FROM BUFFER                              
+000054 5040 2000            00000   151          ST    4,$ORCID            STORE IN TABLE                                           
+                                    152 *                                                                                           
+000058 5340 3009            00009   153          XDECI 4,$IORID            GET ORDER ID FROM TABLE                                  
+00005C 5040 2004            00004   154          ST    4,$ORID             STORE IN TABLE                                           
+                                    155 *                                                                                           
+000060 5340 3012            00012   156          XDECI 4,$ISUB             GET ORDER SUBTOTAL FROM BUFFER                           
+000064 5040 2008            00008   157          ST    4,$ORSUB            STORE IN TABLE                                           
+                                    158 *                                                                                           
+000068 5340 3019            00019   159          XDECI 4,$ISHIP            GET SHIPPING CHARGE FROM BUFFER                          
+00006C 5040 200C            0000C   160          ST    4,$ORSHIP           STORE IN TABLE                                           
+                                    161 *                                                                                           
+000070 D209 2010 301E 00010 0001E   162          MVC   $ORMET(10),$IORMET  MOVE PAYMENT METHOD TO TABLE                             
+                                    163 *                                                                                           
+000076 D205 201A 3029 0001A 00029   164          MVC   $ORSTAT(6),$IORSTAT MOVE ORDER STATUS TO TABLE                               
+                                    165 *                                                                                           
+00007C 4120 2020            00020   166          LA    2,32(,2)            INCREMENT TABLE ADDRESS BY ROW                           
+
+                                                                                                               PAGE    4            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000080 E000 F278 0050 00278         167          XREAD BUFFER,80           READ IN NEXT LINE OF INPUT                               
+                                    168 *                                                                                           
+000086 47F0 F04C            0004C   169          B     RDLOOP2             CONTINUE                                                 
+                                    170 *                                                                                           
+00008A                              171 END2     DS    0H                                                                           
+00008A                              172          DROP  2,3                                                                          
+                                    173 *                                                                                           
+                                    174 *=================================================================                          
+                                    175 * GENERATING REPORT                                                                         
+                                    176 *                                                                                           
+00008A 4120 F2C8            002C8   177          LA    2,TABLE1            LOAD HEAD OF CUST TABLE                                  
+00008E 4130 F520            00520   178          LA    3,T1END             LOAD TABLE 1 END ADDR                                    
+                                    179 *                                                                                           
+000000                              180          USING $CUSTROW,2          USE R2 AS BASE FOR $CUSTROW                              
+                                    181 *                                                                                           
+                                    182 * LOADING/PRINTING CUSTOMER INFO                                                            
+                                    183 *                                                                                           
+000092                              184 PCUSINFO DS    0H                  PRNT CUSTOMER INFO LOOP                                  
+                                    185 *                                                                                           
+000092 D213 F993 2004 00993 00004   186          MVC   OCUSNAME(20),$CNAME COPY CUS NAME TO OUT FIELD                               
+                                    187 *                                                                                           
+000098 5840 2000            00000   188          L     4,$CID              LOAD CUS ID                                              
+00009C 5240 F9B6            009B6   189          XDECO 4,OCUSID            CONVERT CUS ID TO PRINTABLE                              
+                                    190 *                                                                                           
+0000A0 D205 F9DA 2036 009DA 00036   191          MVC   OCUSMEM(6),$CSTAT   COPY CUS MEMBERSHIP TO OUT FIELD                         
+                                    192 *                                                                                           
+0000A6 D21D FA24 2018 00A24 00018   193          MVC   OCUSADDR(30),$CADDR COPY CUS ADDR TO OUT FIELD                               
+                                    194 *                                                                                           
+0000AC E020 F985 0085 00985         195          XPRNT OCINFO1,133         PRINT CURR ROW FOR CUS INFO                              
+0000B2 E020 FA17 0085 00A17         196          XPRNT OCINFO2,133         FINISH PRINTING ROW FOR CUS INFO                         
+                                    197 *                                                                                           
+0000B8 E020 F900 0085 00900         198          XPRNT NEWLINE,133         PRINT A NEW LINE                                         
+                                    199 *                                                                                           
+                                    200 * START LOADING/PRINTING REPORT FOR EACH CUSTOMER IN INNER LOOP                             
+0000BE E020 FAA1 0085 00AA1         201          XPRNT OORDREP1,133        PRINT HEADING OF REPORT                                  
+0000C4 E020 FB26 0085 00B26         202          XPRNT OORDREP2,133        PRINT COLUMN LABELS                                      
+0000CA E020 FBAE 0085 00BAE         203          XPRNT OORDREP3,133        PRINT OPENING LINE OF = SIGNS                            
+                                    204 *                                                                                           
+0000D0 4150 F520            00520   205          LA     5,TABLE2           LOAD HEAD OF ORDER TABLE                                 
+0000D4 4160 F8E0            008E0   206          LA     6,T2END            LOAD TABLE 2 END ADDR                                    
+0000D8 4170 FC33            00C33   207          LA     7,OORDREP4         LOAD HEAD OF REPORT BUFF                                 
+                                    208 *                                                                                           
+000000                              209          USING $ORDROW,5           USE R5 AS BASE FOR $ORDROW                               
+000000                              210          USING $REPBUFF,7          USE R7 AS BASE FOR $REPBUFF                              
+                                    211 *                                                                                           
+0000DC                              212 PORDREP  DS    0H                  PRINT CUSTOMERS ORDERS                                   
+                                    213 *                                                                                           
+0000DC 5940 5000            00000   214          C     4,$ORCID            CHECK IF ORDER CUS ID = CUS ID                           
+0000E0 4770 F1A4            001A4   215          BNZ   NEXTORD             IF NOT GO TO NEXT ORDER                                  
+                                    216 *                                                                                           
+0000E4 5880 5004            00004   217          L     8,$ORID             LOAD ORDER ID                                            
+0000E8 5280 7000            00000   218          XDECO 8,$OORID            CONVERT ORDER ID TO PRINTABLE                            
+                                    219 *                                                                                           
+0000EC D205 7010 501A 00010 0001A   220          MVC   $OORSTAT(6),$ORSTAT COPY ORDER STATUS TO OUT FIELD                           
+                                    221 *                                                                                           
+0000F2 D209 701A 5010 0001A 00010   222          MVC   $OORMET(10),$ORMET  COPY ORDER METHOD TO OUT FIELD                           
+                                    223 *                                                                                           
+
+                                                                                                               PAGE    5            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+0000F8 5880 5008            00008   224          L     8,$ORSUB            LOAD SUBTOTAL OF ORDER                                   
+0000FC 5080 F8E0            008E0   225          ST    8,ORDTOT            STORE SUBTOTAL IN TOTAL                                  
+000100 5280 7026            00026   226          XDECO 8,$OORSUB           CONVERT SUBTOTAL TO PRINTABLE                            
+                                    227 *                                                                                           
+000104 95D5 2036      00036         228          CLI   $CSTAT,C'N'         CHECK IF CUS HAS NO MEMBERSHIP                           
+000108 4780 F124            00124   229          BE    NONE                THEN GIVE 0 DISCOUNT                                     
+                                    230 *                                                                                           
+00010C 95C2 2036      00036         231          CLI   $CSTAT,C'B'         CHECK IF CUS IS BRONZE MEMBER                            
+000110 4780 F12C            0012C   232          BE    BRONZE              THEN GIVE 25 DISCOUNT                                    
+                                    233 *                                                                                           
+000114 95E2 2036      00036         234          CLI   $CSTAT,C'S'         CHECK IF CUS IS SILVER MEMBER                            
+000118 4780 F134            00134   235          BE    SILVER              THEN GIVE 50 DISCOUNT                                    
+                                    236 *                                                                                           
+00011C 95C7 2036      00036         237          CLI   $CSTAT,C'G'         CHECK IF CUS IS GOLD MEMBER                              
+000120 4780 F13C            0013C   238          BE    GOLD                THEN GIVE 75 DISCOUNT                                    
+                                    239 *                                                                                           
+000124 4180 0000            00000   240 NONE     LA    8,0                 LOAD 0 INTO R8                                           
+000128 47F0 F140            00140   241          B     CONT                                                                         
+00012C 4180 0019            00019   242 BRONZE   LA    8,25                LOAD 25 INTO R8                                          
+000130 47F0 F140            00140   243          B     CONT                                                                         
+000134 4180 0032            00032   244 SILVER   LA    8,50                LOAD 50 INTO R8                                          
+000138 47F0 F140            00140   245          B     CONT                                                                         
+00013C 4180 004B            0004B   246 GOLD     LA    8,75                LOAD 75 INTO R8                                          
+                                    247 *                                                                                           
+000140 5280 7032            00032   248 CONT     XDECO 8,$OORDISC          CONVERT DISCOUNT TO PRINTABLE                            
+                                    249 *                                                                                           
+000144 5890 F8E0            008E0   250          L     9,ORDTOT            LOAD THE CURRENT TOTAL OF ORDER                          
+000148 1B98                         251          SR    9,8                 SUBTRACT THE TOTAL BY DISCOUNT                           
+00014A 5090 F8E0            008E0   252          ST    9,ORDTOT            STORE THE CURRENT TOTAL OF ORDER                         
+                                    253 *                                                                                           
+00014E 5880 500C            0000C   254          L     8,$ORSHIP           LOAD SHIPPING VAL OF ORDER                               
+000152 5280 7041            00041   255          XDECO 8,$OORSHIP          CONVERT SHIPPING TO PRINTABLE                            
+000156 5A80 F8E0            008E0   256          A     8,ORDTOT            ADD SHIPPING TO CURR TOTAL                               
+00015A 5080 F8E0            008E0   257          ST    8,ORDTOT            STORE THE FINAL VAL OF TOTAL                             
+                                    258 *                                                                                           
+00015E 5880 F8E0            008E0   259          L     8,ORDTOT            LOAD TOTAL OF ORDER                                      
+000162 5280 704F            0004F   260          XDECO 8,$OORDTOT          CONVERT TOTAL TO PRINTABLE                               
+                                    261 *                                                                                           
+000166 95C3 501A      0001A         262          CLI   $ORSTAT,C'C'        CHECK TO SEE IF ORDER IS CLOSED                          
+00016A 4780 F188            00188   263          BE    CLSORD                                                                       
+                                    264 *                                                                                           
+00016E 5890 F8E4            008E4   265 OPNORD   L     9,OOCT              LOAD OPEN ORD CNT INTO R9                                
+000172 5A90 F270            00270   266          A     9,=F'1'             INCREMENT BY ONE                                         
+000176 5090 F8E4            008E4   267          ST    9,OOCT              STORE INCREMENT                                          
+00017A 5890 F8F0            008F0   268          L     9,PTOT              LOAD PENDING TOTAL CNT INTO R9                           
+00017E 1A98                         269          AR    9,8                 ADD CURR ORD TOTAL TO PENDING TOT                        
+000180 5090 F8F0            008F0   270          ST    9,PTOT              STORE PENDING TOTAL                                      
+000184 47F0 F19E            0019E   271          B     CONTORD             CONTINE                                                  
+                                    272 *                                                                                           
+000188 5890 F8E8            008E8   273 CLSORD   L     9,COCT              LOAD CLOSED ORD CNT INTO R9                              
+00018C 5A90 F270            00270   274          A     9,=F'1'             INCREMENT BY ONE                                         
+000190 5090 F8E8            008E8   275          ST    9,COCT              STORE INCREMENT                                          
+000194 5890 F8EC            008EC   276          L     9,RTOT              LOAD RECEIEVED TOTAL CNT INTO R9                         
+000198 1A98                         277          AR    9,8                 ADD CURR ORD TOT TO RECEIEVED TOT                        
+00019A 5090 F8EC            008EC   278          ST    9,RTOT              STORE RECEIEVED TOTAL                                    
+                                    279 *                                                                                           
+00019E E020 FC33 0085 00C33         280 CONTORD  XPRNT OORDREP4,133        PRINT THE CURR ORD FOR CURR CUS                          
+
+                                                                                                               PAGE    6            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                    281 *                                                                                           
+0001A4 4150 5020            00020   282 NEXTORD  LA    5,32(,5)            INCREMENT TO NEXT ROW (ORDER)                            
+                                    283 *                                                                                           
+0001A8 1956                         284          CR    5,6                 CHECK IF END OF ORDER TABLE REACH                        
+0001AA 4780 F1B2            001B2   285          BZ    NEXTCUS             IF SO INCREMENT TO NEXT CUS                              
+                                    286 *                                                                                           
+0001AE 47F0 F0DC            000DC   287          B     PORDREP             OTHERWISE CONTINUE TO NEXT ORDER                         
+                                    288 *                                                                                           
+0001B2 4120 203C            0003C   289 NEXTCUS  LA    2,60(,2)            INCREMENT TO NEXT ROW (CUSTOMER)                         
+                                    290 *                                                                                           
+0001B6 E020 FBAE 0085 00BAE         291          XPRNT OORDREP3,133        PRINT CLOSING LINE OF = SIGNS                            
+                                    292 *                                                                                           
+                                    293 * PRINTING CLOSED/OPEN ORDERS COUNT                                                         
+0001BC 5890 F8E8            008E8   294          L     9,COCT              LOAD CLOSED ORDER CNT TO R9                              
+0001C0 5290 FCE6            00CE6   295          XDECO 9,OCOCT             CONVERT TO PRINTABLE                                     
+0001C4 58A0 F8F4            008F4   296          L     10,FORDTOT          LOAD TOTAL NUM OF ORDERS TO R10                          
+0001C8 1AA9                         297          AR    10,9                ADD CLOSED ORDER TO TOTAL NUM ORD                        
+                                    298 *                                                                                           
+0001CA 5890 F8EC            008EC   299          L     9,RTOT              LOAD RECEIEVED TOTAL TO R9                               
+0001CE 58B0 F8F8            008F8   300          L     11,FTOT             LOAD OVERALL TOTAL TO R11                                
+0001D2 1AB9                         301          AR    11,9                ADD RECEIVED TO OVERALL TOTAL                            
+0001D4 5290 FD07            00D07   302          XDECO 9,ORTOT             CONVERT TO PRINTABLE                                     
+0001D8 E020 FCB8 0085 00CB8         303          XPRNT OORDREP5,133        PRINT CLOSED ORD/RECEIVED TOT LINE                       
+                                    304 *                                                                                           
+0001DE 5890 F8E4            008E4   305          L     9,OOCT              LOAD OPEN ORDER CNT TO R9                                
+0001E2 5290 FD78            00D78   306          XDECO 9,OOOCT             CONVERT TO PRINTABLE                                     
+0001E6 1AA9                         307          AR    10,9                ADD OPEN ORD TO TOTAL NUM ORD                            
+0001E8 52A0 FE0F            00E0F   308          XDECO 10,OFORDTOT         CONVERT TO PRINTABLE                                     
+0001EC 50A0 F8F4            008F4   309          ST    10,FORDTOT          STORE TOTAL NUM OF ORDERS                                
+                                    310 *                                                                                           
+0001F0 5890 F8F0            008F0   311          L     9,PTOT              LOAD PENDING TOTAL TO R9                                 
+0001F4 5290 FD99            00D99   312          XDECO 9,OPTOT             CONVERT TO PRINTANLE                                     
+0001F8 1AB9                         313          AR    11,9                ADD PENDING TO OVERALL TOTAL                             
+0001FA 52B0 FE30            00E30   314          XDECO 11,OFTOT            CONVERT TO PRINTANLE                                     
+0001FE 50B0 F8F8            008F8   315          ST    11,FTOT             STORE OVERALL TOTAL                                      
+000202 E020 FD4A 0085 00D4A         316          XPRNT OORDREP6,133        PRINT OPEN ORD/PENDING TOT LINE                          
+000208 E020 FDE1 0085 00DE1         317          XPRNT OORDREP7,133        PRINT OVERALL ORD TOT/TOT LINE                           
+                                    318 *                                                                                           
+00020E 5890 F8F4            008F4   319          L     9,FORDTOT           LOAD TOTAL ORDERS TO R9                                  
+000212 5990 F274            00274   320          C     9,=F'0'             CHECK IF TOTAL ORDERS = 0                                
+000216 4780 F22C            0022C   321          BE    AVGCONT             THEN LEAVE AVG = 0                                       
+                                    322 *                                  ELSE                                                     
+00021A 5890 F8F8            008F8   323          L     9,FTOT              LOAD OVERALL TOTAL TO R9                                 
+00021E 5C80 F270            00270   324          M     8,=F'1'             PREPARE FOR DIVISON                                      
+000222 58A0 F8F4            008F4   325          L     10,FORDTOT          LOAD TOTAL ORDERS TO R10                                 
+000226 1D8A                         326          DR    8,10                COMPUTE AVERAGE                                          
+000228 5090 F8FC            008FC   327          ST    9,AVG               STORE AVERAGE                                            
+                                    328 *                                                                                           
+00022C                              329 AVGCONT  DS    0H                                                                           
+00022C 5290 FEC7            00EC7   330          XDECO 9,OAVG              CONVERT TO PRINTANLE                                     
+000230 E020 FE78 0085 00E78         331          XPRNT OORDREP8,133        PRINT AVERAGE ORD AMT LINE                               
+                                    332 *                                                                                           
+                                    333 * RESET ALL SUMMARY STATISTIC STORAGE BELOW                                                 
+000236 4190 0000            00000   334          LA    9,0                 LOAD 0 INTO R9                                           
+00023A 5090 F8E8            008E8   335          ST    9,COCT                                                                       
+00023E 5090 F8E4            008E4   336          ST    9,OOCT                                                                       
+000242 5090 F8EC            008EC   337          ST    9,RTOT                                                                       
+
+                                                                                                               PAGE    7            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000246 5090 F8F0            008F0   338          ST    9,PTOT                                                                       
+00024A 5090 F8F8            008F8   339          ST    9,FTOT                                                                       
+00024E 5090 F8F4            008F4   340          ST    9,FORDTOT                                                                    
+000252 5090 F8FC            008FC   341          ST    9,AVG                                                                        
+                                    342 *                                                                                           
+000256 E020 F900 0085 00900         343          XPRNT NEWLINE,133         PRINT A NEW LINE                                         
+00025C E020 F900 0085 00900         344          XPRNT NEWLINE,133         PRINT A NEW LINE                                         
+                                    345 *                                                                                           
+000262 1923                         346          CR    2,3                 CHECK FOR END OF TABLE                                   
+000264 4770 F092            00092   347          BNZ   PCUSINFO            CONTINUE TO NEXT CUSTOMER                                
+000268                              348          DROP  2,5,7                                                                        
+                                    349 *=================================================================                          
+                                    350 *                                                                                           
+000268 07FE                         351          BR    14                  RETURN TO CALLER (OS)                                    
+                                    352 *                                                                                           
+                                    353          LTORG                     LITERAL ORGANIZATION                                     
+000270 00000001                     354                =F'1'                                                                        
+000274 00000000                     355                =F'0'                                                                        
+                                    356 *                                                                                           
+                                    357 * DECLARED STORAGE                                                                          
+                                    358 *                                                                                           
+000278                              359 BUFFER   DS    CL80                INPUT BUFFER                                             
+0002C8                              360 TABLE1   DS    10CL60' '           10 ROWS OF 60 BYTES                                      
+000520                              361 T1END    DS    0H                  END OF TABLE1 ADDR                                       
+000520                              362 TABLE2   DS    30CL32' '           30 ROWS OF 32 BYTES                                      
+0008E0                              363 T2END    DS    0H                  END OF TABLE2 ADDR                                       
+0008E0 00000000                     364 ORDTOT   DC    F'0'                CURRENT ORDERS TOTAL                                     
+0008E4 00000000                     365 OOCT     DC    F'0'                OPEN ORDER COUNT                                         
+0008E8 00000000                     366 COCT     DC    F'0'                CLOSED ORDER COUNT                                       
+0008EC 00000000                     367 RTOT     DC    F'0'                RECEIVED ORDER TOTAL                                     
+0008F0 00000000                     368 PTOT     DC    F'0'                PENDING ORDER TOTAL                                      
+0008F4 00000000                     369 FORDTOT  DC    F'0'                TOTAL NUMBER OF ORDERS                                   
+0008F8 00000000                     370 FTOT     DC    F'0'                OVERALL ORDERS TOTAL                                     
+0008FC 00000000                     371 AVG      DC    F'0'                AVERAGE ORDER TOTAL                                      
+                                    372 *                                                                                           
+                                    373 * OUTPUT BUFFERS                                                                            
+                                    374 *                                                                                           
+000900 4040404040404040             375 NEWLINE  DC    133C' '                                                                      
+                                    376 *                                                                                           
+                                    377 * OUTPUT CUSTOMER INFO                                                                      
+000985 40                           378 OCINFO1  DC    C' '                                                                         
+000986 C3A4A2A396948599             379          DC    C'Customer:    '                                                             
+000993                              380 OCUSNAME DS    CL20                                                                         
+0009A7 404040                       381          DC    3C' '                                                                        
+0009AA C3A4A2A396948599             382          DC    C'Customer ID:'                                                              
+0009B6                              383 OCUSID   DS    CL12                                                                         
+0009C2 4040404040404040             384          DC    9C' '                                                                        
+0009CB D48594828599A288             385          DC    C'Membership:    '                                                           
+0009DA                              386 OCUSMEM  DS    CL6                                                                          
+0009E0 4040404040404040             387          DC    55C' '                                                                       
+000A17 40                           388 OCINFO2  DC    C' '                                                                         
+000A18 C184849985A2A27A             389          DC    C'Address:    '                                                              
+000A24                              390 OCUSADDR DS    CL30                                                                         
+000A42 4040404040404040             391          DC    95C' '                                                                       
+                                    392 *                                                                                           
+                                    393 * OUTPUT ORDERS REPORT                                                                      
+000AA1 40                           394 OORDREP1 DC    C' '                                                                         
+
+                                                                                                               PAGE    8            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000AA2 D699848599A27A               395          DC    C'Orders:'                                                                   
+000AA9 4040404040404040             396          DC    125C' '                                                                      
+000B26 40                           397 OORDREP2 DC    C' '                                                                         
+000B27 4040C9C440404040             398          DC    C'  ID          Status    Payment Method'                                    
+000B4D 40404040E2A482A3             399          DC    C'    Subtotal        Discount     Shipping'                                 
+000B76 40404040E396A381             400          DC    C'    Total'                                                                 
+000B7F 4040404040404040             401          DC    47C' '                                                                       
+000BAE 40                           402 OORDREP3 DC    C' '                                                                         
+000BAF 4040                         403          DC    C'  '                                                                        
+000BB1 7E7E7E7E7E7E7E7E             404          DC    88C'='                                                                       
+000C09 4040404040404040             405          DC    42C' '                                                                       
+000C33 40                           406 OORDREP4 DC    C' '                                                                         
+000C34 4040404040404040             407          DC    132C' '                                                                      
+000CB8 40                           408 OORDREP5 DC    C' '                                                                         
+000CB9 4040404040404040             409          DC    31C' '                                                                       
+000CD8 C39396A2858440D6             410          DC    C'Closed Orders:'                                                            
+000CE6                              411 OCOCT    DS    CL12                                                                         
+000CF2 404040404040                 412          DC    6C' '                                                                        
+000CF8 D985838589A58584             413          DC    C'Received Total:'                                                           
+000D07                              414 ORTOT    DS    CL12                                                                         
+000D13 4040404040404040             415          DC    55C' '                                                                       
+000D4A 40                           416 OORDREP6 DC    C' '                                                                         
+000D4B 4040404040404040             417          DC    33C' '                                                                       
+000D6C D697859540D69984             418          DC    C'Open Orders:'                                                              
+000D78                              419 OOOCT    DS    CL12                                                                         
+000D84 40404040404040               420          DC    7C' '                                                                        
+000D8B D785958489958740             421          DC    C'Pending Total:'                                                            
+000D99                              422 OPTOT    DS    CL12                                                                         
+000DA5 4040404040404040             423          DC    60C' '                                                                       
+000DE1 40                           424 OORDREP7 DC    C' '                                                                         
+000DE2 4040404040404040             425          DC    32C' '                                                                       
+000E02 E396A3819340D699             426          DC    C'Total Orders:'                                                             
+000E0F                              427 OFORDTOT DS    CL12                                                                         
+000E1B 40404040404040               428          DC    7C' '                                                                        
+000E22 D6A5859981939340             429          DC    C'Overall Total:'                                                            
+000E30                              430 OFTOT    DS    CL12                                                                         
+000E3C 4040404040404040             431          DC    60C' '                                                                       
+000E78 40                           432 OORDREP8 DC    C' '                                                                         
+000E79 4040404040404040             433          DC    64C' '                                                                       
+000EB9 C1A58740D6998485             434          DC    C'Avg Order Amt:'                                                            
+000EC7                              435 OAVG     DS    CL12                                                                         
+000ED3 4040404040404040             436          DC    60C' '                                                                       
+                                    437 *                                                                                           
+                                    438          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:   21060 HIGH:    2008 LEAVING:  470500 FREE BYTES. AVERAGE:       52 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   439000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+Customer:    Marriana Trench        Customer ID:    15402912         Membership:    None                                            
+Address:    1972 Arriaga Dr. 80231                                                                                                  
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   14756301    OPEN      CHECK             466469           0           1842        468311                                          
+   41697723    OPEN      MASTERCARD        768587           0           7300        775887                                          
+   99159294    CLOSED    MASTERCARD         92900           0           1462         94362                                          
+   31771765    OPEN      CHECK             214423           0           6180        220603                                          
+  ========================================================================================                                          
+                               Closed Orders:           1      Received Total:       94362                                          
+                                 Open Orders:           3       Pending Total:     1464801                                          
+                                Total Orders:           4       Overall Total:     1559163                                          
+                                                                Avg Order Amt:      389790                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Harvey Blanchard       Customer ID:    44545886         Membership:    SILVER                                          
+Address:    279 Brace Blvd. 80244                                                                                                   
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   51532621    CLOSED    MASTERCARD        551943          50           4743        556636                                          
+   22012867    CLOSED    MONEY ORD         384311          50           9475        393736                                          
+    5501637    OPEN      MONEY ORD         266786          50           9121        275857                                          
+   87803805    CLOSED    CHECK             206797          50           7445        214192                                          
+  ========================================================================================                                          
+                               Closed Orders:           3      Received Total:     1164564                                          
+                                 Open Orders:           1       Pending Total:      275857                                          
+                                Total Orders:           4       Overall Total:     1440421                                          
+                                                                Avg Order Amt:      360105                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Juan Inviego           Customer ID:    17619857         Membership:    SILVER                                          
+Address:    9411 Sunny Ct.                                                                                                          
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   46556099    CLOSED    MONEY ORD         110371          50           7835        118156                                          
+   95859743    OPEN      MONEY ORD         591679          50           5582        597211                                          
+   53252710    CLOSED    VISA              113520          50           5808        119278                                          
+   81886807    CLOSED    CHECK             324470          50           2940        327360                                          
+   81263710    CLOSED    MONEY ORD         232982          50           2488        235420                                          
+  ========================================================================================                                          
+                               Closed Orders:           4      Received Total:      800214                                          
+                                 Open Orders:           1       Pending Total:      597211                                          
+                                Total Orders:           5       Overall Total:     1397425                                          
+                                                                Avg Order Amt:      279485                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Francesca Donialo      Customer ID:    18851608         Membership:    BRONZE                                          
+Address:    2751 W. Rte 138 80244                                                                                                   
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   92977169    CLOSED    VISA              319863          25           3569        323407                                          
+   10249511    OPEN      MONEY ORD         926274          25           2167        928416                                          
+   40460790    CLOSED    MONEY ORD         492617          25           4415        497007                                          
+  ========================================================================================                                          
+                               Closed Orders:           2      Received Total:      820414                                          
+                                 Open Orders:           1       Pending Total:      928416                                          
+                                Total Orders:           3       Overall Total:     1748830                                          
+                                                                Avg Order Amt:      582943                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Wynona Brady           Customer ID:    34280166         Membership:    None                                            
+Address:    1966 Red Cliff Pl 80538                                                                                                 
+                                                                                                                                    
+
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   18859136    CLOSED    MASTERCARD        437429           0           2668        440097                                          
+   39960328    OPEN      CHECK             598187           0           2341        600528                                          
+   54687813    CLOSED    VISA               62958           0           5811         68769                                          
+  ========================================================================================                                          
+                               Closed Orders:           2      Received Total:      508866                                          
+                                 Open Orders:           1       Pending Total:      600528                                          
+                                Total Orders:           3       Overall Total:     1109394                                          
+                                                                Avg Order Amt:      369798                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Courtney Savatino      Customer ID:    95841256         Membership:    GOLD                                            
+Address:    21248 E Nassau Dr. 80013                                                                                                
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+  ========================================================================================                                          
+                               Closed Orders:           0      Received Total:           0                                          
+                                 Open Orders:           0       Pending Total:           0                                          
+                                Total Orders:           0       Overall Total:           0                                          
+                                                                Avg Order Amt:           0                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Emilio Estivolo        Customer ID:    34292507         Membership:    None                                            
+Address:    124 Willow Bridge Rd 81657                                                                                              
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+  ========================================================================================                                          
+                               Closed Orders:           0      Received Total:           0                                          
+                                 Open Orders:           0       Pending Total:           0                                          
+                                Total Orders:           0       Overall Total:           0                                          
+                                                                Avg Order Amt:           0                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Tilly Carlson          Customer ID:    94282235         Membership:    GOLD                                            
+Address:    5530 N Saint Lou Dr. 80538                                                                                              
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   63288674    CLOSED    VISA              863685          75           3699        867309                                          
+    8957740    CLOSED    VISA              210540          75           3830        214295                                          
+   58708217    OPEN      MONEY ORD         523011          75           5681        528617                                          
+   73796093    OPEN      CHECK              76761          75           3684         80370                                          
+  ========================================================================================                                          
+                               Closed Orders:           2      Received Total:     1081604                                          
+                                 Open Orders:           2       Pending Total:      608987                                          
+                                Total Orders:           4       Overall Total:     1690591                                          
+                                                                Avg Order Amt:      422647                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Ginger Kapinski        Customer ID:    38291736         Membership:    BRONZE                                          
+Address:    315 Araphoe Ave 80302                                                                                                   
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   93491046    OPEN      CHECK             275767          25           4793        280535                                          
+   21555437    CLOSED    VISA              107113          25           1400        108488                                          
+   67387323    CLOSED    CHECK              27243          25           1518         28736                                          
+    4046134    CLOSED    CHECK             920010          25           1067        921052                                          
+  ========================================================================================                                          
+                               Closed Orders:           3      Received Total:     1058276                                          
+                                 Open Orders:           1       Pending Total:      280535                                          
+                                Total Orders:           4       Overall Total:     1338811                                          
+                                                                Avg Order Amt:      334702                                          
+                                                                                                                                    
+                                                                                                                                    
+Customer:    Michelle Martin        Customer ID:    94136952         Membership:    None                                            
+Address:    124 Meadow Rd. 81137                                                                                                    
+                                                                                                                                    
+Orders:                                                                                                                             
+  ID          Status    Payment Method    Subtotal        Discount     Shipping    Total                                            
+  ========================================================================================                                          
+   53855284    CLOSED    VISA              794285           0           4829        799114                                          
+   61963908    OPEN      CHECK             555563           0           6093        561656                                          
+    4086527    CLOSED    MASTERCARD        837673           0           4189        841862                                          
+  ========================================================================================                                          
+                               Closed Orders:           2      Received Total:     1640976                                          
+                                 Open Orders:           1       Pending Total:      561656                                          
+                                Total Orders:           3       Overall Total:     2202632                                          
+                                                                Avg Order Amt:      734210                                          
+                                                                                                                                    
+                                                                                                                                    
+
+*** EXECUTION TIME =    0.001 SECS.      3893 INSTRUCTIONS EXECUTED -  3893000 INSTRUCTIONS/SEC ***                                 
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
