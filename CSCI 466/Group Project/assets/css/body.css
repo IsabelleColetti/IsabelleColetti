@@ -1,0 +1,297 @@
+/**
+ * @file body.css
+ * 
+ * @brief Control the look elements in between the body tag.
+ * 
+ * @author David Petrovski
+ * @author Isabelle Coletti
+ * @author Amanda Zedwick
+ * 
+ * CSCI 466 - 1
+ */
+
+ 
+body 
+{
+    background: #E3F2FD;                  /* Background color of the whole page */
+    font-family: "Gill Sans", sans-serif; /* Sets font for the whole body tag */
+    margin: 0;                            /* Makes the header go to the top of the screen */
+    padding-bottom: 50px;                 /* Adds some space at the bottom of the page */
+}
+
+
+.welcome_msg
+{
+    text-align: center; /* Centers the message */
+}
+
+
+.product_table_store
+{
+    /* Positioned table in the middle of the page */
+    position: relative;
+    
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.product_view_link a
+{
+    text-decoration: none; /* Removes hyperlink styling */
+    color: black;          /* Sets font color */
+}
+
+
+.product_view_link:hover
+{
+    opacity: 20%; /* When hovering over changes opacity */
+}
+
+
+.product_name_store
+{
+    text-align: center; /* Centers the product name */
+}
+
+
+.price_lbl_store
+{
+    font-weight: normal; /* Gives the price label a normal font weight */
+}
+
+
+.product_view_table
+{
+    /* Positioned table in the left of the page */
+    position: relative;
+    
+    margin-top: 70px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.product_info_view
+{
+    vertical-align: top; /* Aligns product info at the top of the cell */
+    font-size: 20px;     /* Sets font size */
+}
+
+.product_name_view
+{
+    font-weight: bold; /* Sets font to bold */
+    font-size: 40px; /* Sets font size */
+}
+
+.succ_added_to_cart
+{
+    color: #049a89;     /* Sets the color of the message */
+    text-align: center; /* Centers the message */
+    font-weight: bold;  /* Bolds the text */
+    font-size: 18px;    /* Sets the font size */
+
+    /* Positions the message at the middle of the screen above all of the products */
+    position: absolute;
+    top: 142px;        
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.err_added_to_cart
+{
+    color: red;         /* Sets the color of the message */
+    text-align: center; /* Centers the message */
+    font-weight: bold;  /* Bolds the text */
+    font-size: 18px;    /* Sets the font size */
+
+    /* Positions the message at the middle of the screen above all of the products */
+    position: absolute;
+    top: 142px;        
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.emp_options
+{
+    /* Positions the buttons in the middle of the screen */
+    position: relative;
+    
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.inventory_table
+{
+    /* Positions inventory table in the middle of the page */
+    position: relative;
+    
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.orders
+{
+    /* Positions the orders tables in the middle of the screen */
+    position: relative;
+    
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+.cart_msg
+{
+    text-align: center; /* Center welcome message */
+}
+
+
+.cart_display
+{
+    width: 82%; /* Sets width of table compared to page */
+
+    /* Positions the cart table on the left side of the page spaced from order content above it */
+    position: relative;
+
+    margin-top: 52px;
+    left: 5%;
+}
+
+
+.product_in_stock_cart
+{
+    color: #049a89; /* Sets the color of the message */ 
+}
+
+
+.product_low_stock_cart
+{
+    color: red; /* Sets the color of the message */
+}
+
+
+.total_cart
+{
+    width: 40%;      /* Uses 40% of parent tables width */
+    font-size: 20px; /* Sets font for carts total */
+    
+    /* Aligns text at top center of the cell */
+    vertical-align: top; 
+    text-align: center;
+}
+
+
+.shipping
+{
+    text-align: center; /* Aligns the text */
+    font-size: 21px;    /* Sets the font size */
+}
+
+
+.checkout_table
+{
+    /* Positions the whole checkout table and sets its width */
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.order_breakdown
+{
+    text-align: left; /* Aligns text */
+    font-size: 18px;  /* Sets font size */
+}
+
+
+.order_details
+{
+    text-align: right; /* Aligns text */
+    font-size: 18px;   /* Sets font size */
+}
+
+
+.checkout_details
+{
+    text-align: center; /* Centers the text */
+}
+
+
+.shipping_address
+{
+    text-align: center; /* Centers the input from the user */
+    width: 35%;         /* Sets width of the input field */
+}
+
+
+.card_number
+{
+    text-align: center;
+    width: 35%; /* Sets width of the input field */
+}
+
+
+.exp_table
+{
+    /* Sets up the table that will have the expiration input fields */
+    width: 36%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.exp_month_lbl
+{
+    text-align: center; /* Centers the input from the user */
+    font-size: 18px;    /* Sets the font size */
+}
+
+
+.exp_year_lbl
+{
+    text-align: center; /* Centers the input from the user */
+    font-size: 18px;    /* Sets the font size */
+}
+
+
+.exp_month_field
+{
+    width: 90%;         /* Sets the width of the input field */
+    text-align: center; /* Centers the input from the user */
+}
+
+
+.exp_year_field
+{
+    width: 90%;         /* Sets the width of the input field */
+    text-align: center; /* Centers the input from the user */
+}
+
+
+.purchase_error
+{    
+    color: red;        /* Sets font color */
+    text-align: center; /* Centers text */
+    
+    /* Positions error message */
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 510px;
+}
+
+
+.billing_information
+{
+    font-size: 18px; /* Sets font size */
+}
+
+.TotalToDate
+{
+    font-size: 20px; /* Sets font size */
+    text-align: center; /* Centers text */
+}
