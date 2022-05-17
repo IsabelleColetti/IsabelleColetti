@@ -1,0 +1,279 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  2 9 6 4  --  N O D E  S V S C J E S 2        
+
+ 
+19.27.21 JOB04990 ---- MONDAY,    21 MAR 2022 ----
+19.27.21 JOB04990  IRR010I  USERID KC03CC1  IS ASSIGNED TO THIS JOB.
+19.27.21 JOB04990  ICH70001I KC03CC1  LAST ACCESS AT 19:26:57 ON MONDAY, MARCH 21, 2022
+19.27.21 JOB04990  $HASP373 KC03CC1A STARTED - INIT 1    - CLASS A        - SYS 2964
+19.27.21 JOB04990  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+19.27.21 JOB04990  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+19.27.21 JOB04990  -JSTEP01              00     29      3       .00       .00     .0             5  BATCH        0     0     0     0
+19.27.21 JOB04990  -KC03CC1A ENDED.  NAME-ISABELLE COLETTI     TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+19.27.21 JOB04990  $HASP395 KC03CC1A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  21 MAR 2022 JOB EXECUTION DATE
+
+
+          179 CARDS READ
+
+
+          244 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           23 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03CC1A JOB ,'ISABELLE COLETTI',MSGCLASS=H                           JOB04990
+       2 //JSTEP01  EXEC PGM=ASSIST                                                      
+       3 //STEPLIB  DD DSN=KC00NIU.ASSIST.LOADLIB,DISP=SHR                               
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN    DD *                                                                 
+         //*                                                                             
+         //* IN-STREAM PROGRAM DATA                                                      
+       6 //FT05F001 DD *                                                                 
+       7 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03CC1  LAST ACCESS AT 19:26:57 ON MONDAY, MARCH 21, 2022
+IEFA111I KC03CC1A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03CC1A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IEF237I JES2 ALLOCATED TO FT05F001
+IEF142I KC03CC1A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC00NIU.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03CC1.KC03CC1A.JOB04990.D0000103.?         SYSOUT        
+IEF285I   KC03CC1.KC03CC1A.JOB04990.D0000101.?         SYSIN         
+IEF285I   KC03CC1.KC03CC1A.JOB04990.D0000102.?         SYSIN         
+IEF373I STEP/JSTEP01 /START 2022080.1927
+IEF032I STEP/JSTEP01 /STOP  2022080.1927 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   248K  EXT:        0K  SYS:    11348K
+        ATB- REAL:                  1056K  SLOTS:                     0K
+             VIRT- ALLOC:      13M SHRD:       0M
+IEF375I  JOB/KC03CC1A/START 2022080.1927
+IEF033I  JOB/KC03CC1A/STOP  2022080.1927 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 *****************************************************************                           
+                                      2 *  CSCI 360 -2           LAB EXERCISE 3            SPRING 2022  *                           
+                                      3 *                                                               *                           
+                                      4 * NAME: ISABELLE COLETTI                                        *                           
+                                      5 * DATE: 03/21/2022                                              *                           
+                                      6 *                                                               *                           
+                                      7 * This program consists of several coding exercises. They       *                           
+                                      8 * include reading in input via a displacement method, reading   *                           
+                                      9 * in input via an index register dynamically applying column    *                           
+                                     10 * offsets, and using DSECTS to load data and print into a print *                           
+                                     11 * line buffer.                                                  *                           
+                                     12 *                                                               *                           
+                                     13 * REGISTER USAGE:                                               *                           
+                                     14 * R1 - Used to hold the address of the input buffer.            *                           
+                                     15 * R2 - Used to hold the head addresses of both data tables, and *                           
+                                     16 *      as a base register for $EX3ROW DSECT.                    *                           
+                                     17 * R3 - Used to hold converted input values, the number of       *                           
+                                     18 *      columns, and the address of the end of FTABL2.           *                           
+                                     19 * R4 - Used to hold converted input values, the address of the  *                           
+                                     20 *      output buffer head for Exercise 3, and as a base         *                           
+                                     21 *      register for $PBUFF DSECT.                               *                           
+                                     22 * R7 - Used to hold values from FTABL2 before they are          *                           
+                                     23 *      converted for output.                                    *                           
+                                     24 *                                                               *                           
+                                     25 *****************************************************************                           
+                                     26 *                                                                                           
+000004                               27 NEXTF    EQU   4                   1 FULLWORD OFFSET                                        
+000018                               28 NEXTROW  EQU   24                  ROW OFFSET FTABL2 (6 FULLWORD)                           
+                                     29 *                                                                                           
+                                     30 *================================================================                           
+                                     31 * EXERCISE 3 FTABL2 COLUMN ADDRESSING                                                       
+000000                               32 $EX3ROW  DSECT                                                                              
+000000                               33 $EX3C1   DS    F                   TABLE, 1ST COLUMN                                        
+000004                               34 $EX3C2   DS    F                   TABLE, 2ND COLUMN                                        
+000008                               35 $EX3C3   DS    F                   TABLE, 3RD COLUMN                                        
+00000C                               36 $EX3C4   DS    F                   TABLE, 4TH COLUMN                                        
+000010                               37 $EX3C5   DS    F                   TABLE, 5TH COLUMN                                        
+000014                               38 $EX3C6   DS    F                   TABLE, 6TH COLUMN                                        
+                                     39 *                                                                                           
+                                     40 *================================================================                           
+                                     41 * EXERCISE 3 PRINT BUFFER FIELD ADDRESSING                                                  
+000000                               42 $PBUFF   DSECT                                                                              
+000000                               43 $OC1     DS    CL12                PRNTLINE, 1ST FIELD                                      
+00000C                               44 $OC2     DS    CL12                PRNTLINE, 2ND FIELD                                      
+000018                               45 $OC3     DS    CL12                PRNTLINE, 3RD FIELD                                      
+000024                               46 $OC4     DS    CL12                PRNTLINE, 4TH FIELD                                      
+000030                               47 $OC5     DS    CL12                PRNTLINE, 5TH FIELD                                      
+00003C                               48 $OC6     DS    CL12                PRNTLINE, 6TH FIELD                                      
+                                     49 *                                                                                           
+                                     50 *================================================================                           
+                                     51 *****************************************************************                           
+000000                               52 MAIN     CSECT                                                                              
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+000000                               53          USING MAIN,15             ESTABLISH ADDRESSABILITY ON REG 15                       
+                                     54 *                                                                                           
+                                     55 * EXERCISE 1                                                                                
+000000 4120 F128            00128    56          LA    2,FTABL1            STORE FTABL1 HEAD IN REGISTER 2                          
+000004 E000 F0D8 0050 000D8          57          XREAD BUFFER,80           READ THE FIRST LINE OF INPUT                             
+                                     58 *                                                                                           
+00000A 4110 F0D8            000D8    59 READLOOP LA    1,BUFFER            LOAD BUFFER ADDRESS INTO REG 1                           
+00000E 955C 1000      00000          60          CLI   0(1),X'5C'          CHECK TO SEE IF * HAS BEEN REACHED                       
+000012 4780 F044            00044    61          BZ    ENDREAD             IF SO, BRANCH TO ENDREAD                                 
+                                     62 *                                                                                           
+000016 5330 1000            00000    63          XDECI 3,0(,1)             CONVERT FIRST NUM, STORE IN REG 3                        
+00001A 5030 2000            00000    64          ST    3,0(,2)             STORE REG 3 CONTENTS IN FTABL1                           
+                                     65 *                                                                                           
+00001E 5330 1000            00000    66          XDECI 3,0(,1)             CONVERT SECOND NUM, STORE IN REG 3                       
+000022 5030 2004            00004    67          ST    3,4(,2)             STORE REG 3 CONTENTS IN FTABL1                           
+                                     68 *                                                                                           
+000026 5330 1000            00000    69          XDECI 3,0(,1)             CONVERT THIRD NUM, STORE IN REG 3                        
+00002A 5030 2008            00008    70          ST    3,8(,2)             STORE REG 3 CONTENTS IN FTABL1                           
+                                     71 *                                                                                           
+00002E 5330 1000            00000    72          XDECI 3,0(,1)             CONVERT FOURTH NUM, STORE IN REG 3                       
+000032 5030 200C            0000C    73          ST    3,12(,2)            STORE REG 3 CONTENTS IN FTABL1                           
+                                     74 *                                                                                           
+000036 4120 2010            00010    75          LA    2,16(,2)            ADD 4 FULLWORDS TO FTABL1 ADDRESS                        
+                                     76 *                                                                                           
+00003A E000 F0D8 0050 000D8          77          XREAD BUFFER,80           READ IN NEXT LINE OF INPUT                               
+000040 47F0 F00A            0000A    78          B     READLOOP            CONTINUE LOOP                                            
+                                     79 *                                                                                           
+000044                               80 ENDREAD  DS    0H                                                                           
+                                     81 *                                                                                           
+000044 E060 F128 0050 00128          82          XDUMP FTABL1,80           XDUMP THE TABLE                                          
+                                     83 *                                                                                           
+                                     84 * EXERCISE 2                                                                                
+00004A 4120 F178            00178    85          LA    2,FTABL2            STORE FTABL2 HEAD IN REGISTER 2                          
+00004E E000 F0D8 0050 000D8          86          XREAD BUFFER,80           READ THE FIRST LINE OF INPUT                             
+                                     87 *                                                                                           
+000054 4770 F07A            0007A    88 EX2LOOP  BNZ   ENDREAD2            BRANCH END OF READLOOP ON NON-ZERO                       
+                                     89 *                                                                                           
+000058 4110 F0D8            000D8    90          LA    1,BUFFER            LOAD BUFFER ADDRESS INTO REG 1                           
+00005C 4130 0006            00006    91          LA    3,6                 LOAD # OF COLUMNS TO REG 3                               
+                                     92 *                                                                                           
+000060 5340 1000            00000    93 COLLOOP  XDECI 4,0(,1)             CONVERT NUM, STORE IN REG 4                              
+000064 5040 2000            00000    94          ST    4,0(,2)             STORE REG 4 CONTENTS INTO FTABL2                         
+000068 4120 2004            00004    95          LA    2,NEXTF(,2)         INCREMENT FTABL2 ADDR BY FULLWORD                        
+00006C 4630 F060            00060    96          BCT   3,COLLOOP           READ NEXT IF NOT DONE W/ 6 COLUMNS                       
+                                     97 *                                                                                           
+000070 E000 F0D8 0050 000D8          98          XREAD BUFFER,80           READ IN NEXT LINE OF INPUT                               
+000076 47F0 F054            00054    99          B     EX2LOOP             CONTINUE LOOP                                            
+                                    100 *                                                                                           
+00007A                              101 ENDREAD2 DS    0H                                                                           
+                                    102 *                                                                                           
+00007A E060 F178 0090 00178         103          XDUMP FTABL2,144          XDUMP THE TABLE                                          
+                                    104 *                                                                                           
+                                    105 * EXERCISE 3                                                                                
+000080 4120 F178            00178   106          LA    2,FTABL2            STORE FTABL2 HEAD IN REG 2                               
+000084 4130 F208            00208   107          LA    3,TEND              STORE END OF FTABL2 IN REG 3                             
+000088 4140 F209            00209   108          LA    4,OUTREG            LOAD OUTPUT BUFFER HEAD IN REG 4                         
+                                    109 *                                                                                           
+
+                                                                                                               PAGE    3            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+00008C 47F0 F0CA            000CA   110          B     TCHECK              BRANCH TO CHECK TABLE POSITION                           
+                                    111 *                                                                                           
+000090                              112 PROW     DS    0H                                                                           
+000000                              113          USING $EX3ROW,2           USE REG 2 AS BASE FOR $EX3ROW                            
+000000                              114          USING $PBUFF,4            USE REG 4 AS BASE FOR $PBUFF                             
+                                    115 * --------------------------------                                                          
+000090 5870 2000            00000   116          L     7,$EX3C1            LOAD FIRST COLUMN VALUE                                  
+000094 5270 4000            00000   117          XDECO 7,$OC1              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    118 *                                                                                           
+000098 5870 2004            00004   119          L     7,$EX3C2            LOAD SECOND COLUMN VALUE                                 
+00009C 5270 400C            0000C   120          XDECO 7,$OC2              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    121 *                                                                                           
+0000A0 5870 2008            00008   122          L     7,$EX3C3            LOAD THIRD COLUMN VALUE                                  
+0000A4 5270 4018            00018   123          XDECO 7,$OC3              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    124 *                                                                                           
+0000A8 5870 200C            0000C   125          L     7,$EX3C4            LOAD FOURTH COLUMN VALUE                                 
+0000AC 5270 4024            00024   126          XDECO 7,$OC4              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    127 *                                                                                           
+0000B0 5870 2010            00010   128          L     7,$EX3C5            LOAD FIFTH COLUMN VALUE                                  
+0000B4 5270 4030            00030   129          XDECO 7,$OC5              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    130 *                                                                                           
+0000B8 5870 2014            00014   131          L     7,$EX3C6            LOAD SIXTH COLUMN VALUE                                  
+0000BC 5270 403C            0003C   132          XDECO 7,$OC6              CONVERT AND WRITE TO OUTPUT BUFFER                       
+                                    133 * --------------------------------                                                          
+0000C0                              134          DROP  2,4                                                                          
+                                    135 *                                                                                           
+0000C0 E020 F208 0085 00208         136          XPRNT PRNTLINE,133        PRINT THE ROW OF OUTPUT                                  
+0000C6 4120 2018            00018   137          LA    2,NEXTROW(,2)       INCREMENT ADDR OF FTABL2 POSITION                        
+0000CA 1923                         138 TCHECK   CR    2,3                 CHECK IF AT END OF THE TABLE                             
+0000CC 4770 F090            00090   139          BNE   PROW                IF NOT, CONTINUE PRINTING                                
+                                    140 *                                                                                           
+0000D0 07FE                         141          BR    14                  RETURN TO CALLER (OS)                                    
+                                    142 *                                                                                           
+                                    143          LTORG                     LITERAL ORGANIZATION                                     
+                                    144 *                                                                                           
+0000D8                              145 BUFFER   DS    CL80                INPUT BUFFER                                             
+000128                              146          DS    0F                  ENFORCE FULLWORD BOUNDARY                                
+                                    147 * EXERCISE 1 TABLE                                                                          
+000128                              148 FTABL1   DS    20F                 4X5 TABLE OF FULLWORDS                                   
+                                    149 * EXERCISE 2 TABLE                                                                          
+000178                              150 FTABL2   DS    36F                 6X6 TABLE OF FULLWORDS                                   
+000208                              151 TEND     DS    0H                                                                           
+                                    152 * OUTPUT BUFFER                                                                             
+000208 40                           153 PRNTLINE DC    C' '                CARRIAGE CONTROL - SINGLE SPACE                          
+000209 4040404040404040             154 OUTREG   DC    132C' '             FILL WITH SPACES                                         
+                                    155 *                                                                                           
+                                    156          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:    7192 HIGH:     892 LEAVING:  485484 FREE BYTES. AVERAGE:       51 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   157000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+
+BEGIN XSNAP - CALL     1 AT C000004A USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000128 TO 000178                                                         
+000120   40404040 40404040 00000013 00000ADA    000000BF 00000026 000000B3 00001C7B   *        ........................*            
+000140   00000058 0000001B 000002EC 000006EC    000000AA 00000000 00000001 0000012B   *................................*            
+000160   000003A0 0000002B 0000039A 000006FD    00000246 00000011 F5F5F5F5 F5F5F5F5   *........................55555555*            
+
+                                                                                                                                    
+
+BEGIN XSNAP - CALL     2 AT D0000080 USER STORAGE                                                                                   
+
+                             CORE ADDRESSES SPECIFIED-     000178 TO 000208                                                         
+000160   000003A0 0000002B 0000039A 000006FD    00000246 00000011 00000002 00011C03   *................................*            
+000180   00000188 000006FC 000003A0 0000001B    00000009 00004608 0000010B 000023D8   *...............................Q*            
+0001A0   00000116 0000005C 00000008 0000671E    00000125 000015E1 000003C5 00000012   *...........................E....*            
+0001C0   00000000 00004D72 000001F5 00000BA9    00000259 00000008 00000001 0000E68A   *...........5..................W.*            
+0001E0   000003C2 000005DD 000003A0 0000002C    00000009 00014A24 00000367 00002688   *...B............................*            
+000200   000000A8 00000032 40404040 40404040    40404040 40404040 40404040 40404040   *........                        *            
+
+                                                                                                                                    
+           2       72707         392        1788         928          27                                                            
+           9       17928         267        9176         278          92                                                            
+           8       26398         293        5601         965          18                                                            
+           0       19826         501        2985         601           8                                                            
+           1       59018         962        1501         928          44                                                            
+           9       84516         871        9864         168          50                                                            
+
+*** EXECUTION TIME =    0.000 SECS.       357 INSTRUCTIONS EXECUTED -   357000 INSTRUCTIONS/SEC ***                                 
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
